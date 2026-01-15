@@ -12,7 +12,8 @@ class SolveResult:
     cond_A: float
 
 def solve(A: npt.ArrayLike, b: npt.ArrayLike) -> SolveResult:
-    AA = as_2d(A); bb = as_1d(b)
+    AA = as_2d(A)
+    bb = as_1d(b)
     if AA.shape[0] != AA.shape[1]:
         raise ValueError("A must be square.")
     if AA.shape[0] != bb.shape[0]:

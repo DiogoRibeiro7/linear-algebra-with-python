@@ -1,16 +1,26 @@
 from __future__ import annotations
+
 import sys
 from pathlib import Path
-ROOT = Path(__file__).resolve().parents[1]
-sys.path.insert(0, str(ROOT / "src"))
+
 import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import numpy as np
-from linalg_with_python.eigen import power_iteration
-from linalg_with_python.geometry2d import LinearMap2D, unit_circle
+
+_ROOT = Path(__file__).resolve().parents[1]
+_SRC_PATH = _ROOT / "src"
+
+def _ensure_src_in_path() -> None:
+    src_str = str(_SRC_PATH)
+    if src_str not in sys.path:
+        sys.path.insert(0, src_str)
 
 def main() -> None:
+    _ensure_src_in_path()
+    from linalg_with_python.eigen import power_iteration
+    from linalg_with_python.geometry2d import LinearMap2D, unit_circle
+
     A = np.array([[1.1, 0.2], [0.1, 0.9]], dtype=np.float64)
     res = power_iteration(A, seed=1)
     v = res.eigenvector
@@ -27,7 +37,7 @@ def main() -> None:
     ax.grid(True)
     ax.legend()
 
-    out_dir = ROOT / "assets" / "figures"
+    out_dir = _ROOT / "assets" / "figures"
     out_dir.mkdir(parents=True, exist_ok=True)
     fig.savefig(out_dir / "demo_eigen_power_iteration.png", dpi=160, bbox_inches="tight")
     plt.close(fig)
