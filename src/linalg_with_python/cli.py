@@ -6,35 +6,13 @@ from pathlib import Path
 import matplotlib.pyplot as plt
 import numpy as np
 
+from .cli_helpers import arg_matrix, arg_vector
 from .geometry2d import LinearMap2D, unit_circle
 from .least_squares import least_squares_qr
 from .systems import solve
 
 FIGURES_DIR = Path.cwd() / "assets" / "figures"
 FIGURES_DIR.mkdir(parents=True, exist_ok=True)
-
-
-def parse_matrix(value: str) -> np.ndarray:
-    rows = [row.strip() for row in value.split(";") if row.strip()]
-    parsed = []
-    for text_row in rows:
-        items = [item.strip() for item in text_row.split(",") if item.strip()]
-        parsed.append([float(item) for item in items])
-    if not parsed:
-        raise argparse.ArgumentTypeError("Matrix string is empty.")
-    row_lengths = {len(row) for row in parsed}
-    if len(row_lengths) != 1:
-        raise argparse.ArgumentTypeError("Matrix rows must all have the same length.")
-    return np.array(parsed, dtype=np.float64)
-
-
-def parse_vector(value: str) -> np.ndarray:
-    entries = [item.strip() for item in value.split(",") if item.strip()]
-    if not entries:
-        raise argparse.ArgumentTypeError("Vector string is empty.")
-    return np.array([float(item) for item in entries], dtype=np.float64)
-
-
 def plot_linear_map(A: np.ndarray) -> Path:
     if A.shape != (2, 2):
         raise ValueError("Matrix A must be 2×2 for map command.")
@@ -54,14 +32,14 @@ def plot_linear_map(A: np.ndarray) -> Path:
 
 
 def run_map(args: argparse.Namespace) -> None:
-    A = parse_matrix(args.A)
+    A = args.A
     path = plot_linear_map(A)
     print(f"Saved unit circle transformation to {path}")
 
 
 def run_solve(args: argparse.Namespace) -> None:
-    A = parse_matrix(args.A)
-    b = parse_vector(args.b)
+    A = args.A
+    b = args.b
     if A.shape[0] != b.shape[0]:
         raise ValueError("Number of rows in A must equal length of b.")
     result = solve(A, b)
@@ -70,8 +48,8 @@ def run_solve(args: argparse.Namespace) -> None:
 
 
 def run_lsq(args: argparse.Namespace) -> None:
-    x = parse_vector(args.xdata)
-    y = parse_vector(args.ydata)
+    x = args.xdata
+    y = args.ydata
     if x.shape != y.shape:
         raise ValueError("xdata and ydata must have the same length.")
     A = np.column_stack([np.ones_like(x), x])
@@ -84,21 +62,27 @@ def main() -> None:
     parser = argparse.ArgumentParser(
         prog="linalgpy",
         description="Minimal CLI for visualizing linear maps, solving systems, and fitting lines.",
+        epilog=(
+            "map -> notebooks/02_matrices_and_linear_maps.ipynb\n"
+            "solve -> notebooks/03_solving_linear_systems.ipynb\n"
+            "lsq  -> notebooks/04_least_squares_and_projections.ipynb"
+        ),
+        formatter_class=argparse.RawDescriptionHelpFormatter,
     )
     subparsers = parser.add_subparsers(dest="command", required=True)
 
     map_parser = subparsers.add_parser("map", help="Plot how a matrix maps the unit circle.")
-    map_parser.add_argument("--A", required=True, help="Matrix entries as 'a,b;c,d'.")
+    map_parser.add_argument("--A", required=True, type=arg_matrix, help="Matrix entries as 'a,b;c,d'.")
     map_parser.set_defaults(func=run_map)
 
     solve_parser = subparsers.add_parser("solve", help="Solve Ax = b.")
-    solve_parser.add_argument("--A", required=True, help="Matrix entries as 'a,b;c,d'.")
-    solve_parser.add_argument("--b", required=True, help="Right-hand side as 'x,y'.")
+    solve_parser.add_argument("--A", required=True, type=arg_matrix, help="Matrix entries as 'a,b;c,d'.")
+    solve_parser.add_argument("--b", required=True, type=arg_vector, help="Right-hand side as 'x,y'.")
     solve_parser.set_defaults(func=run_solve)
 
     lsq_parser = subparsers.add_parser("lsq", help="Fit a line via QR least squares.")
-    lsq_parser.add_argument("--xdata", required=True, help="Comma-separated x values.")
-    lsq_parser.add_argument("--ydata", required=True, help="Comma-separated y values.")
+    lsq_parser.add_argument("--xdata", required=True, type=arg_vector, help="Comma-separated x values.")
+    lsq_parser.add_argument("--ydata", required=True, type=arg_vector, help="Comma-separated y values.")
     lsq_parser.set_defaults(func=run_lsq)
 
     args = parser.parse_args()

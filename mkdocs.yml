@@ -1,0 +1,12 @@
+site_name: linear-algebra-with-python
+site_description: Intuition-led linear algebra lessons with NumPy and reproducible demos.
+nav:
+  - Home: index.md
+  - Curriculum: curriculum.md
+  - Syllabus: syllabus.md
+  - FAQ: faq.md
+theme:
+  name: material
+  palette:
+    primary: indigo
+    accent: purple

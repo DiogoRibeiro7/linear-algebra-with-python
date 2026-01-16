@@ -37,6 +37,7 @@ python scripts/demo_least_squares.py
 python scripts/demo_eigen_2d.py
 python scripts/demo_conditioning.py
 python scripts/demo_pca_2d.py
+python scripts/demo_nb02_mappings.py
 ```
 
 Each demo saves its figures under `assets/figures/` so notebooks and documentation can reference them.
@@ -52,12 +53,17 @@ poetry run linalgpy lsq --xdata "0,1,2" --ydata "1,2,3"
 
 CLI arguments use comma-separated values for rows and semicolons between rows; keep the inputs numeric so the parser stays simple.
 
+-## Interactivity
+-`notebooks/08_interactive_linear_maps.ipynb` uses `ipywidgets` and `ipympl` (install via `poetry install --with dev`) to explore a rotation+scaling map.
+
 ## Documentation
 - `CONTRIBUTING.md` explains the workflow for tests, notebooks, and CLI helpers.
 - `docs/syllabus.md` lays out the module order, exercises, and supporting modules.
 - `docs/faq.md` lists frequent issues with tests, notebooks, and the CLI.
 - `CHANGELOG.md` tracks notable updates.
 - `CODE_OF_CONDUCT.md` and `SECURITY.md` describe contributor expectations and reporting.
+- `mkdocs.yml` + `docs/` power a mini static site; run `poetry run mkdocs serve` to preview the curriculum and `poetry run mkdocs build` before publishing.
+- `src/linalg_with_python/blocks.py` introduces block-matrix helpers for composing larger geometric maps.
 
 ## License
 MIT.
