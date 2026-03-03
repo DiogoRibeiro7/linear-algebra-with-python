@@ -1,69 +1,50 @@
-# linear-algebra-with-python
+# Linear Algebra with Python
 
-![CI](https://github.com/diogo/linear-algebra-with-python/actions/workflows/ci.yml/badge.svg)
-![Python 3.12](https://img.shields.io/badge/python-3.12-blue)
+Course: Linear Algebra and Analytic Geometry (TSIW, ESMAD — IPP)  
+Instructor: Diogo Ribeiro (dfr@esmad.ipp.pt, ORCID: 0009-0001-2022-7072)
+
+![Python 3.11+](https://img.shields.io/badge/python-3.11%2B-blue)
 ![License: MIT](https://img.shields.io/badge/license-MIT-green)
 
-Intuition-first lessons, reference implementations, and reproducible demos for linear algebra with NumPy.
+## About
+Eight practical assignments covering matrices, determinants, linear systems, and analytic geometry.
 
-## Learning path
-| Module | Notebook | Outcome |
-| --- | --- | --- |
-| 01 | `notebooks/01_vectors.ipynb` | Vector operations, Gram-Schmidt, and projections in `src/linalg_with_python/vectors.py`. |
-| 02 | `notebooks/02_matrices_and_linear_maps.ipynb` | Matrices as maps—basis, unit shapes, and geometric examples saved via `scripts/demo_linear_maps.py`. |
-| 03 | `notebooks/03_solving_linear_systems.ipynb` | Solving `Ax = b`, residuals, and conditioning along with `scripts/demo_conditioning.py`. |
-| 04 | `notebooks/04_least_squares_and_projections.ipynb` | Column space, least squares, and QR vs normal equations using `src/linalg_with_python/least_squares.py`. |
-| 05 | `notebooks/05_qr_and_svd.ipynb` | QR and SVD intuition, singular-value stretches, and reconstruction checks. |
-| 06 | `notebooks/06_eigenvalues_and_diagonalization.ipynb` | Eigengeometry, Rayleigh quotients, and power iteration examples. |
-| 07 | `notebooks/07_pca_mini_project.ipynb` | PCA mini-project with covariance, SVD, and projection visualization; supported by `scripts/demo_pca_2d.py`. |
+## Prerequisites
+- Python 3.11+
+- Poetry
 
-## Featured figures
-![Linear map of rotated basis](assets/figures/basis_rotation.png)
-![Line fit residual comparison](assets/figures/line_fit_qr.png)
-![Conditioning sensitivity plot](assets/figures/conditioning_sensitivity.png)
-
-## Setup & validation
+## Installation
 ```bash
+git clone https://github.com/diogoribeiro7/linear-algebra-with-python
+cd linear-algebra-with-python
 poetry install
-poetry run pytest -q
-poetry run ruff check .
-poetry run mypy src
 ```
 
-## Running demos
+## Assignments
+
+| # | Title | Module | Difficulty |
+|---|--------|--------|-------------|
+| A1 | Matrices: Construction and Classification | Matrices | Introductory |
+| A2 | Matrix Operations | Operations, Transpose | Introductory |
+| A3 | Determinants and Invertibility | Determinants, Inverse | Intermediate |
+| A4 | Linear Systems: Gauss | Gaussian Elimination | Intermediate |
+| A5 | Cramer and LU Decomposition | Cramer, LU | Intermediate |
+| A6 | Analytic Geometry: Lines and Planes | Analytic Geometry | Intermediate |
+| A7 | Surfaces of Revolution | Surfaces | Intermediate |
+| A8 | Integrative Project | All | Advanced |
+
+## Run
 ```bash
-python scripts/demo_linear_maps.py
-python scripts/demo_least_squares.py
-python scripts/demo_eigen_2d.py
-python scripts/demo_conditioning.py
-python scripts/demo_pca_2d.py
-python scripts/demo_nb02_mappings.py
+poetry run python assignments/01_matrizes_tipos/matrizes_tipos.py
 ```
 
-Each demo saves its figures under `assets/figures/` so notebooks and documentation can reference them.
-
-## CLI helpers
-`poetry run linalgpy --help` shows the available commands. Some examples:
-
+## Tests
 ```bash
-poetry run linalgpy map --A "1.2,0.8;0,0.9"
-poetry run linalgpy solve --A "3,1;1,2" --b "9,8"
-poetry run linalgpy lsq --xdata "0,1,2" --ydata "1,2,3"
+poetry run pytest
 ```
-
-CLI arguments use comma-separated values for rows and semicolons between rows; keep the inputs numeric so the parser stays simple.
-
--## Interactivity
--`notebooks/08_interactive_linear_maps.ipynb` uses `ipywidgets` and `ipympl` (install via `poetry install --with dev`) to explore a rotation+scaling map.
-
-## Documentation
-- `CONTRIBUTING.md` explains the workflow for tests, notebooks, and CLI helpers.
-- `docs/syllabus.md` lays out the module order, exercises, and supporting modules.
-- `docs/faq.md` lists frequent issues with tests, notebooks, and the CLI.
-- `CHANGELOG.md` tracks notable updates.
-- `CODE_OF_CONDUCT.md` and `SECURITY.md` describe contributor expectations and reporting.
-- `mkdocs.yml` + `docs/` power a mini static site; run `poetry run mkdocs serve` to preview the curriculum and `poetry run mkdocs build` before publishing.
-- `src/linalg_with_python/blocks.py` introduces block-matrix helpers for composing larger geometric maps.
 
 ## License
 MIT.
+
+## Author
+Diogo Ribeiro — ORCID: https://orcid.org/0009-0001-2022-7072
