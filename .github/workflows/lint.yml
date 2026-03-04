@@ -1,4 +1,4 @@
-name: CI
+name: Lint
 
 on:
   push:
@@ -7,11 +7,11 @@ on:
     branches: ["develop", "main"]
 
 jobs:
-  test-python:
+  lint-python:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: ["3.11","3.12","3.13"]
+        python-version: ["3.11", "3.12", "3.13"]
     steps:
       - uses: actions/checkout@v6
       - uses: actions/setup-python@v6
@@ -24,20 +24,3 @@ jobs:
         working-directory: packages/python
       - run: poetry run mypy src/ --ignore-missing-imports
         working-directory: packages/python
-      - run: poetry run pytest --tb=short
-        working-directory: packages/python
-
-  test-js:
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: ["20", "22"]
-    steps:
-      - uses: actions/checkout@v6
-      - uses: actions/setup-node@v4
-        with:
-          node-version: ${{ matrix.node-version }}
-      - run: yarn install
-        working-directory: packages/js
-      - run: yarn test
-        working-directory: packages/js

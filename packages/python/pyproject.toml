@@ -20,6 +20,8 @@ nbformat = ">=5.9"
 pytest = ">=8.0"
 ruff = ">=0.4"
 mypy = ">=1.10"
+mkdocs = ">=1.6"
+mkdocs-material = ">=9.5"
 
 [tool.ruff]
 line-length = 100

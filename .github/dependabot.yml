@@ -2,7 +2,7 @@ version: 2
 updates:
   # Python dependencies
   - package-ecosystem: "pip"
-    directory: "/"
+    directory: "/packages/python"
     schedule:
       interval: "weekly"
     open-pull-requests-limit: 10
@@ -11,6 +11,18 @@ updates:
     labels:
       - "dependencies"
       - "python"
+
+  # JavaScript dependencies
+  - package-ecosystem: "npm"
+    directory: "/packages/js"
+    schedule:
+      interval: "weekly"
+    open-pull-requests-limit: 10
+    reviewers:
+      - "diogoribeiro7"
+    labels:
+      - "dependencies"
+      - "javascript"
 
   # GitHub Actions
   - package-ecosystem: "github-actions"
