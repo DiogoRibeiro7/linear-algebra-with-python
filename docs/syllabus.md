@@ -3,18 +3,33 @@
 ## Lesson flow
 | Module | Notebook | Outcomes |
 | --- | --- | --- |
-| 01 | `notebooks/01_vectors.ipynb` | Understand vector norms, dot products, and projections; practice with `packages/python/src/linalg_utils/vectors.py`. |
-| 02 | `notebooks/02_matrices_and_linear_maps.ipynb` | Visualize how matrices map basis vectors, unit squares, and unit circles through rotation, scaling, shear, and reflection; link to `scripts/demo_linear_maps.py`. |
-| 03 | `notebooks/03_solving_linear_systems.ipynb` | Solve `Ax=b`, reason about residuals, explore conditioning via perturbations and `scripts/demo_conditioning.py`. |
-| 04 | `notebooks/04_least_squares_and_projections.ipynb` | Project vectors onto subspaces, fit noisy data, compare normal equations vs QR using `packages/python/src/linalg_utils/least_squares.py`. |
-| 05 | `notebooks/05_qr_and_svd.ipynb` | Decompose matrices into QR and SVD factors, interpret singular values as axis stretches; tie to `packages/python/src/linalg_utils/decompositions.py`. |
-| 06 | `notebooks/06_eigenvalues_and_diagonalization.ipynb` | Relate eigenpairs to geometric stretch, use `power_iteration` and `eigen_2x2` von insight. |
-| 07 | `notebooks/07_pca_mini_project.ipynb` | Practice PCA with a noisy 2D dataset, project onto the dominant mode, and link to `scripts/demo_pca_2d.py`. |
+| 01 | `notebooks/01_vectors_and_dot_products.ipynb` | Understand vector norms, dot products, and projections; practice with `packages/python/src/linalg_utils/vectors.py` (supplemental). |
+| 02 | `notebooks/02_matrices_and_linear_maps.ipynb` | Visualize how matrices map basis vectors, unit squares, and unit circles through rotation, scaling, shear, and reflection; link to `scripts/demo_linear_maps.py` (supports A1–A2). |
+| 03 | `notebooks/03_solving_linear_systems.ipynb` | Solve `Ax=b`, reason about residuals, explore conditioning (supports A4). |
+| 04 | `notebooks/04_least_squares_and_projections.ipynb` | Project vectors onto subspaces and compare methods (supplemental). |
+| 05 | `notebooks/05_qr_and_svd.ipynb` | Decompose matrices into QR and SVD factors (supplemental). |
+| 06 | `notebooks/06_eigenvalues_and_diagonalization.ipynb` | Relate eigenpairs to geometric stretch (supplemental). |
+| 07 | `notebooks/07_pca_mini_project.ipynb` | Practice PCA on a noisy dataset (optional capstone). |
 
-## Exercises & solutions
-- `exercises/02_matrices_exercises.ipynb` + `solutions/02_matrices_exercises.ipynb`: Tasks about linear maps, verifying invariants.
-- `exercises/03_systems_exercises.ipynb` + `solutions/03_systems_exercises.ipynb`: Practice solving systems, residuals, and conditioning labs.
-- `exercises/04_least_squares_exercises.ipynb` + `solutions/04_least_squares_exercises.ipynb`: Hands-on least squares fitting, normal equations vs QR evaluation.
+## Exercises
+Assignment-aligned exercise notebooks (see `assignments/ASSIGNMENTS.tex` for the full spec):
+- `exercises/01_assignment_exercises.ipynb`
+- `exercises/02_assignment_exercises.ipynb`
+- `exercises/03_assignment_exercises.ipynb`
+- `exercises/04_assignment_exercises.ipynb`
+- `exercises/05_assignment_exercises.ipynb`
+- `exercises/06_assignment_exercises.ipynb`
+- `exercises/07_assignment_exercises.ipynb`
+
+## Solutions
+Assignment-aligned solution notebooks:
+- `solutions/01_assignment_solutions.ipynb`
+- `solutions/02_assignment_solutions.ipynb`
+- `solutions/03_assignment_solutions.ipynb`
+- `solutions/04_assignment_solutions.ipynb`
+- `solutions/05_assignment_solutions.ipynb`
+- `solutions/06_assignment_solutions.ipynb`
+- `solutions/07_assignment_solutions.ipynb`
 
 ## Supporting modules
 - `packages/python/src/linalg_utils/checks.py`: Math invariants helpers (`is_orthonormal`, `relative_error`, etc.).

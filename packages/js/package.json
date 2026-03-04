@@ -8,8 +8,18 @@
     "test": "vitest run",
     "test:watch": "vitest"
   },
+  "dependencies": {
+    "chart.js": "latest",
+    "d3": "latest",
+    "mathjs": "latest",
+    "numeric": "latest",
+    "plotly.js-dist-min": "latest"
+  },
   "devDependencies": {
     "typescript": "^5.5.4",
     "vitest": "^2.0.5"
+  },
+  "engines": {
+    "node": ">=20"
   }
 }

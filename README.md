@@ -7,15 +7,16 @@ Instructor: Diogo Ribeiro (dfr@esmad.ipp.pt, ORCID: 0009-0001-2022-7072)
 
 ## About
 
-Eight practical assignments covering matrices, determinants, linear systems, and analytic geometry, with a Python reference implementation and a TypeScript port.
+Seven practical assignments covering matrices, determinants, linear systems, and analytic geometry, with a Python reference implementation and a TypeScript port.
 
 Repository layout:
 
 - `packages/python`: Python library (`linalg_utils`) and tests.
 - `packages/js`: TypeScript port and tests.
 - `assignments`: Assignment statements and starter files.
+- `assignments/ASSIGNMENTS.tex`: Full assignment specification (2025/2026).
 - `assignments/submissions`: Submission templates and grading rubric.
-- `exercises` / `solutions`: Practice notebooks and reference solutions.
+- `exercises` / `solutions`: Assignment-aligned exercise and solution notebooks.
 - `notebooks`: Lesson notebooks.
 - `scripts`: Demo scripts to regenerate figures in `assets/figures`.
 - `shared/fixtures`: Cross-language fixtures (JSON) for parity testing.
@@ -24,7 +25,7 @@ Repository layout:
 
 - Python 3.11+
 - Poetry
-- Node.js 18+ (for the TypeScript port)
+- Node.js 20+ (for the TypeScript port)
 
 ## Installation (Python)
 
@@ -48,13 +49,12 @@ Yarn is used for the TypeScript package (Berry/PnP by default).
 #  | Title                                     | Module                | Difficulty
 -- | ----------------------------------------- | --------------------- | ------------
 A1 | Matrices: Construction and Classification | Matrices              | Introductory
-A2 | Matrix Operations                         | Operations, Transpose | Introductory
+A2 | Matrix Operations and Property Verification | Operations, Transpose | Introductory
 A3 | Determinants and Invertibility            | Determinants, Inverse | Intermediate
-A4 | Linear Systems: Gauss                     | Gaussian Elimination  | Intermediate
+A4 | Linear Systems: Gauss and Classification  | Gaussian Elimination  | Intermediate
 A5 | Cramer and LU Decomposition               | Cramer, LU            | Intermediate
 A6 | Analytic Geometry: Lines and Planes       | Analytic Geometry     | Intermediate
 A7 | Surfaces of Revolution                    | Surfaces              | Intermediate
-A8 | Integrative Project                       | All                   | Advanced
 
 ## Run (Python)
 
