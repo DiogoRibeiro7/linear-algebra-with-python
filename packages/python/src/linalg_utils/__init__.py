@@ -1,5 +1,7 @@
 """Utility functions for linear algebra assignments."""
 
+from .checks import RelativeError, assert_close, is_orthonormal, is_upper_triangular, relative_error
+from .decompositions import qr_gram_schmidt
 from .determinants import (
     det_2x2,
     det_3x3_sarrus,
@@ -8,6 +10,13 @@ from .determinants import (
     eh_invertivel,
     inversa_2x2,
     inversa_gauss_jordan,
+)
+from .eigen import (
+    Eigen2x2Result,
+    PowerIterationResult,
+    eigen_2x2,
+    power_iteration,
+    rayleigh_quotient,
 )
 from .geometry import (
     intersecao_reta_plano,
@@ -24,6 +33,7 @@ from .geometry import (
     superficie_revolucao,
 )
 from .geometry2d import LinearMap2D, apply_linear_map, unit_circle, unit_square
+from .least_squares import LeastSquaresResult, least_squares_normal_eq, least_squares_qr
 from .lu import (
     decomposicao_lu,
     det_via_lu,
@@ -41,10 +51,6 @@ from .matrices import (
     dimensao,
     eh_quadrada,
 )
-from .checks import RelativeError, assert_close, is_orthonormal, is_upper_triangular, relative_error
-from .decompositions import qr_gram_schmidt
-from .eigen import Eigen2x2Result, PowerIterationResult, eigen_2x2, power_iteration, rayleigh_quotient
-from .least_squares import LeastSquaresResult, least_squares_normal_eq, least_squares_qr
 from .systems import (
     classificar_sistema,
     cramer,

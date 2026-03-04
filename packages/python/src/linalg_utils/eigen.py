@@ -40,7 +40,10 @@ def eigen_2x2(A: npt.ArrayLike) -> Eigen2x2Result:
     if A_arr.shape != (2, 2):
         raise ValueError("Matrix must be 2x2.")
     values, vectors = np.linalg.eig(A_arr)
-    return Eigen2x2Result(eigenvalues=np.array(values, dtype=float), eigenvectors=np.array(vectors, dtype=float))
+    return Eigen2x2Result(
+        eigenvalues=np.array(values, dtype=float),
+        eigenvectors=np.array(vectors, dtype=float),
+    )
 
 
 @dataclass(frozen=True)
