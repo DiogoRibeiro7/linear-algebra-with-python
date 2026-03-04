@@ -9,6 +9,8 @@ on:
 jobs:
   test-python:
     runs-on: ubuntu-latest
+    env:
+      PYTHONNOUSERSITE: "1"
     strategy:
       matrix:
         python-version: ["3.11","3.12","3.13"]
