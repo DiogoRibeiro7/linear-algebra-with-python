@@ -1,0 +1,19 @@
+# Default owners
+* @diogoribeiro7
+
+# Core packages
+/packages/python/ @diogoribeiro7
+/packages/js/ @diogoribeiro7
+
+# Assignments and submissions
+/assignments/ @diogoribeiro7
+/assignments/submissions/ @diogoribeiro7
+
+# Docs and notebooks
+/docs/ @diogoribeiro7
+/notebooks/ @diogoribeiro7
+/exercises/ @diogoribeiro7
+/solutions/ @diogoribeiro7
+
+# CI / GitHub config
+/.github/ @diogoribeiro7
