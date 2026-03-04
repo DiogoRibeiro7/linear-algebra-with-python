@@ -9,7 +9,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 _ROOT = Path(__file__).resolve().parents[1]
-_SRC_PATH = _ROOT / "src"
+_SRC_PATH = _ROOT / "packages" / "python" / "src"
 
 def _ensure_src_in_path() -> None:
     src_str = str(_SRC_PATH)
@@ -18,7 +18,7 @@ def _ensure_src_in_path() -> None:
 
 def main() -> None:
     _ensure_src_in_path()
-    from linalg_with_python.least_squares import least_squares_qr
+    from linalg_utils.least_squares import least_squares_qr
 
     rng = np.random.default_rng(0)
     x = np.linspace(-2.0, 2.0, 40)

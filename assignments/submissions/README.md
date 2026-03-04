@@ -3,6 +3,7 @@
 This folder is for student uploads.
 
 ## Folder naming
+
 Each student must create a folder using the pattern:
 
 ```
@@ -12,6 +13,7 @@ Each student must create a folder using the pattern:
 Where `XXX` are exactly three digits (e.g., `4025001`, `4025123`).
 
 ## Required files inside each student folder
+
 - `README.md`
 - `.gitkeep`
 - `SUBMISSION_GUIDE.md`

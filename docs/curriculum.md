@@ -18,13 +18,13 @@ This document bundles the notebooks, exercises, and assets into a coherent teach
 ## Curriculum deliverables
 
 - **Capstone**: `capstone/starter.ipynb` and `capstone/solution.ipynb` provide Track A (least squares + geometry) and Track B (PCA/SVD) templates. Pair them with the exercises for a final assessment.
-- **CLI + demos**: `poetry run linalgpy --help` (maps, solve, lsq) plus the `scripts/demo_*.py` set keep the figures reproducible. Run `scripts/run_all_demos.py` when you need to regenerate every asset before publishing.
+- **CLI + demos**: from `packages/python`, run `poetry run linalgpy --help` (maps, solve, lsq) plus the `scripts/demo_*.py` set keep the figures reproducible. Run `scripts/run_all_demos.py` when you need to regenerate every asset before publishing.
 - **Exercises/solutions**: each exercise notebook (modules 02–04) includes 8–8 tasks plus a “Check your work” section that reminds learners what shapes or invariants to confirm; the solution notebooks show complete code and printed metrics.
 - **Figures**: keep each figure in `assets/figures/` so notebooks and README can embed them consistently.
 
 ## Exporting a PDF or static site
 
-1. Install any missing requirements in the Poetry environment: `poetry install`.
+1. Install any missing requirements in the Poetry environment: `cd packages/python` then `poetry install`.
 2. Run `jupyter nbconvert --to pdf notebooks/02_matrices_and_linear_maps.ipynb` (repeat for other notebooks) to produce shareable PDFs.
 3. Use a static site generator (e.g., MkDocs) that can render Markdown + images from this repo if you want a more formal “site”; the links above already match the published order.
 

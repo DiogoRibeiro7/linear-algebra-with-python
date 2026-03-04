@@ -10,16 +10,18 @@ Welcome to the static site that mirrors the `README.md` learning path with riche
 
 ## Building the site
 
-Make sure the Poetry environment is installed (`poetry install`), then:
+Make sure the Poetry environment is installed in `packages/python` (`poetry install`), then:
 
 ```bash
-poetry run mkdocs serve
+cd packages/python
+poetry run mkdocs serve -f ../../mkdocs.yml
 ```
 
 Or create a production build:
 
 ```bash
-poetry run mkdocs build
+cd packages/python
+poetry run mkdocs build -f ../../mkdocs.yml
 ```
 
 The generated site lives in `site/` (ignored by Git). Use `mkdocs serve` during development to preview the notebooks/demos alongside the curriculum.

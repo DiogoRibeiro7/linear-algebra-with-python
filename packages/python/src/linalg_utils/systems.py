@@ -156,6 +156,30 @@ def resolver_gauss(
     return x, classification, steps
 
 
+class SolveResult:
+    """Container for linear system solutions."""
+
+    def __init__(self, x: Array, residual: Array, residual_norm: float) -> None:
+        self.x = x
+        self.residual = residual
+        self.residual_norm = residual_norm
+
+
+def solve(A: npt.ArrayLike, b: npt.ArrayLike) -> SolveResult:
+    """Solve Ax = b using a direct solver (square) or least squares (rectangular)."""
+    A_arr = _as_2d(A)
+    b_arr = np.array(b, dtype=float).reshape(-1)
+    if A_arr.shape[0] != b_arr.shape[0]:
+        raise ValueError("Incompatible dimensions between A and b.")
+    if A_arr.shape[0] == A_arr.shape[1]:
+        x = np.linalg.solve(A_arr, b_arr)
+    else:
+        x, *_ = np.linalg.lstsq(A_arr, b_arr, rcond=None)
+    residual = A_arr @ x - b_arr
+    residual_norm = float(np.linalg.norm(residual))
+    return SolveResult(x=x, residual=residual, residual_norm=residual_norm)
+
+
 def cramer_2x2(A: npt.ArrayLike, b: npt.ArrayLike, *, tol: float = 1e-12) -> Array:
     """Solve a 2x2 system using Cramer's rule.
 

@@ -23,7 +23,7 @@ def build_matrices_exercise() -> list[dict]:
             "source": [
                 "# Matrices exercises\n",
                 "Tackle each task by filling in the `TODO` sections. Keep your answers short and save any figures under `assets/figures/`. "
-                "You can reuse `linalg_with_python.geometry2d` helpers to stay consistent with the lessons.\n",
+                "You can reuse `linalg_utils.geometry2d` helpers to stay consistent with the lessons.\n",
             ],
         },
         {
@@ -41,7 +41,7 @@ def build_matrices_exercise() -> list[dict]:
             "outputs": [],
             "source": [
                 "import numpy as np\n",
-                "from linalg_with_python import geometry2d\n",
+                "from linalg_utils import geometry2d\n",
                 "\n",
                 "# TODO: define your transformation matrix\n",
                 "transform = np.eye(2)\n",
@@ -410,7 +410,7 @@ def build_least_squares_exercise() -> list[dict]:
             "outputs": [],
             "source": [
                 "import numpy as np\n",
-                "from linalg_with_python import least_squares\n",
+                "from linalg_utils import least_squares\n",
                 "\n",
                 "x = np.array([0.0, 1.0, 2.0, 3.0])\n",
                 "y = np.array([1.0, 3.0, 7.0, 13.0])\n",
@@ -588,7 +588,7 @@ def build_matrices_solution() -> list[dict]:
             "outputs": [],
             "source": [
                 "import numpy as np\n",
-                "from linalg_with_python import geometry2d\n",
+                "from linalg_utils import geometry2d\n",
                 "\n",
                 "transform = (\n",
                 "    np.array([[np.cos(np.pi / 6), -np.sin(np.pi / 6)], [np.sin(np.pi / 6), np.cos(np.pi / 6)]])\n",
@@ -791,7 +791,7 @@ def build_least_squares_solution() -> list[dict]:
             "source": [
                 "import numpy as np\n",
                 "import matplotlib.pyplot as plt\n",
-                "from linalg_with_python import least_squares\n",
+                "from linalg_utils import least_squares\n",
                 "\n",
                 "x = np.array([0.0, 1.0, 2.0, 3.0])\n",
                 "y = np.array([1.0, 3.0, 7.0, 13.0])\n",

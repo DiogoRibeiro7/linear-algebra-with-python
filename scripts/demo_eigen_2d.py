@@ -9,7 +9,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 _ROOT = Path(__file__).resolve().parents[1]
-_SRC_PATH = _ROOT / "src"
+_SRC_PATH = _ROOT / "packages" / "python" / "src"
 
 def _ensure_src_in_path() -> None:
     src_str = str(_SRC_PATH)
@@ -18,8 +18,8 @@ def _ensure_src_in_path() -> None:
 
 def main() -> None:
     _ensure_src_in_path()
-    from linalg_with_python.eigen import power_iteration
-    from linalg_with_python.geometry2d import LinearMap2D, unit_circle
+    from linalg_utils.eigen import power_iteration
+    from linalg_utils.geometry2d import LinearMap2D, unit_circle
 
     A = np.array([[1.1, 0.2], [0.1, 0.9]], dtype=np.float64)
     res = power_iteration(A, seed=1)

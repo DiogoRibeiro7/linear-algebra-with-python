@@ -1,7 +1,7 @@
 # FAQ
 
 ## Tests fail unexpectedly
-- **Why did `poetry run pytest -q` fail after a refactor?** Inspect the failing test file under `tests/` to understand the missing behavior; rerun with `poetry run pytest tests/test_filename.py` for extra context.
+- **Why did `poetry run pytest -q` fail after a refactor?** Inspect the failing test file under `packages/python/tests/` to understand the missing behavior; rerun with `poetry run pytest tests/test_filename.py` (from `packages/python`) for extra context.
 - **Mypy errors about missing imports or `np.ndarray` shapes?** Check that the relevant module imports NumPy and exposes typed signatures; add `from __future__ import annotations` if needed.
 
 ## Notebook & asset issues
@@ -18,4 +18,4 @@
 
 ## General tips
 - Keep README, CONTRIBUTING, and docs/syllabus aligned whenever you add a lesson, demo, or CLI feature.
-- When you add new helper modules or scripts, also update the tests under `tests/` and mention the new behaviour in the FAQ if it introduces a common stumbling block.
+- When you add new helper modules or scripts, also update the tests under `packages/python/tests/` and mention the new behaviour in the FAQ if it introduces a common stumbling block.

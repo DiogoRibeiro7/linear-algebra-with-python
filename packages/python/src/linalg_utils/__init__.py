@@ -23,6 +23,7 @@ from .geometry import (
     superficie_esfera,
     superficie_revolucao,
 )
+from .geometry2d import LinearMap2D, apply_linear_map, unit_circle, unit_square
 from .lu import (
     decomposicao_lu,
     det_via_lu,
@@ -40,6 +41,10 @@ from .matrices import (
     dimensao,
     eh_quadrada,
 )
+from .checks import RelativeError, assert_close, is_orthonormal, is_upper_triangular, relative_error
+from .decompositions import qr_gram_schmidt
+from .eigen import Eigen2x2Result, PowerIterationResult, eigen_2x2, power_iteration, rayleigh_quotient
+from .least_squares import LeastSquaresResult, least_squares_normal_eq, least_squares_qr
 from .systems import (
     classificar_sistema,
     cramer,
@@ -47,8 +52,10 @@ from .systems import (
     cramer_3x3,
     escalonar,
     resolver_gauss,
+    solve,
     substituicao_retroativa,
 )
+from .vectors import angle, dot, norm, projection
 
 __all__ = [
     "classificar_matriz",
@@ -90,4 +97,27 @@ __all__ = [
     "superficie_cone",
     "superficie_esfera",
     "superficie_revolucao",
+    "LinearMap2D",
+    "apply_linear_map",
+    "unit_circle",
+    "unit_square",
+    "RelativeError",
+    "relative_error",
+    "assert_close",
+    "is_orthonormal",
+    "is_upper_triangular",
+    "qr_gram_schmidt",
+    "Eigen2x2Result",
+    "PowerIterationResult",
+    "eigen_2x2",
+    "power_iteration",
+    "rayleigh_quotient",
+    "LeastSquaresResult",
+    "least_squares_normal_eq",
+    "least_squares_qr",
+    "solve",
+    "angle",
+    "dot",
+    "norm",
+    "projection",
 ]
