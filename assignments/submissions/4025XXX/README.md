@@ -4,15 +4,15 @@ Replace `4025XXX` with your own student ID folder name.
 
 ## Contents
 
-List the assignments you submitted here and confirm both language tracks are present. Example:
+Confirm each assignment includes both languages and a shared reflection:
 
-- Assignment 01 -- Matrices (Python + JavaScript)
-- Assignment 02 -- Operations (Python + JavaScript)
-- Assignment 03 -- Determinants (Python + JavaScript)
-- Assignment 04 -- Systems (Python + JavaScript)
-- Assignment 05 -- Cramer/LU (Python + JavaScript)
-- Assignment 06 -- Geometry (Python + JavaScript)
-- Assignment 07 -- Surfaces (Python + JavaScript)
+- A01 -- Matrices (Python + JavaScript)
+- A02 -- Operations (Python + JavaScript)
+- A03 -- Determinants (Python + JavaScript)
+- A04 -- Systems (Python + JavaScript)
+- A05 -- Cramer/LU (Python + JavaScript)
+- A06 -- Geometry (Python + JavaScript)
+- A07 -- Surfaces (Python + JavaScript)
 
 ## Notes
 
