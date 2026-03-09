@@ -39,3 +39,13 @@ Run those commands before creating a patch, especially if you touched src/ or no
 ## Reporting issues
 - File a GitHub issue for bugs or missing content; include commands to reproduce and any offending figure/notebook names.
 - If a notebook or script fails to run, paste the error along with the asset path so reviewers can rerun the same steps.
+
+## Student submission PRs
+- Target branch must be `develop`.
+- Source branch format: `<student_number>-A<nn>` (example: `4025001-A01`).
+- PR title format: `Submission <student_number> --- A<nn>` (example: `Submission 4025001 --- A01`).
+- Submission files must stay under `assignments/submissions/<student_number>/<nn>/`.
+- Required files in the submission folder: `README.md` and `reflexao.md`.
+- Include exactly one language track: `python/` or `javascript/`.
+- Automated submission control accepts only assignments `A01` through `A06`.
+- Assignment `A07` can exist in teaching materials but is excluded from submission-control validation.

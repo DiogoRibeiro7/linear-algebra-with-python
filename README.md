@@ -86,7 +86,23 @@ yarn test
 
 ## Submissions
 
-Start with the submission index at `assignments/submissions/README.md`, then follow the guide in `assignments/submissions/4025XXX/SUBMISSION_GUIDE.md`. These documents define naming conventions, required deliverables, and the grading checklist.
+Official PR-based submissions use the following format:
+
+- Target branch: `develop`
+- Source branch example: `4025001-A01`
+- PR title example: `Submission 4025001 --- A01`
+- Submission path example: `assignments/submissions/4025001/01/`
+- Supported assignments in automated submission control: `A01` to `A06` only
+
+Each submission folder must contain:
+
+- `README.md`
+- `reflexao.md`
+- Exactly one implementation track:
+  - `python/` with at least one file
+  - or `javascript/` with at least one file
+
+`assignments/07_superficies_revolucao` remains available as teaching material, but `A07` is outside the submission-control workflow.
 
 ## License
 
