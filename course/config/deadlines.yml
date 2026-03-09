@@ -5,6 +5,8 @@ supported_assignments:
   - "04"
   - "05"
   - "06"
+# Assignment 07 may exist in repository teaching materials but is out of scope
+# for submission-control validation and therefore is intentionally not listed.
 
 deadlines:
   "01": "2026-03-20T23:59:00Z"
