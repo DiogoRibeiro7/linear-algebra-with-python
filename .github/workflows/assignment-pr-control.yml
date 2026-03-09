@@ -20,6 +20,9 @@ jobs:
   submission-control:
     name: Validate assignment submission PR
     runs-on: ubuntu-latest
+    concurrency:
+      group: assignment-pr-control-${{ github.event.pull_request.number }}
+      cancel-in-progress: true
 
     steps:
       - name: Checkout repository
@@ -40,7 +43,6 @@ jobs:
         env:
           EVENT_PATH: ${{ github.event_path }}
           GITHUB_WORKSPACE: ${{ github.workspace }}
-          BASE_REF: ${{ github.base_ref }}
         shell: bash
         run: |
           python - <<'PY'
@@ -49,7 +51,7 @@ jobs:
           import re
           import subprocess
           import sys
-          from datetime import datetime, timezone
+          from datetime import datetime
           from pathlib import Path
 
           import yaml
