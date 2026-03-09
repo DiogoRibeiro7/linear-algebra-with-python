@@ -33,7 +33,7 @@ class RelativeError:
     relative: float
 
     @classmethod
-    def from_vectors(cls, actual: npt.ArrayLike, expected: npt.ArrayLike) -> "RelativeError":
+    def from_vectors(cls, actual: npt.ArrayLike, expected: npt.ArrayLike) -> RelativeError:
         a_arr = np.array(actual, dtype=float).reshape(-1)
         e_arr = np.array(expected, dtype=float).reshape(-1)
         diff = float(np.linalg.norm(a_arr - e_arr))
@@ -54,7 +54,12 @@ def least_squares_normal_eq(A: npt.ArrayLike, b: npt.ArrayLike) -> LeastSquaresR
         x, *_ = np.linalg.lstsq(ATA, ATb, rcond=None)
     residual = A_arr @ x - b_arr
     residual_norm = float(np.linalg.norm(residual))
-    return LeastSquaresResult(x=x, residual=residual, residual_norm=residual_norm, method="normal_eq")
+    return LeastSquaresResult(
+        x=x,
+        residual=residual,
+        residual_norm=residual_norm,
+        method="normal_eq",
+    )
 
 
 def least_squares_qr(A: npt.ArrayLike, b: npt.ArrayLike) -> LeastSquaresResult:

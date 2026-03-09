@@ -59,7 +59,7 @@ class RelativeError:
     relative: float
 
     @classmethod
-    def from_vectors(cls, actual: npt.ArrayLike, expected: npt.ArrayLike) -> "RelativeError":
+    def from_vectors(cls, actual: npt.ArrayLike, expected: npt.ArrayLike) -> RelativeError:
         a_arr = _as_vector(actual)
         e_arr = _as_vector(expected)
         diff = np.linalg.norm(a_arr - e_arr)

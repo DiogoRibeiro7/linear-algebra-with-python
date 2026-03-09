@@ -18,6 +18,13 @@ Where `XXX` are exactly three digits (e.g., `4025001`, `4025123`).
 - `README.md`
 - `.gitkeep`
 - `SUBMISSION_GUIDE.md`
+- `01/` through `07/` (one folder per assignment)
 
-Use the template in `assignments/submissions/4025XXX` as a starting point. The course has 7 assignments (01–07).
-Each assignment submission must include both Python and JavaScript implementations plus a shared `reflexao.md`.
+Each assignment folder must include:
+
+- `README.md`
+- `python/` (your Python deliverables)
+- `javascript/` (your JavaScript deliverables)
+- `reflexao.md` (shared reflection)
+
+Use the template in `assignments/submissions/4025XXX` as a starting point.

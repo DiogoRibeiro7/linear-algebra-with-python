@@ -40,7 +40,10 @@ def eigen_2x2(A: npt.ArrayLike) -> Eigen2x2Result:
     if A_arr.shape != (2, 2):
         raise ValueError("Matrix must be 2x2.")
     values, vectors = np.linalg.eig(A_arr)
-    return Eigen2x2Result(eigenvalues=np.array(values, dtype=float), eigenvectors=np.array(vectors, dtype=float))
+    return Eigen2x2Result(
+        eigenvalues=np.array(values, dtype=float),
+        eigenvectors=np.array(vectors, dtype=float),
+    )
 
 
 @dataclass(frozen=True)
@@ -56,13 +59,13 @@ def power_iteration(
     A_arr = _as_square(A)
     n = A_arr.shape[0]
     rng = np.random.default_rng(seed)
-    b_k = rng.normal(size=n)
+    b_k: Array = np.array(rng.normal(size=n), dtype=float)
     b_k = b_k / np.linalg.norm(b_k)
     eigenvalue = 0.0
 
     for i in range(1, num_iters + 1):
-        b_k1 = A_arr @ b_k
-        norm = np.linalg.norm(b_k1)
+        b_k1: Array = A_arr @ b_k
+        norm = float(np.linalg.norm(b_k1))
         if norm <= 1e-12:
             raise ValueError("Power iteration failed: zero vector encountered.")
         b_k1 = b_k1 / norm

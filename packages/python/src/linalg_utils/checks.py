@@ -12,7 +12,9 @@ def _as_array(a: npt.ArrayLike) -> Array:
     return np.array(a, dtype=float)
 
 
-def assert_close(label: str, actual: npt.ArrayLike, expected: npt.ArrayLike, *, tol: float = 1e-9) -> None:
+def assert_close(
+    label: str, actual: npt.ArrayLike, expected: npt.ArrayLike, *, tol: float = 1e-9
+) -> None:
     actual_arr = _as_array(actual)
     expected_arr = _as_array(expected)
     if not np.allclose(actual_arr, expected_arr, rtol=tol, atol=tol):
@@ -34,8 +36,8 @@ def is_orthonormal(Q: npt.ArrayLike, *, tol: float = 1e-9) -> bool:
     m, n = arr.shape
     if m < n:
         return False
-    I = np.eye(n)
-    return bool(np.allclose(arr.T @ arr, I, atol=tol, rtol=0.0))
+    identity = np.eye(n)
+    return bool(np.allclose(arr.T @ arr, identity, atol=tol, rtol=0.0))
 
 
 @dataclass(frozen=True)
