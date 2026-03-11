@@ -71,25 +71,51 @@ jobs:
           errors = []
           warnings = []
 
-          # Enforce base branch.
+          branch_match = re.fullmatch(r"([0-9]{7})-A([0-9]{2})", head_ref)
+          if branch_match:
+              branch_student, branch_assignment = branch_match.groups()
+          else:
+              branch_student = ""
+              branch_assignment = ""
+
+          title_match = re.fullmatch(r"Submission ([0-9]{7}) --- A([0-9]{2})", pr_title)
+          if title_match:
+              title_student, title_assignment = title_match.groups()
+          else:
+              title_student = ""
+              title_assignment = ""
+
+          base_sha = pr["base"]["sha"]
+          head_sha = pr["head"]["sha"]
+          diff_cmd = ["git", "diff", "--name-only", base_sha, head_sha]
+          changed_files = subprocess.check_output(diff_cmd, text=True).splitlines()
+
+          submission_path_changed = any(
+              p.startswith("assignments/submissions/") for p in changed_files
+          )
+          is_submission_pr = bool(branch_match or title_match or submission_path_changed)
+
+          # Non-submission PRs should not be blocked or labeled by this workflow.
+          if not is_submission_pr:
+              output_path = os.environ["GITHUB_OUTPUT"]
+              with open(output_path, "a", encoding="utf-8") as out:
+                  out.write("student=\n")
+                  out.write("assignment=\n")
+                  out.write("late=false\n")
+                  out.write("valid=true\n")
+                  out.write("is_submission=false\n")
+              print("Non-submission PR detected. Skipping submission validation.")
+              sys.exit(0)
+
+          # Enforce base branch for submission PRs.
           if base_ref != "develop":
               errors.append(f"PR base branch must be 'develop', found '{base_ref}'.")
 
-          branch_match = re.fullmatch(r"([0-9]{7})-A([0-9]{2})", head_ref)
           if not branch_match:
               errors.append("Source branch must match 'NNNNNNN-Axx' (example: 4025001-A01).")
-              branch_student = ""
-              branch_assignment = ""
-          else:
-              branch_student, branch_assignment = branch_match.groups()
 
-          title_match = re.fullmatch(r"Submission ([0-9]{7}) --- A([0-9]{2})", pr_title)
           if not title_match:
               errors.append("PR title must match 'Submission NNNNNNN --- Axx'.")
-              title_student = ""
-              title_assignment = ""
-          else:
-              title_student, title_assignment = title_match.groups()
 
           student_number = branch_student or title_student
           assignment = branch_assignment or title_assignment
@@ -133,11 +159,6 @@ jobs:
               warnings.append(
                   f"Student number {student_number} is not listed in course/config/students.yml."
               )
-
-          base_sha = pr["base"]["sha"]
-          head_sha = pr["head"]["sha"]
-          diff_cmd = ["git", "diff", "--name-only", base_sha, head_sha]
-          changed_files = subprocess.check_output(diff_cmd, text=True).splitlines()
 
           if not changed_files:
               errors.append("No changed files were detected in this PR.")
@@ -190,6 +211,7 @@ jobs:
               out.write(f"assignment={assignment}\n")
               out.write(f"late={'true' if late else 'false'}\n")
               out.write(f"valid={'false' if errors else 'true'}\n")
+              out.write("is_submission=true\n")
 
           if warnings:
               print("Warnings:")
@@ -211,11 +233,12 @@ jobs:
         uses: actions/github-script@v8
         with:
           script: |
+            const isSubmission = `${{ steps.validate.outputs.is_submission }}` === "true";
             const student = `${{ steps.validate.outputs.student }}`;
             const assignment = `${{ steps.validate.outputs.assignment }}`;
             const currentNumber = context.payload.pull_request.number;
 
-            if (!student || !assignment) {
+            if (!isSubmission || !student || !assignment) {
               core.setOutput("duplicate", "false");
               return;
             }
@@ -241,10 +264,16 @@ jobs:
         with:
           script: |
             const labelsToManage = ["submitted", "late", "invalid", "duplicate-submission"];
+            const isSubmission = `${{ steps.validate.outputs.is_submission }}` === "true";
             const valid = `${{ steps.validate.outputs.valid }}` === "true";
             const late = `${{ steps.validate.outputs.late }}` === "true";
             const duplicate = `${{ steps.duplicate.outputs.duplicate }}` === "true";
             const prNumber = context.payload.pull_request.number;
+
+            if (!isSubmission) {
+              core.info("Non-submission PR; skipping submission labels and checks.");
+              return;
+            }
 
             const existing = context.payload.pull_request.labels.map((l) => l.name);
             const toRemove = existing.filter((l) => labelsToManage.includes(l));
