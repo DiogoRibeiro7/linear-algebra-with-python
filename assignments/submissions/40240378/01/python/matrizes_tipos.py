@@ -71,7 +71,8 @@ def classificar_matriz(matriz):
     if np.allclose(matriz, 0):
         classificacoes.append("zero")
 
-    if np.allclose(matriz, np.eye(numero_linhas, numero_colunas)):
+    if numero_linhas == numero_colunas:
+    if np.allclose(matriz, np.eye(numero_linhas)):
         classificacoes.append("identity")
 
     if numero_linhas == numero_colunas:
