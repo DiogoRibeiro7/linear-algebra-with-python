@@ -1,0 +1,931 @@
+\documentclass[a4paper,11pt]{article}
+
+% ── Packages ──────────────────────────────────────────────────
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+% \usepackage{lmodern} % Use default Computer Modern
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{enumitem}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{multirow}
+\usepackage{fancyhdr}
+\usepackage{hyperref}
+\usepackage{tcolorbox}
+\usepackage{fancyvrb}
+\usepackage{amsmath,amssymb}
+\usepackage{array}
+\usepackage{colortbl}
+\usepackage{tikz}
+\usepackage{lastpage}
+
+% ── Colors ────────────────────────────────────────────────────
+\definecolor{ippblue}{HTML}{1B4F72}
+\definecolor{midblue}{HTML}{2E86C1}
+\definecolor{lightblue}{HTML}{D6EAF8}
+\definecolor{darkgray}{HTML}{2C3E50}
+\definecolor{lightgray}{HTML}{F2F3F4}
+\definecolor{codebg}{HTML}{F8F9FA}
+\definecolor{hintbg}{HTML}{EBF5FB}
+\definecolor{hintborder}{HTML}{2E86C1}
+\definecolor{warnbg}{HTML}{FEF9E7}
+\definecolor{warnborder}{HTML}{F39C12}
+\definecolor{jsbg}{HTML}{FFF8E1}
+\definecolor{jsborder}{HTML}{FF8F00}
+\definecolor{pybg}{HTML}{E8F5E9}
+\definecolor{pyborder}{HTML}{388E3C}
+
+% ── Hyperlinks ────────────────────────────────────────────────
+\hypersetup{
+  colorlinks=true,
+  linkcolor=ippblue,
+  urlcolor=midblue,
+  citecolor=ippblue,
+  pdftitle={LAGA -- Assignment Specifications 2025/2026},
+  pdfauthor={Diogo Ribeiro},
+}
+
+% ── Headers / Footers ────────────────────────────────────────
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\textit{\color{midblue}Linear Algebra with Python or JavaScript}}
+\fancyhead[R]{\small\textit{\color{gray}ESMAD --- IPP}}
+\fancyfoot[C]{\small\color{gray}Page \thepage\ of \pageref{LastPage}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% Configure header with image in top right corner
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[R]{\includegraphics[width=2cm]{logo-esmad-final.png}}  % Replace 'logo.png' with your image file name
+\AtBeginDocument{%
+    \setlength{\headheight}{24pt}%
+    \addtolength{\topmargin}{-12pt}%
+    \setlength{\emergencystretch}{1em}%
+}
+
+% Apply the header also to the first page
+\fancypagestyle{plain}{
+    \fancyhf{}
+    \fancyhead[R]{\includegraphics[width=2cm]{logo-esmad-final.png}}  % Include logo on title page
+}
+
+% ── Section formatting ────────────────────────────────────────
+\titleformat{\section}
+  {\Large\bfseries\color{ippblue}}
+  {\thesection}{1em}{}
+  [\vspace{-0.5em}\color{midblue}\rule{\textwidth}{0.8pt}]
+
+\titleformat{\subsection}
+  {\large\bfseries\color{darkgray}}
+  {\thesubsection}{1em}{}
+
+\titleformat{\subsubsection}
+  {\normalsize\bfseries\color{midblue}}
+  {\thesubsubsection}{1em}{}
+
+% ── Tcolorbox styles ─────────────────────────────────────────
+\tcbuselibrary{skins,breakable}
+
+\newtcolorbox{hintbox}{
+  enhanced,
+  breakable,
+  colback=hintbg,
+  colframe=hintborder,
+  boxrule=0.4pt,
+  left=8pt,
+  right=8pt,
+  top=6pt,
+  bottom=6pt,
+  fonttitle=\bfseries\color{ippblue},
+  title=Hints,
+  attach boxed title to top left={yshift=-2mm,xshift=4mm},
+  boxed title style={colback=hintbg,colframe=hintborder},
+}
+
+\newtcolorbox{infobox}{
+  enhanced,
+  breakable,
+  colback=hintbg,
+  colframe=hintborder,
+  boxrule=0.4pt,
+  left=8pt,
+  right=8pt,
+  top=6pt,
+  bottom=6pt,
+  borderline west={3pt}{0pt}{hintborder},
+}
+
+\newtcolorbox{warnbox}{
+  enhanced,
+  breakable,
+  colback=warnbg,
+  colframe=warnborder,
+  boxrule=0.4pt,
+  left=8pt,
+  right=8pt,
+  top=6pt,
+  bottom=6pt,
+  borderline west={3pt}{0pt}{warnborder},
+}
+
+\newtcolorbox{pythonbox}[1][Python]{
+  enhanced,
+  breakable,
+  colback=pybg,
+  colframe=pyborder,
+  boxrule=0.4pt,
+  left=8pt, right=8pt, top=6pt, bottom=6pt,
+  fonttitle=\bfseries\color{pyborder},
+  title={#1},
+  attach boxed title to top left={yshift=-2mm,xshift=4mm},
+  boxed title style={colback=pybg,colframe=pyborder},
+}
+
+\newtcolorbox{jsbox}[1][JavaScript]{
+  enhanced,
+  breakable,
+  colback=jsbg,
+  colframe=jsborder,
+  boxrule=0.4pt,
+  left=8pt, right=8pt, top=6pt, bottom=6pt,
+  fonttitle=\bfseries\color{jsborder},
+  title={#1},
+  attach boxed title to top left={yshift=-2mm,xshift=4mm},
+  boxed title style={colback=jsbg,colframe=jsborder},
+}
+
+% ── Code style ────────────────────────────────────────────────
+\DefineVerbatimEnvironment{code}{Verbatim}{
+  fontsize=\small,
+  frame=single,
+  framesep=6pt,
+  rulecolor=\color{gray!40},
+  fillcolor=\color{codebg},
+  formatcom=\color{darkgray},
+}
+
+% ── Custom commands ───────────────────────────────────────────
+\newcommand{\assignmentheader}[4]{%
+  \section{Assignment #1 --- #2}
+  \vspace{-0.3em}
+  \begin{tabularx}{\textwidth}{>{\bfseries\color{ippblue}\columncolor{lightblue}}l X}
+    \toprule
+    Module      & #3 \\
+    Difficulty  & #4 \\
+    \bottomrule
+  \end{tabularx}
+  \vspace{0.8em}
+}
+
+% ── Metadata table for assignments ────────────────────────────
+\newcommand{\assignmentmeta}[4]{%
+  \noindent
+  \begin{tabularx}{\textwidth}{
+    >{\bfseries\color{ippblue}\cellcolor{lightblue}}p{3cm}
+    X}
+    \arrayrulecolor{gray!40}\hline
+    Module     & #1 \\ \hline
+    Difficulty & #2 \\ \hline
+    Deadline   & #3 \\ \hline
+    Submission & \texttt{assignments/submissions/4025XXX/#4/} \\ \hline
+  \end{tabularx}
+  \vspace{0.8em}
+}
+
+% ── Language tag ──────────────────────────────────────────────
+\newcommand{\pylabel}{\textcolor{pyborder}{\textbf{[Python]}}}
+\newcommand{\jslabel}{\textcolor{jsborder}{\textbf{[JavaScript]}}}
+\newcommand{\bothlabel}{\textcolor{ippblue}{\textbf{[Python or JS]}}}
+
+% ── Document ──────────────────────────────────────────────────
+\begin{document}
+
+% ══════════════════════════════════════════════════════════════
+%  COVER PAGE
+% ══════════════════════════════════════════════════════════════
+\thispagestyle{empty}
+\begin{center}
+  \vspace*{3cm}
+
+  {\color{midblue}\large ESMAD --- Instituto Polit\'ecnico do Porto}\\[0.3em]
+  {\color{midblue}\large TSIW --- Linear Algebra and Analytic Geometry}
+
+  \vspace{3cm}
+
+  {\color{ippblue}\Huge\bfseries Assignment Specifications}\\[0.8em]
+  {\color{darkgray}\LARGE 7 Practical Assignments}\\[0.4em]
+  {\color{darkgray}\Large 2025\,/\,2026}
+
+  \vspace{2cm}
+
+  \begin{tabular}{cc}
+    \textcolor{pyborder}{\Large\textbf{Python}} & \textcolor{jsborder}{\Large\textbf{JavaScript}} \\
+    \texttt{NumPy / SciPy / Matplotlib} & \texttt{math.js / Plotly.js / D3.js} \\
+  \end{tabular}
+
+  \vspace{2cm}
+
+  {\large Instructor: \textbf{Diogo Ribeiro}}\\[0.3em]
+  {\color{midblue}\href{mailto:dfr@esmad.ipp.pt}{dfr@esmad.ipp.pt}}\\[0.2em]
+  {ORCID: \href{https://orcid.org/0009-0001-2022-7072}{0009-0001-2022-7072}}
+
+  \vspace{2cm}
+
+  {\color{midblue}\rule{0.6\textwidth}{0.4pt}}\\[0.6em]
+  {\ttfamily\color{midblue}\href{https://github.com/diogoribeiro7/linear-algebra-with-python}{github.com/diogoribeiro7/linear-algebra-with-python}}
+
+\end{center}
+\newpage
+
+% ══════════════════════════════════════════════════════════════
+%  TABLE OF CONTENTS
+% ══════════════════════════════════════════════════════════════
+\tableofcontents
+\newpage
+
+% ══════════════════════════════════════════════════════════════
+%  GENERAL INSTRUCTIONS
+% ══════════════════════════════════════════════════════════════
+\section{General Instructions}
+
+\subsection{Overview}
+
+This document contains 7 practical assignments for the Linear Algebra and Analytic Geometry course. Assignments are released every two weeks and must be submitted via Pull Request to the course GitHub repository before the stated deadline.
+
+\begin{warnbox}
+  \textbf{Entrega em uma linguagem.} Cada assignment pode ser realizado em Python \textbf{ou} JavaScript. Deve ser entregue apenas \textbf{uma} implementação (à escolha do estudante), e ela deve produzir os resultados pedidos.
+\end{warnbox}
+
+\subsection{Submission Procedure}
+
+\begin{enumerate}[leftmargin=*]
+  \item You will be added as a \textbf{collaborator} to the course repository at \url{https://github.com/diogoribeiro7/linear-algebra-with-python}. Accept the invitation sent to your GitHub account.
+  \item Clone the repository to your local machine.
+  \item Inside \texttt{assignments/submissions/}, create a folder named with your student number (e.g.,~\texttt{4025001}).
+  \item For each assignment, create a subfolder (\texttt{01/}, \texttt{02/}, \ldots) containing \textbf{either} the Python \textbf{or} the JavaScript implementation.
+  \item Create a \textbf{branch} named with your student number and assignment (e.g.,~\texttt{4025001-A01}).
+  \item Commit your changes, push, and open a \textbf{Pull Request} against the \texttt{develop} branch with a clear title (e.g.,~\emph{Submission 4025001 --- A01}).
+\end{enumerate}
+
+\subsection{Technical Requirements}
+
+\subsubsection{Python Track}
+
+All Python code must run with \textbf{Python~3.11+} using the project dependencies managed by Poetry. Install the project environment with \texttt{poetry install} from the repository root. Use the utility modules in \texttt{src/linalg\_utils/} where appropriate --- you are expected to import and use these functions rather than reimplementing them from scratch (unless the task explicitly asks for an implementation).
+
+\begin{pythonbox}[Key Python Libraries]
+  \texttt{numpy} --- array operations and linear algebra\\
+  \texttt{scipy} --- LU decomposition, advanced routines\\
+  \texttt{matplotlib} --- 2D and 3D visualization\\
+  \texttt{sympy} --- symbolic computation (optional)
+\end{pythonbox}
+
+\subsubsection{JavaScript Track}
+
+All JavaScript code must run with \textbf{Node.js~20+} or in a modern browser. The project includes a \texttt{package.json} with the required dependencies. Install with \texttt{npm install} from the repository root.
+
+\begin{jsbox}[Key JavaScript Libraries]
+  \texttt{mathjs} --- matrix operations, linear algebra, and symbolic math\\
+  \texttt{plotly.js} --- interactive 2D and 3D visualization (browser)\\
+  \texttt{d3.js} --- data-driven visualization (browser)\\
+  \texttt{chart.js} --- charting (optional, for simpler plots)\\
+  \texttt{numeric.js} --- numerical methods (optional alternative to mathjs)
+\end{jsbox}
+
+\subsection{Repository Structure}
+
+\begin{code}
+assignments/submissions/4025XXX/
+  01/
+    README.md
+    python/
+      matrizes_tipos.py
+    javascript/
+      matrizes_tipos.js (or .mjs)
+    reflexao.md
+  02/
+    README.md
+    python/
+      operacoes_matrizes.ipynb
+    javascript/
+      operacoes_matrizes.js
+      operacoes_matrizes.html   (for browser visualizations)
+    reflexao.md
+  ...
+\end{code}
+
+\subsection{Evaluation Schedule}
+
+\begin{itemize}[leftmargin=*]
+  \item \textbf{Test~1} (April~27): covers Assignments A1 through A5 (matrices, determinants, linear systems, Cramer/LU).
+  \item \textbf{Test~2} (June~19): covers Assignment A6 (analytic geometry).
+\end{itemize}
+
+\begin{infobox}
+  Each assignment includes a \texttt{reflexao.md} file where you write a short reflection connecting the computational work to the underlying mathematical concepts. This is graded for \emph{depth of understanding}, not length. The reflection is shared between the chosen language option --- you do not need to write two separate reflections.
+\end{infobox}
+
+\subsection{Language Equivalence Table}
+
+The following table maps the core operations for Python or JavaScript:
+
+\renewcommand{\arraystretch}{1.25}
+\begin{center}
+\begin{tabularx}{\textwidth}{
+  >{\bfseries\color{ippblue}}p{3.5cm}
+  >{\ttfamily\small}X
+  >{\ttfamily\small}X
+}
+\toprule
+\rowcolor{ippblue}
+\textcolor{white}{\textbf{Operation}} & \textcolor{white}{\textbf{Python (NumPy)}} & \textcolor{white}{\textbf{JavaScript (math.js)}} \\
+\midrule
+Create matrix       & np.array([[1,2],[3,4]])     & math.matrix([[1,2],[3,4]])    \\
+\rowcolor{lightgray}
+Zeros               & np.zeros((m,n))             & math.zeros(m,n)               \\
+Identity            & np.eye(n)                   & math.identity(n)              \\
+\rowcolor{lightgray}
+Multiply            & A @ B                       & math.multiply(A, B)           \\
+Transpose           & A.T                         & math.transpose(A)             \\
+\rowcolor{lightgray}
+Determinant         & np.linalg.det(A)            & math.det(A)                   \\
+Inverse             & np.linalg.inv(A)            & math.inv(A)                   \\
+\rowcolor{lightgray}
+Solve $Ax=b$        & np.linalg.solve(A,b)        & math.lusolve(A, b)            \\
+Element access      & A[i,j]                      & A.get([i,j]) or A.\_data[i][j] \\
+\rowcolor{lightgray}
+Shape               & A.shape                     & A.size()                      \\
+Allclose            & np.allclose(A, B)           & math.deepEqual(math.round(A,10), math.round(B,10)) \\
+\rowcolor{lightgray}
+Cross product       & np.cross(u, v)              & math.cross(u, v)              \\
+Dot product         & np.dot(u, v)                & math.dot(u, v)                \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Visualization Guidelines}
+
+\begin{pythonbox}[Python Visualization]
+  Use \textbf{matplotlib} for all plots. Save figures with \texttt{plt.savefig()}. For 3D plots, use \texttt{mpl\_toolkits.mplot3d}.
+\end{pythonbox}
+
+\begin{jsbox}[JavaScript Visualization]
+  Use \textbf{Plotly.js} for interactive 2D/3D plots in the browser. Create an \texttt{.html} file that loads Plotly from CDN and renders the plots. For static output, you may also use \texttt{canvas}-based rendering with Node.js. Console-based outputs (tables, logs) should be produced with \texttt{console.table()} or formatted \texttt{console.log()}.
+\end{jsbox}
+
+\subsection{Academic Integrity}
+
+You may discuss ideas with classmates, but all code and written reflections must be your own. Submissions that contain copied code or text will receive a zero grade. Using AI tools to generate solutions is not permitted --- you must demonstrate your own understanding.
+
+\subsection{Getting Help}
+
+If you encounter issues running the code or understanding the assignment tasks, file a GitHub Issue in the repository or contact the instructor at \href{mailto:dfr@esmad.ipp.pt}{dfr@esmad.ipp.pt}. Include the error message, the commands you ran, and the relevant file paths.
+
+\newpage
+
+% ══════════════════════════════════════════════════════════════
+%  ASSIGNMENT SUMMARY TABLE
+% ══════════════════════════════════════════════════════════════
+\section{Assignment Summary}
+
+\begin{center}
+\renewcommand{\arraystretch}{1.35}
+\begin{tabularx}{\textwidth}{
+  >{\centering\bfseries}p{0.8cm}
+  X
+  p{3.2cm}
+  >{\centering}p{2.2cm}
+  >{\centering\arraybackslash}p{1.8cm}
+}
+\toprule
+\rowcolor{ippblue}
+\textcolor{white}{\#} & \textcolor{white}{\textbf{Title}} & \textcolor{white}{\textbf{Module}} & \textcolor{white}{\textbf{Difficulty}} & \textcolor{white}{\textbf{Deadline}} \\
+\midrule
+A1 & Matrices: Construction and Classification & Matrices & Introductory & Week 2 \\
+\rowcolor{lightgray}
+A2 & Matrix Operations and Property Verification & Operations, Transpose & Introductory & Week 4 \\
+A3 & Determinants and Invertibility & Determinants, Inverse & Intermediate & Week 6 \\
+\rowcolor{lightgray}
+A4 & Linear Systems: Gauss and Classification & Gaussian Elimination & Intermediate & Week 8 \\
+A5 & Cramer and LU Decomposition & Cramer, LU & Intermediate & Week 10 \\
+\rowcolor{lightgray}
+A6 & Analytic Geometry: Lines and Planes & Analytic Geometry & Intermediate & Week 12 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\vspace{1em}
+
+\begin{infobox}
+All assignments require implementation in \textbf{either Python or JavaScript}. The evaluation is based on the chosen language unless otherwise noted.
+\end{infobox}
+
+\newpage
+
+% ══════════════════════════════════════════════════════════════
+%  ASSIGNMENT 01
+% ══════════════════════════════════════════════════════════════
+\section{Assignment 01 --- Matrices: Construction and Classification}
+
+\assignmentmeta{Matrices}{Introductory}{Week 2}{01}
+
+\subsection{Objective}
+
+Understand the structure of special matrix types, access individual elements programmatically, and build reusable classification functions using NumPy (Python) and math.js (JavaScript).
+
+\subsection{Context}
+
+Matrices are the foundational data structure in linear algebra. Before performing operations or solving systems, you must be comfortable creating, inspecting, and classifying matrices. This assignment ensures you have a solid practical foundation in the chosen language.
+
+\subsection{Learning Outcomes}
+
+\begin{itemize}[leftmargin=*]
+  \item Create special matrices (zero, identity, diagonal, triangular, symmetric).
+  \item Access elements by index and inspect dimensions.
+  \item Write reusable functions for matrix classification in Python or JavaScript.
+  \item Handle dimension mismatch errors gracefully in the chosen language.
+\end{itemize}
+
+\subsection{Tasks}
+
+\renewcommand{\arraystretch}{1.3}
+\begin{tabularx}{\textwidth}{
+  >{\centering\bfseries\cellcolor{lightblue}}p{0.8cm}
+  X
+  p{3.5cm}
+}
+\toprule
+\rowcolor{ippblue}
+\textcolor{white}{\#} & \textcolor{white}{\textbf{Task Description}} & \textcolor{white}{\textbf{Expected Output}} \\
+\midrule
+T1 & \bothlabel\ Create the following matrices: a $3 \times 4$ zero matrix, a $4 \times 4$ identity matrix, a $3 \times 3$ diagonal matrix with entries $[2, 5, -1]$, an upper triangular $3 \times 3$ matrix, a lower triangular $3 \times 3$ matrix, and a symmetric matrix built from $M + M^\top$ for a matrix $M$ of your choice. & Printed matrices with labels \\
+\rowcolor{lightgray}
+T2 & \bothlabel\ For each matrix created in T1, print its dimensions (rows $\times$ columns), the element at position $a_{2,3}$ (row~2, column~3, using 0-based indexing), and verify the result makes sense given the matrix structure. & Element values and dimensions \\
+T3 & \bothlabel\ Write a function \texttt{classificar\_matriz(A)} that receives a matrix and returns a list of labels from: \texttt{square}, \texttt{rectangular}, \texttt{zero}, \texttt{identity}, \texttt{diagonal}, \texttt{symmetric}, \texttt{upper\_triangular}, \texttt{lower\_triangular}. Test it on all matrices from T1. & Function code and test results \\
+\rowcolor{lightgray}
+T4 & \bothlabel\ Demonstrate what happens when you try to add two matrices with incompatible dimensions (e.g.,\ $2 \times 3 + 4 \times 2$) and when you try to multiply matrices with incompatible inner dimensions. Catch and print the errors. & Error messages with explanation \\
+T5 & Write a short reflection (\texttt{reflexao.md}, 150--250 words) explaining why the identity matrix simultaneously satisfies multiple classifications (diagonal, symmetric, triangular). Use set-theoretic language. Additionally, note any differences you observed between the Python or JavaScript APIs for matrix handling. & \texttt{reflexao.md} file \\
+\bottomrule
+\end{tabularx}
+
+\subsection{Deliverables}
+
+\begin{code}
+assignments/submissions/4025XXX/01/
+  README.md
+  python/
+    matrizes_tipos.py
+  javascript/
+    matrizes_tipos.js
+  reflexao.md
+\end{code}
+
+\begin{hintbox}
+  \pylabel\ Use \texttt{np.zeros}, \texttt{np.eye}, \texttt{np.diag}, \texttt{np.triu}, \texttt{np.tril} for matrix creation. For classification, \texttt{np.allclose} is your best friend for floating-point comparisons. Test edge cases like $1 \times 1$ matrices.
+
+  \medskip
+
+  \jslabel\ Use \texttt{math.zeros(m,n)}, \texttt{math.identity(n)}, \texttt{math.diag([...])} for matrix creation. For extracting triangular parts, you will need to write helper functions since math.js does not have built-in \texttt{triu}/\texttt{tril}. For comparisons, use \texttt{math.deepEqual} combined with \texttt{math.round} for floating-point tolerance. Error handling uses \texttt{try \{ ... \} catch (e) \{ ... \}}.
+\end{hintbox}
+
+\subsection{Evaluation Criteria}
+
+\begin{tabularx}{\textwidth}{X r}
+  Correctness of matrix creation and element access (the chosen language) & 30\% \\
+  Quality and completeness of the classification function (the chosen language) & 30\% \\
+  Error handling demonstration (the chosen language) & 15\% \\
+  Reflection depth and clarity & 25\% \\
+\end{tabularx}
+
+\newpage
+
+% ══════════════════════════════════════════════════════════════
+%  ASSIGNMENT 02
+% ══════════════════════════════════════════════════════════════
+\section{Assignment 02 --- Matrix Operations and Property Verification}
+
+\assignmentmeta{Operations, Transpose}{Introductory}{Week 4}{02}
+
+\subsection{Objective}
+
+Practice matrix arithmetic operations and computationally verify fundamental algebraic properties such as non-commutativity, transpose identities, and the linear combination interpretation of matrix-vector products --- in Python or JavaScript.
+
+\subsection{Context}
+
+Matrix algebra differs from scalar algebra in important ways. Multiplication is generally not commutative, and the transpose operation interacts with products in a specific order-reversing fashion. Verifying these properties computationally in two different languages builds deep intuition and cross-platform fluency.
+
+\subsection{Learning Outcomes}
+
+\begin{itemize}[leftmargin=*]
+  \item Perform matrix addition, subtraction, and scalar multiplication.
+  \item Compute matrix products respecting dimension rules.
+  \item Verify non-commutativity and compute commutators.
+  \item Prove transpose properties computationally.
+  \item Interpret $Ax$ as a linear combination of the columns of $A$.
+\end{itemize}
+
+\subsection{Tasks}
+
+\renewcommand{\arraystretch}{1.3}
+\begin{tabularx}{\textwidth}{
+  >{\centering\bfseries\cellcolor{lightblue}}p{0.8cm}
+  X
+  p{3.5cm}
+}
+\toprule
+\rowcolor{ippblue}
+\textcolor{white}{\#} & \textcolor{white}{\textbf{Task Description}} & \textcolor{white}{\textbf{Expected Output}} \\
+\midrule
+T1 & \bothlabel\ Define two $2 \times 3$ matrices $A$ and $B$. Compute and print $A + B$, $A - B$, and $3A$. Verify that the sum preserves dimensions using an assertion. & Computed results with verification \\
+\rowcolor{lightgray}
+T2 & \bothlabel\ Define a $3 \times 2$ matrix $C$. Compute $AC$ ($2 \times 3$ times $3 \times 2$) and $CA$ ($3 \times 2$ times $2 \times 3$). Print both results and explain why they have different dimensions and are not equal. & Products with dimensional analysis \\
+T3 & \bothlabel\ For two $2 \times 2$ matrices $P$ and $Q$, compute $PQ$, $QP$, and the commutator $[P,Q] = PQ - QP$. Show that $PQ \neq QP$ in general, but that $PI = IP = P$ for the identity matrix. & Commutator and identity verification \\
+\rowcolor{lightgray}
+T4 & \bothlabel\ Verify the three transpose properties computationally: (a)~$(A^\top)^\top = A$; (b)~$(A+B)^\top = A^\top + B^\top$; (c)~$(AC)^\top = C^\top A^\top$. Use approximate comparison for each. & Boolean verification of each property \\
+T5 & \bothlabel\ Generate a random $3 \times 3$ matrix $M$ and construct $S = M + M^\top$. Verify that $S$ is symmetric. Then define a $3 \times 3$ system matrix and a vector $\mathbf{x}$, compute $A\mathbf{x}$, and show that $A\mathbf{x}$ equals the linear combination $x_1 \mathbf{a}_1 + x_2 \mathbf{a}_2 + x_3 \mathbf{a}_3$ where $\mathbf{a}_i$ are the columns of $A$. & Symmetry proof and linear combination \\
+\rowcolor{lightgray}
+T6 & Write a \texttt{reflexao.md} (150--250 words) explaining the geometric or algebraic significance of non-commutativity in matrix multiplication. Compare how the two languages express these operations. & \texttt{reflexao.md} file \\
+\bottomrule
+\end{tabularx}
+
+\subsection{Deliverables}
+
+\begin{code}
+assignments/submissions/4025XXX/02/
+  README.md
+  python/
+    operacoes_matrizes.ipynb
+  javascript/
+    operacoes_matrizes.js
+    operacoes_matrizes.html     (for any browser visualizations)
+  reflexao.md
+\end{code}
+
+\begin{hintbox}
+  \pylabel\ Remember that \texttt{@} is the matrix multiplication operator in NumPy. Use \texttt{np.allclose} instead of \texttt{==} for floating-point comparisons. The linear combination view of $Ax$ is fundamental to understanding column spaces.
+
+  \medskip
+
+  \jslabel\ Use \texttt{math.multiply(A, B)} for matrix multiplication, \texttt{math.add}, \texttt{math.subtract} for arithmetic. For random matrices, use \texttt{math.random([3,3])}. Access columns with \texttt{math.column(A, j)}. Use \texttt{math.deepEqual(math.round(X, 10), math.round(Y, 10))} instead of strict equality.
+\end{hintbox}
+
+\subsection{Evaluation Criteria}
+
+\begin{tabularx}{\textwidth}{X r}
+  Correct operations and dimensional awareness & 25\% \\
+  Property verification completeness & 25\% \\
+  Commutator and non-commutativity analysis & 20\% \\
+  Linear combination demonstration & 15\% \\
+  Reflection quality & 15\% \\
+\end{tabularx}
+
+\newpage
+
+% ══════════════════════════════════════════════════════════════
+%  ASSIGNMENT 03
+% ══════════════════════════════════════════════════════════════
+\section{Assignment 03 --- Determinants and Invertibility}
+
+\assignmentmeta{Determinants, Inverse}{Intermediate}{Week 6}{03}
+
+\subsection{Objective}
+
+Implement determinant computation using multiple methods (direct formula, Sarrus, Gaussian elimination, cofactor expansion), explore invertibility conditions, and compute matrix inverses programmatically in Python or JavaScript.
+
+\subsection{Context}
+
+The determinant is a scalar that encodes whether a matrix is invertible and how it scales volumes. Understanding multiple computation methods helps you appreciate both the theory and the practical trade-offs between algorithms.
+
+\subsection{Learning Outcomes}
+
+\begin{itemize}[leftmargin=*]
+  \item Compute determinants via the $2 \times 2$ formula, Sarrus' rule, Gaussian elimination, and cofactor expansion.
+  \item Verify determinant properties (product rule, transpose, scalar multiple, row operations).
+  \item Test invertibility and compute condition numbers.
+  \item Compute inverses via direct formula and Gauss-Jordan elimination.
+\end{itemize}
+
+\subsection{Tasks}
+
+\renewcommand{\arraystretch}{1.3}
+\begin{tabularx}{\textwidth}{
+  >{\centering\bfseries\cellcolor{lightblue}}p{0.8cm}
+  X
+  p{3.5cm}
+}
+\toprule
+\rowcolor{ippblue}
+\textcolor{white}{\#} & \textcolor{white}{\textbf{Task Description}} & \textcolor{white}{\textbf{Expected Output}} \\
+\midrule
+T1 & \bothlabel\ Implement \texttt{det\_2x2(A)} for $2 \times 2$ matrices and \texttt{det\_3x3\_sarrus(A)} for $3 \times 3$ matrices. Test each on at least two matrices (one invertible, one singular) and compare with the built-in determinant. & Functions with test output \\
+\rowcolor{lightgray}
+T2 & \bothlabel\ Implement a Gaussian elimination-based determinant function \texttt{det\_gauss(A)} that returns both the determinant value and intermediate row echelon steps. Test on a $4 \times 4$ matrix. & Function with step-by-step output \\
+T3 & \bothlabel\ Verify the following properties computationally using random matrices: $\det(AB) = \det(A)\det(B)$;\; $\det(A^\top) = \det(A)$;\; $\det(kA) = k^n \det(A)$;\; row swap negates the determinant;\; adding a multiple of one row to another preserves the determinant. & Verification of 5 properties \\
+\rowcolor{lightgray}
+T4 & \bothlabel\ Write a function \texttt{eh\_invertivel(A)} that checks invertibility. Apply it to three matrices: one clearly invertible, one singular, and one ill-conditioned (with condition number $> 10^8$). Report the condition number for each. & Invertibility report with cond.\ numbers \\
+T5 & \bothlabel\ Implement \texttt{inversa\_gauss\_jordan(A)} that computes the inverse via augmented matrix $[A|I]$ reduction. Test on a $3 \times 3$ and a $4 \times 4$ matrix, verifying that $A \cdot A^{-1} = I$. & Inverse computation with verification \\
+\rowcolor{lightgray}
+T6 & \bothlabel\ Create a visualization showing how a $2 \times 2$ matrix transforms the unit square into a parallelogram. Display the area scale factor (which equals $|\det(A)|$) in the plot title. Save the figure. & Saved figure \texttt{determinante\_area.png/html} \\
+T7 & Write \texttt{reflexao.md} (200--300 words) explaining the geometric meaning of the determinant and why $\det(A) = 0$ implies non-invertibility. & \texttt{reflexao.md} file \\
+\bottomrule
+\end{tabularx}
+
+\subsection{Deliverables}
+
+\begin{code}
+assignments/submissions/4025XXX/03/
+  README.md
+  python/
+    determinantes.ipynb
+    determinante_area.png
+  javascript/
+    determinantes.js
+    determinante_area.html    (interactive Plotly visualization)
+  reflexao.md
+\end{code}
+
+\begin{hintbox}
+  \pylabel\ For Gauss-Jordan, augment $[A|I]$ and reduce to $[I|A^{-1}]$. Use partial pivoting for numerical stability. The condition number is \texttt{np.linalg.cond(A)}. For visualization, transform the vertices of the unit square $[0,0]$, $[1,0]$, $[1,1]$, $[0,1]$.
+
+  \medskip
+
+  \jslabel\ Use \texttt{math.det(A)} for verification. For the Gauss-Jordan implementation, work with 2D arrays (not math.js matrices) for easier row manipulation. Compute condition number manually as $\|A\| \cdot \|A^{-1}\|$ using \texttt{math.norm}. For visualization, use Plotly.js shapes or SVG to draw the unit square and its transformation.
+\end{hintbox}
+
+\subsection{Evaluation Criteria}
+
+\begin{tabularx}{\textwidth}{X r}
+  Determinant implementations and correctness & 25\% \\
+  Property verification & 15\% \\
+  Invertibility analysis with condition numbers & 15\% \\
+  Gauss-Jordan inverse & 20\% \\
+  Visualization quality & 10\% \\
+  Reflection depth & 15\% \\
+\end{tabularx}
+
+\newpage
+
+% ══════════════════════════════════════════════════════════════
+%  ASSIGNMENT 04
+% ══════════════════════════════════════════════════════════════
+\section{Assignment 04 --- Linear Systems: Gauss and Classification}
+
+\assignmentmeta{Gaussian Elimination}{Intermediate}{Week 8}{04}
+
+\subsection{Objective}
+
+Solve and classify linear systems using Gaussian elimination with partial pivoting, implement back substitution, handle all three system types (SPD, SPI, SI), and visualize solution geometry --- in Python or JavaScript.
+
+\subsection{Context}
+
+Solving $Ax = b$ is the central problem of linear algebra. Gaussian elimination reduces the system to echelon form, from which you can read off the solution (if unique), parametric families (if infinite), or contradictions (if impossible). The Rouch\'e--Capelli theorem provides the theoretical framework.
+
+\subsection{Learning Outcomes}
+
+\begin{itemize}[leftmargin=*]
+  \item Implement Gaussian elimination with partial pivoting and step tracking.
+  \item Classify systems as SPD (unique), SPI (infinite), or SI (impossible).
+  \item Extract parametric solutions for underdetermined systems.
+  \item Visualize 2D systems as intersecting lines and 3D systems as intersecting planes.
+\end{itemize}
+
+\subsection{Tasks}
+
+\renewcommand{\arraystretch}{1.3}
+\begin{tabularx}{\textwidth}{
+  >{\centering\bfseries\cellcolor{lightblue}}p{0.8cm}
+  X
+  p{3.5cm}
+}
+\toprule
+\rowcolor{ippblue}
+\textcolor{white}{\#} & \textcolor{white}{\textbf{Task Description}} & \textcolor{white}{\textbf{Expected Output}} \\
+\midrule
+T1 & \bothlabel\ Implement \texttt{escalonar(Ab)} that takes an augmented matrix and returns the echelon form with a log of row operations. Implement \texttt{substituicao\_retroativa(U, b)} for back substitution. Solve: $2x + y - z = 8$, $-3x - y + 2z = -11$, $-2x + y + 2z = -3$. & Step-by-step elimination output \\
+\rowcolor{lightgray}
+T2 & \bothlabel\ Construct an indeterminate system (SPI) where the second row is a multiple of the first. Show that echelon form reveals a free variable. Produce at least three particular solutions by assigning different values to the free parameter. & Echelon form and parametric solutions \\
+T3 & \bothlabel\ Construct an impossible system (SI). Show that echelon form reveals a contradiction ($0 = \text{nonzero}$). Explain geometrically why the system has no solution. & Echelon form with contradiction \\
+\rowcolor{lightgray}
+T4 & \bothlabel\ Write \texttt{classificar\_sistema(A, b)} that uses rank analysis (Rouch\'e--Capelli) to return \texttt{'SPD'}, \texttt{'SPI'}, or \texttt{'SI'}. Test on at least 5 systems covering all three types, including $2 \times 2$, $3 \times 3$, and $4 \times 4$ examples. & Classification table for $5+$ systems \\
+T5 & \bothlabel\ For an SPI system with 3 unknowns and 2 equations, write out the general parametric solution explicitly. Verify that substituting specific parameter values satisfies the original equations. & Parametric solution with verification \\
+\rowcolor{lightgray}
+T6 & \bothlabel\ Compare your Gauss implementation with the built-in solver for SPD systems. Show that they produce the same result. Then demonstrate what happens when the built-in solver receives a singular system. & Comparison with built-in solver \\
+T7 & \bothlabel\ Create two visualizations: (a)~three 2D systems shown as pairs of lines illustrating unique, infinite, and no solution; (b)~a 3D visualization showing three planes intersecting at a point. & Saved figures \\
+\rowcolor{lightgray}
+T8 & Write \texttt{reflexao.md} (200--300 words) explaining the Rouch\'e--Capelli theorem and its connection to Gaussian elimination. & \texttt{reflexao.md} file \\
+\bottomrule
+\end{tabularx}
+
+\subsection{Deliverables}
+
+\begin{code}
+assignments/submissions/4025XXX/04/
+  README.md
+  python/
+    sistemas_lineares.ipynb
+    *.png
+  javascript/
+    sistemas_lineares.js
+    sistemas_lineares.html    (interactive visualizations)
+  reflexao.md
+\end{code}
+
+\begin{hintbox}
+  \pylabel\ Use \texttt{np.linalg.matrix\_rank} for classification. For parametric solutions, identify pivot vs.\ free variables from the echelon form. In 3D plots, use \texttt{plot\_surface} with \texttt{alpha} for transparency.
+
+  \medskip
+
+  \jslabel\ Compute matrix rank manually by counting non-zero rows in the echelon form (math.js does not have a built-in rank function). For 3D visualizations, use Plotly.js with \texttt{type: 'surface'} or \texttt{type: 'mesh3d'} traces. The built-in solver is \texttt{math.lusolve(A, b)}.
+\end{hintbox}
+
+\subsection{Evaluation Criteria}
+
+\begin{tabularx}{\textwidth}{X r}
+  Gaussian elimination and back substitution & 25\% \\
+  System classification correctness & 20\% \\
+  Parametric solutions & 15\% \\
+  Built-in solver comparison & 10\% \\
+  Visualizations & 15\% \\
+  Reflection & 15\% \\
+\end{tabularx}
+
+\newpage
+
+% ══════════════════════════════════════════════════════════════
+%  ASSIGNMENT 05
+% ══════════════════════════════════════════════════════════════
+\section{Assignment 05 --- Cramer and LU Decomposition}
+
+\assignmentmeta{Cramer, LU}{Intermediate}{Week 10}{05}
+
+\subsection{Objective}
+
+Compare Cramer's rule with Gaussian elimination and LU decomposition, analyze computational costs empirically, and demonstrate the efficiency of LU for multiple right-hand sides --- in Python or JavaScript.
+
+\subsection{Context}
+
+Different solution methods have different strengths. Cramer's rule provides elegant closed-form solutions but scales terribly. LU decomposition pays a one-time factorization cost and then solves additional systems cheaply. Understanding these trade-offs is essential for applied work.
+
+\subsection{Learning Outcomes}
+
+\begin{itemize}[leftmargin=*]
+  \item Implement Cramer's rule for $2 \times 2$ and $3 \times 3$ systems.
+  \item Use LU decomposition (SciPy in Python, manual or library-based in JavaScript).
+  \item Benchmark methods across matrix sizes.
+  \item Solve multiple right-hand sides efficiently with LU.
+  \item Visualize matrix factors as heatmaps.
+\end{itemize}
+
+\subsection{Tasks}
+
+\renewcommand{\arraystretch}{1.3}
+\begin{tabularx}{\textwidth}{
+  >{\centering\bfseries\cellcolor{lightblue}}p{0.8cm}
+  X
+  p{3.5cm}
+}
+\toprule
+\rowcolor{ippblue}
+\textcolor{white}{\#} & \textcolor{white}{\textbf{Task Description}} & \textcolor{white}{\textbf{Expected Output}} \\
+\midrule
+T1 & \bothlabel\ Implement \texttt{cramer\_2x2(A, b)} and \texttt{cramer\_3x3(A, b)}. Solve at least one system with each and compare results with the built-in solver. & Cramer solutions with verification \\
+\rowcolor{lightgray}
+T2 & \bothlabel\ Compute the LU decomposition of a $3 \times 3$ matrix. Print $P$, $L$, and $U$. Verify that $PA = LU$. Compute $\det(A)$ from the diagonal of $U$. & LU factors with verification \\
+T3 & \bothlabel\ Benchmark Cramer, your Gauss implementation, and the built-in solver for matrix sizes $n = 2, 3, 5, 10, 20, 50, 100$. Use timing mechanisms appropriate for each language. Present results in a table and bar chart. & Benchmark table and figure \\
+\rowcolor{lightgray}
+T4 & \bothlabel\ Given a fixed matrix $A$ and three different right-hand sides $b_1, b_2, b_3$, solve all three using a single LU factorization. Compare the total time with solving each from scratch. & Multi-RHS solution with timing \\
+T5 & \bothlabel\ Create a heatmap visualization showing the structure of $A$, $L$, and $U$ side by side, with numerical values annotated in each cell. & Saved figure \texttt{lu\_heatmap.png/html} \\
+\rowcolor{lightgray}
+T6 & Write \texttt{reflexao.md} (200--300 words) comparing the three methods (Cramer, Gauss, LU) in terms of computational complexity, practical use cases, and numerical stability. & \texttt{reflexao.md} file \\
+\bottomrule
+\end{tabularx}
+
+\subsection{Deliverables}
+
+\begin{code}
+assignments/submissions/4025XXX/05/
+  README.md
+  python/
+    cramer_lu.ipynb
+    lu_heatmap.png
+  javascript/
+    cramer_lu.js
+    cramer_lu.html              (interactive benchmarks and heatmap)
+  reflexao.md
+\end{code}
+
+\begin{hintbox}
+  \pylabel\ For Cramer, replace column~$i$ of $A$ with $b$ and compute the determinant. Use \texttt{scipy.linalg.lu\_factor} and \texttt{lu\_solve} for efficient LU operations. For benchmarking, use \texttt{min(timeit.repeat(...))}.
+
+  \medskip
+
+  \jslabel\ For LU decomposition, implement your own or use the \texttt{numeric.js} library (\texttt{numeric.LU(A)}). For Cramer, use \texttt{math.det} combined with column replacement. For benchmarking, use \texttt{performance.now()} (browser) or \texttt{process.hrtime.bigint()} (Node.js). For heatmaps, use Plotly.js with \texttt{type: 'heatmap'} and \texttt{text} annotations.
+\end{hintbox}
+
+\subsection{Evaluation Criteria}
+
+\begin{tabularx}{\textwidth}{X r}
+  Cramer implementation & 15\% \\
+  LU decomposition and verification & 20\% \\
+  Benchmarking quality and presentation & 25\% \\
+  Multiple RHS demonstration & 15\% \\
+  Visualization & 10\% \\
+  Reflection & 15\% \\
+\end{tabularx}
+
+\newpage
+
+% ══════════════════════════════════════════════════════════════
+%  ASSIGNMENT 06
+% ══════════════════════════════════════════════════════════════
+\section{Assignment 06 --- Analytic Geometry: Lines and Planes}
+
+\assignmentmeta{Analytic Geometry}{Intermediate}{Week 12}{06}
+
+\subsection{Objective}
+
+Represent lines and planes in parametric and Cartesian forms, classify relative positions (intersecting, parallel, coincident, skew), and compute intersections using linear algebra tools --- in Python or JavaScript.
+
+\subsection{Context}
+
+Analytic geometry connects geometric objects (lines, planes) with algebraic representations. Classifying relative positions of lines and planes is equivalent to analyzing the solutions of associated linear systems, directly applying the theory from previous assignments.
+
+\subsection{Learning Outcomes}
+
+\begin{itemize}[leftmargin=*]
+  \item Generate parametric representations of lines in $\mathbb{R}^2$ and $\mathbb{R}^3$.
+  \item Convert between Cartesian and parametric plane representations.
+  \item Classify relative positions using cross products and rank analysis.
+  \item Compute line-plane intersections.
+  \item Visualize geometric configurations in 2D and 3D.
+\end{itemize}
+
+\subsection{Tasks}
+
+\renewcommand{\arraystretch}{1.3}
+\begin{tabularx}{\textwidth}{
+  >{\centering\bfseries\cellcolor{lightblue}}p{0.8cm}
+  X
+  p{3.5cm}
+}
+\toprule
+\rowcolor{ippblue}
+\textcolor{white}{\#} & \textcolor{white}{\textbf{Task Description}} & \textcolor{white}{\textbf{Expected Output}} \\
+\midrule
+T1 & \bothlabel\ For three pairs of 2D lines (one intersecting, one parallel, one coincident), implement a function \texttt{posicao\_relativa\_retas\_2d} that classifies them. Visualize all three cases in a single figure with three subplots. & Classification function and figure \\
+\rowcolor{lightgray}
+T2 & \bothlabel\ Extend to 3D with four cases: intersecting, parallel, coincident, and skew lines. Implement \texttt{posicao\_relativa\_retas\_3d} and visualize in a $2 \times 2$ subplot grid. & 3D line classification and figure \\
+T3 & \bothlabel\ Implement \texttt{plano\_cartesiano\_para\_parametrico(a, b, c, d)} that converts $ax + by + cz = d$ into parametric form (point $+$ two direction vectors). Test on two different planes. & Conversion function with output \\
+\rowcolor{lightgray}
+T4 & \bothlabel\ Classify pairs of planes as secant, parallel, or coincident. Implement \texttt{posicao\_relativa\_planos} and test on three pairs. & Plane classification results \\
+T5 & \bothlabel\ Implement \texttt{intersecao\_reta\_plano} that computes the intersection point between a line and a plane. Test with three cases: intersecting, parallel, and contained. & Intersection computation \\
+\rowcolor{lightgray}
+T6 & \bothlabel\ Demonstrate dot product tests for parallelism and perpendicularity: two perpendicular lines, a line parallel to a plane, two perpendicular planes. & Dot product verification \\
+T7 & \bothlabel\ Create a comprehensive 3D visualization showing a plane, a line intersecting it, a parallel line, the plane normal vector, and the intersection point marked. & Saved figure \texttt{geometria\_resumo.png/html} \\
+\rowcolor{lightgray}
+T8 & Write \texttt{reflexao.md} (200--300 words) explaining the role of direction and normal vectors in determining relative positions. & \texttt{reflexao.md} file \\
+\bottomrule
+\end{tabularx}
+
+\subsection{Deliverables}
+
+\begin{code}
+assignments/submissions/4025XXX/06/
+  README.md
+  python/
+    geometria_analitica.ipynb
+    geometria_resumo.png
+  javascript/
+    geometria_analitica.js
+    geometria_analitica.html    (interactive 3D with Plotly)
+  reflexao.md
+\end{code}
+
+\begin{hintbox}
+  \pylabel\ For 2D line classification, the cross product of direction vectors (as a scalar in 2D) tells you if lines are parallel. For line-plane intersection, substitute the parametric line equation into the plane equation and solve for $t$. Use \texttt{np.cross} for 3D cross products.
+
+  \medskip
+
+  \jslabel\ Use \texttt{math.cross(u, v)} for cross products and \texttt{math.dot(u, v)} for dot products. For 3D visualizations, Plotly.js excels with \texttt{type: 'scatter3d'} (lines and points) and \texttt{type: 'mesh3d'} or \texttt{type: 'surface'} (planes). Define planes as meshgrids computed with nested loops or array comprehensions.
+\end{hintbox}
+
+\subsection{Evaluation Criteria}
+
+\begin{tabularx}{\textwidth}{X r}
+  2D line classification and visualization & 15\% \\
+  3D line classification & 15\% \\
+  Plane conversions and classification & 15\% \\
+  Line-plane intersection & 15\% \\
+  Dot product demonstrations & 10\% \\
+  Comprehensive visualization & 15\% \\
+  Reflection & 15\% \\
+\end{tabularx}
+
+\newpage
+
+\end{document}
