@@ -218,7 +218,7 @@
   \vspace{3cm}
 
   {\color{ippblue}\Huge\bfseries Assignment Specifications}\\[0.8em]
-  {\color{darkgray}\LARGE 7 Practical Assignments}\\[0.4em]
+  {\color{darkgray}\LARGE Graded Submission Specification for A01--A06}\\[0.4em]
   {\color{darkgray}\Large 2025\,/\,2026}
 
   \vspace{2cm}
@@ -255,7 +255,7 @@
 
 \subsection{Overview}
 
-This document contains 7 practical assignments for the Linear Algebra and Analytic Geometry course. Assignments are released every two weeks and must be submitted via Pull Request to the course GitHub repository before the stated deadline.
+This document contains the graded submission specification for Assignments A01 through A06 of the Linear Algebra and Analytic Geometry course. These assignments are released every two weeks and must be submitted via Pull Request to the course GitHub repository before the stated deadline. Assignment A07 remains in the repository as separate teaching material and is intentionally outside the graded submission-control workflow.
 
 \begin{warnbox}
   \textbf{Entrega em uma linguagem.} Cada assignment pode ser realizado em Python \textbf{ou} JavaScript. Deve ser entregue apenas \textbf{uma} implementação (à escolha do estudante), e ela deve produzir os resultados pedidos.
@@ -266,17 +266,17 @@ This document contains 7 practical assignments for the Linear Algebra and Analyt
 \begin{enumerate}[leftmargin=*]
   \item You will be added as a \textbf{collaborator} to the course repository at \url{https://github.com/diogoribeiro7/linear-algebra-with-python}. Accept the invitation sent to your GitHub account.
   \item Clone the repository to your local machine.
-  \item Inside \texttt{assignments/submissions/}, create a folder named with your student number (e.g.,~\texttt{4025001}).
+  \item Inside \texttt{assignments/submissions/}, create a folder named with your student number (e.g.,~\texttt{40250001}).
   \item For each assignment, create a subfolder (\texttt{01/}, \texttt{02/}, \ldots) containing \textbf{either} the Python \textbf{or} the JavaScript implementation.
-  \item Create a \textbf{branch} named with your student number and assignment (e.g.,~\texttt{4025001-A01}).
-  \item Commit your changes, push, and open a \textbf{Pull Request} against the \texttt{develop} branch with a clear title (e.g.,~\emph{Submission 4025001 --- A01}).
+  \item Create a \textbf{branch} named with your student number and assignment (e.g.,~\texttt{40250001-A01}).
+  \item Commit your changes, push, and open a \textbf{Pull Request} against the \texttt{develop} branch with a clear title (e.g.,~\emph{Submission 40250001 --- A01}).
 \end{enumerate}
 
 \subsection{Technical Requirements}
 
 \subsubsection{Python Track}
 
-All Python code must run with \textbf{Python~3.11+} using the project dependencies managed by Poetry. Install the project environment with \texttt{poetry install} from the repository root. Use the utility modules in \texttt{src/linalg\_utils/} where appropriate --- you are expected to import and use these functions rather than reimplementing them from scratch (unless the task explicitly asks for an implementation).
+All Python code must run with \textbf{Python~3.11+} using the project dependencies managed by Poetry. Install the project environment from \texttt{packages/python} with \texttt{poetry install}. Use the utility modules in \texttt{packages/python/src/linalg\_utils/} where appropriate --- you are expected to import and use these functions rather than reimplementing them from scratch (unless the task explicitly asks for an implementation).
 
 \begin{pythonbox}[Key Python Libraries]
   \texttt{numpy} --- array operations and linear algebra\\
@@ -287,7 +287,7 @@ All Python code must run with \textbf{Python~3.11+} using the project dependenci
 
 \subsubsection{JavaScript Track}
 
-All JavaScript code must run with \textbf{Node.js~20+} or in a modern browser. The project includes a \texttt{package.json} with the required dependencies. Install with \texttt{npm install} from the repository root.
+All JavaScript code must run with \textbf{Node.js~20+} or in a modern browser. The project includes a \texttt{package.json} in \texttt{packages/js}. Install the JavaScript dependencies from \texttt{packages/js} with \texttt{yarn install}.
 
 \begin{jsbox}[Key JavaScript Libraries]
   \texttt{mathjs} --- matrix operations, linear algebra, and symbolic math\\
@@ -300,7 +300,7 @@ All JavaScript code must run with \textbf{Node.js~20+} or in a modern browser. T
 \subsection{Repository Structure}
 
 \begin{code}
-assignments/submissions/4025XXX/
+assignments/submissions/4025XXXX/
   01/
     README.md
     python/
@@ -328,6 +328,10 @@ assignments/submissions/4025XXX/
 
 \begin{infobox}
   Each assignment includes a \texttt{reflexao.md} file where you write a short reflection connecting the computational work to the underlying mathematical concepts. This is graded for \emph{depth of understanding}, not length. The reflection is shared between the chosen language option --- you do not need to write two separate reflections.
+\end{infobox}
+
+\begin{infobox}
+  Submission deadlines for A01 through A06 are configured in \texttt{course/config/deadlines.yml}. The dates shown in this document match that file: A01 --- 2026-04-08, A02 --- 2026-04-22, A03 --- 2026-05-06, A04 --- 2026-05-20, A05 --- 2026-06-03, A06 --- 2026-06-17. Assignment A07 is not listed there because it is teaching material only.
 \end{infobox}
 
 \subsection{Language Equivalence Table}
@@ -391,7 +395,7 @@ If you encounter issues running the code or understanding the assignment tasks, 
 % ══════════════════════════════════════════════════════════════
 %  ASSIGNMENT SUMMARY TABLE
 % ══════════════════════════════════════════════════════════════
-\section{Assignment Summary}
+\section{Assignment Summary (A01--A06)}
 
 \begin{center}
 \renewcommand{\arraystretch}{1.35}
@@ -406,15 +410,15 @@ If you encounter issues running the code or understanding the assignment tasks, 
 \rowcolor{ippblue}
 \textcolor{white}{\#} & \textcolor{white}{\textbf{Title}} & \textcolor{white}{\textbf{Module}} & \textcolor{white}{\textbf{Difficulty}} & \textcolor{white}{\textbf{Deadline}} \\
 \midrule
-A1 & Matrices: Construction and Classification & Matrices & Introductory & Week 2 \\
+A1 & Matrices: Construction and Classification & Matrices & Introductory & 2026-04-08 \\
 \rowcolor{lightgray}
-A2 & Matrix Operations and Property Verification & Operations, Transpose & Introductory & Week 4 \\
-A3 & Determinants and Invertibility & Determinants, Inverse & Intermediate & Week 6 \\
+A2 & Matrix Operations and Property Verification & Operations, Transpose & Introductory & 2026-04-22 \\
+A3 & Determinants and Invertibility & Determinants, Inverse & Intermediate & 2026-05-06 \\
 \rowcolor{lightgray}
-A4 & Linear Systems: Gauss and Classification & Gaussian Elimination & Intermediate & Week 8 \\
-A5 & Cramer and LU Decomposition & Cramer, LU & Intermediate & Week 10 \\
+A4 & Linear Systems: Gauss and Classification & Gaussian Elimination & Intermediate & 2026-05-20 \\
+A5 & Cramer and LU Decomposition & Cramer, LU & Intermediate & 2026-06-03 \\
 \rowcolor{lightgray}
-A6 & Analytic Geometry: Lines and Planes & Analytic Geometry & Intermediate & Week 12 \\
+A6 & Analytic Geometry: Lines and Planes & Analytic Geometry & Intermediate & 2026-06-17 \\
 \bottomrule
 \end{tabularx}
 \end{center}
@@ -422,7 +426,7 @@ A6 & Analytic Geometry: Lines and Planes & Analytic Geometry & Intermediate & We
 \vspace{1em}
 
 \begin{infobox}
-All assignments require implementation in \textbf{either Python or JavaScript}. The evaluation is based on the chosen language unless otherwise noted.
+Assignments A01 through A06 require implementation in \textbf{either Python or JavaScript}. The evaluation is based on the chosen language unless otherwise noted. Assignment A07 remains available in the repository as separate teaching material and is outside the PR-based submission workflow.
 \end{infobox}
 
 \newpage
@@ -432,7 +436,7 @@ All assignments require implementation in \textbf{either Python or JavaScript}. 
 % ══════════════════════════════════════════════════════════════
 \section{Assignment 01 --- Matrices: Construction and Classification}
 
-\assignmentmeta{Matrices}{Introductory}{Week 2}{01}
+\assignmentmeta{Matrices}{Introductory}{2026-04-08}{01}
 
 \subsection{Objective}
 
@@ -509,7 +513,7 @@ assignments/submissions/4025XXX/01/
 % ══════════════════════════════════════════════════════════════
 \section{Assignment 02 --- Matrix Operations and Property Verification}
 
-\assignmentmeta{Operations, Transpose}{Introductory}{Week 4}{02}
+\assignmentmeta{Operations, Transpose}{Introductory}{2026-04-22}{02}
 
 \subsection{Objective}
 
@@ -591,7 +595,7 @@ assignments/submissions/4025XXX/02/
 % ══════════════════════════════════════════════════════════════
 \section{Assignment 03 --- Determinants and Invertibility}
 
-\assignmentmeta{Determinants, Inverse}{Intermediate}{Week 6}{03}
+\assignmentmeta{Determinants, Inverse}{Intermediate}{2026-05-06}{03}
 
 \subsection{Objective}
 
@@ -675,7 +679,7 @@ assignments/submissions/4025XXX/03/
 % ══════════════════════════════════════════════════════════════
 \section{Assignment 04 --- Linear Systems: Gauss and Classification}
 
-\assignmentmeta{Gaussian Elimination}{Intermediate}{Week 8}{04}
+\assignmentmeta{Gaussian Elimination}{Intermediate}{2026-05-20}{04}
 
 \subsection{Objective}
 
@@ -761,7 +765,7 @@ assignments/submissions/4025XXX/04/
 % ══════════════════════════════════════════════════════════════
 \section{Assignment 05 --- Cramer and LU Decomposition}
 
-\assignmentmeta{Cramer, LU}{Intermediate}{Week 10}{05}
+\assignmentmeta{Cramer, LU}{Intermediate}{2026-06-03}{05}
 
 \subsection{Objective}
 
@@ -845,7 +849,7 @@ assignments/submissions/4025XXX/05/
 % ══════════════════════════════════════════════════════════════
 \section{Assignment 06 --- Analytic Geometry: Lines and Planes}
 
-\assignmentmeta{Analytic Geometry}{Intermediate}{Week 12}{06}
+\assignmentmeta{Analytic Geometry}{Intermediate}{2026-06-17}{06}
 
 \subsection{Objective}
 
