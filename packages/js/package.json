@@ -16,7 +16,7 @@
     "plotly.js-dist-min": "^3.4.0"
   },
   "devDependencies": {
-    "typescript": "^5.5.4",
+    "typescript": "^6.0.2",
     "vitest": "^4.1.1"
   },
   "engines": {
