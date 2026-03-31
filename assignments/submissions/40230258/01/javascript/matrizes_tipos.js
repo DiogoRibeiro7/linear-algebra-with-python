@@ -78,8 +78,9 @@ function classificar_matriz(A) {
 }
 
 function isUpperTriangular(matrix) {
-  for (let i = 1; i < matrix.size()[0]; i++) {
-    for (let j = 0; j < i; j++) {
+  const [rows, cols] = matrix.size();
+  for (let i = 1; i < rows; i++) {
+    for (let j = 0; j < Math.min(i, cols); j++) {
       if (matrix.get([i, j]) !== 0) return false;
     }
   }
