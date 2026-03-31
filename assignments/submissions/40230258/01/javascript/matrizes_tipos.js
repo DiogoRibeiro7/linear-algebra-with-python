@@ -1,10 +1,11 @@
-//1
-
 import * as math from "mathjs";
+
+//1
 
 //3x4 0
 const matrizNula = math.zeros(3, 4);
 console.log(matrizNula);
+console.log(matrizNula.length)
 
 //4x4 I
 const matrizIdentidade = math.identity(4);
@@ -61,11 +62,11 @@ function classificar_matriz(A) {
     if (math.deepEqual(A, math.transpose(A))) {
         result += "symmetric ";
     }
-    const triangDecomp = math.lup(A)
-    if (math.deepEqual(A, triangDecomp.U)) {
+
+    if (isUpperTriangular(A)) {
         result += "upper_triangular ";
     }
-    if (math.deepEqual(A, triangDecomp.L)) {
+    if (isLowerTriangular(A)) {
         result += "lower_triangular ";
     }
     if (A.size()[0] === A.size()[1]) {
@@ -76,10 +77,27 @@ function classificar_matriz(A) {
     return result;
 }
 
-for (let i = 0; i < 5; i++) {
-    console.log(`Classificação da matriz ${i + 1}: ${classificar_matriz([matrizNula, matrizIdentidade, matrizDiagonal, matrizTSup, matrizTInf][i])}`);   
+function isUpperTriangular(matrix) {
+  for (let i = 1; i < matrix.size()[0]; i++) {
+    for (let j = 0; j < i; j++) {
+      if (matrix.get([i, j]) !== 0) return false;
+    }
+  }
+  return true;
 }
 
+function isLowerTriangular(matrix) {
+  for (let i = 0; i < matrix.size()[0]; i++) {
+    for (let j = i + 1; j < matrix.size()[1]; j++) {
+        if (matrix.get([i, j]) !== 0) return false;
+    }
+  }
+    return true;
+}
+
+for (let i = 0; i < 6; i++) {
+    console.log(`Classificação da matriz ${i + 1}: ${classificar_matriz([matrizNula, matrizIdentidade, matrizDiagonal, matrizTSup, matrizTInf, matrizSimetrica][i])}`);   
+}
 
 
 //4
