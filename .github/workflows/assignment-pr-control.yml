@@ -1,0 +1,324 @@
+name: Assignment PR Control
+
+on:
+  pull_request:
+    branches:
+      - develop
+    types:
+      - opened
+      - edited
+      - reopened
+      - synchronize
+      - ready_for_review
+
+permissions:
+  contents: read
+  pull-requests: write
+  issues: write
+
+jobs:
+  submission-control:
+    name: Validate assignment submission PR
+    runs-on: ubuntu-latest
+    concurrency:
+      group: assignment-pr-control-${{ github.event.pull_request.number }}
+      cancel-in-progress: true
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+
+      - name: Install lightweight validator dependencies
+        run: python -m pip install --disable-pip-version-check pyyaml
+
+      - name: Validate PR metadata and submission structure
+        id: validate
+        env:
+          EVENT_PATH: ${{ github.event_path }}
+          GITHUB_WORKSPACE: ${{ github.workspace }}
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json
+          import os
+          import re
+          import subprocess
+          import sys
+          from datetime import datetime
+          from pathlib import Path
+
+          import yaml
+
+          event_path = os.environ["EVENT_PATH"]
+          workspace = Path(os.environ["GITHUB_WORKSPACE"])
+
+          with open(event_path, "r", encoding="utf-8") as f:
+              event = json.load(f)
+
+          pr = event["pull_request"]
+          base_ref = pr["base"]["ref"]
+          head_ref = pr["head"]["ref"]
+          pr_title = pr["title"]
+          pr_created_at = datetime.fromisoformat(pr["created_at"].replace("Z", "+00:00"))
+
+          errors = []
+          warnings = []
+
+          branch_match = re.fullmatch(r"([0-9]{8})-A([0-9]{2})", head_ref)
+          if branch_match:
+              branch_student, branch_assignment = branch_match.groups()
+          else:
+              branch_student = ""
+              branch_assignment = ""
+
+          title_match = re.fullmatch(r"Submission ([0-9]{8}) --- A([0-9]{2})", pr_title)
+          if title_match:
+              title_student, title_assignment = title_match.groups()
+          else:
+              title_student = ""
+              title_assignment = ""
+
+          base_sha = pr["base"]["sha"]
+          head_sha = pr["head"]["sha"]
+          diff_cmd = ["git", "diff", "--name-only", base_sha, head_sha]
+          changed_files = subprocess.check_output(diff_cmd, text=True).splitlines()
+
+          submission_path_changed = any(
+              p.startswith("assignments/submissions/") for p in changed_files
+          )
+          is_submission_pr = bool(branch_match or title_match or submission_path_changed)
+
+          # Non-submission PRs should not be blocked or labeled by this workflow.
+          if not is_submission_pr:
+              output_path = os.environ["GITHUB_OUTPUT"]
+              with open(output_path, "a", encoding="utf-8") as out:
+                  out.write("student=\n")
+                  out.write("assignment=\n")
+                  out.write("late=false\n")
+                  out.write("valid=true\n")
+                  out.write("is_submission=false\n")
+              print("Non-submission PR detected. Skipping submission validation.")
+              sys.exit(0)
+
+          # Enforce base branch for submission PRs.
+          if base_ref != "develop":
+              errors.append(f"PR base branch must be 'develop', found '{base_ref}'.")
+
+          if not branch_match:
+              errors.append("Source branch must match 'NNNNNNNN-Axx' (example: 40250001-A01).")
+
+          if not title_match:
+              errors.append("PR title must match 'Submission NNNNNNNN --- Axx'.")
+
+          student_number = branch_student or title_student
+          assignment = branch_assignment or title_assignment
+
+          if branch_match and title_match:
+              if branch_student != title_student:
+                  errors.append("Student number in branch and PR title must match.")
+              if branch_assignment != title_assignment:
+                  errors.append("Assignment code in branch and PR title must match.")
+
+          deadlines_path = workspace / "course" / "config" / "deadlines.yml"
+          students_path = workspace / "course" / "config" / "students.yml"
+
+          if not deadlines_path.exists():
+              errors.append("Missing deadline configuration: course/config/deadlines.yml")
+              deadlines_doc = {}
+          else:
+              with open(deadlines_path, "r", encoding="utf-8") as f:
+                  deadlines_doc = yaml.safe_load(f) or {}
+
+          if not students_path.exists():
+              errors.append("Missing students configuration: course/config/students.yml")
+              students_doc = {}
+          else:
+              with open(students_path, "r", encoding="utf-8") as f:
+                  students_doc = yaml.safe_load(f) or {}
+
+          supported_assignments = set((deadlines_doc.get("supported_assignments") or []))
+          deadlines = deadlines_doc.get("deadlines") or {}
+
+          if assignment and assignment not in supported_assignments:
+              errors.append(
+                  f"Unsupported assignment A{assignment}. Supported assignments are A01-A06 only."
+              )
+
+          if assignment and assignment not in deadlines:
+              errors.append(f"Missing deadline entry for assignment {assignment} in deadlines.yml.")
+
+          students = set((students_doc.get("students") or []))
+          if student_number and students and student_number not in students:
+              warnings.append(
+                  f"Student number {student_number} is not listed in course/config/students.yml."
+              )
+
+          if not changed_files:
+              errors.append("No changed files were detected in this PR.")
+
+          allowed_prefix = ""
+          if student_number and assignment:
+              allowed_prefix = f"assignments/submissions/{student_number}/{assignment}/"
+
+          if allowed_prefix:
+              out_of_scope = [p for p in changed_files if not p.startswith(allowed_prefix)]
+              if out_of_scope:
+                  errors.append(
+                      "Files outside the allowed submission folder were changed: "
+                      + ", ".join(out_of_scope[:10])
+                  )
+
+              submission_root = workspace / "assignments" / "submissions" / student_number / assignment
+              readme_path = submission_root / "README.md"
+              reflexao_path = submission_root / "reflexao.md"
+
+              if not readme_path.exists():
+                  errors.append(f"Missing required file: {readme_path.relative_to(workspace)}")
+              if not reflexao_path.exists():
+                  errors.append(f"Missing required file: {reflexao_path.relative_to(workspace)}")
+
+              python_dir = submission_root / "python"
+              javascript_dir = submission_root / "javascript"
+
+              def has_files(path: Path) -> bool:
+                  return path.exists() and any(p.is_file() for p in path.rglob("*"))
+
+              has_python = has_files(python_dir)
+              has_javascript = has_files(javascript_dir)
+
+              if has_python and has_javascript:
+                  errors.append("Submission must include exactly one track: python/ OR javascript/, not both.")
+              elif not has_python and not has_javascript:
+                  errors.append("Submission must include one non-empty track: python/ OR javascript/.")
+
+          late = False
+          if assignment and assignment in deadlines:
+              deadline_raw = str(deadlines[assignment])
+              deadline = datetime.fromisoformat(deadline_raw.replace("Z", "+00:00"))
+              if pr_created_at > deadline:
+                  late = True
+
+          output_path = os.environ["GITHUB_OUTPUT"]
+          with open(output_path, "a", encoding="utf-8") as out:
+              out.write(f"student={student_number}\n")
+              out.write(f"assignment={assignment}\n")
+              out.write(f"late={'true' if late else 'false'}\n")
+              out.write(f"valid={'false' if errors else 'true'}\n")
+              out.write("is_submission=true\n")
+
+          if warnings:
+              print("Warnings:")
+              for w in warnings:
+                  print(f"- {w}")
+
+          if errors:
+              print("Validation failed:")
+              for err in errors:
+                  print(f"- {err}")
+              sys.exit(1)
+
+          print("Validation passed.")
+          PY
+
+      - name: Check duplicate open PR for same student/assignment
+        id: duplicate
+        if: always()
+        uses: actions/github-script@v8
+        with:
+          script: |
+            const isSubmission = `${{ steps.validate.outputs.is_submission }}` === "true";
+            const student = `${{ steps.validate.outputs.student }}`;
+            const assignment = `${{ steps.validate.outputs.assignment }}`;
+            const currentNumber = context.payload.pull_request.number;
+
+            if (!isSubmission || !student || !assignment) {
+              core.setOutput("duplicate", "false");
+              return;
+            }
+
+            const { data: prs } = await github.rest.pulls.list({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              state: "open",
+              per_page: 100
+            });
+
+            const expectedBranch = `${student}-A${assignment}`;
+            const duplicate = prs.some((pr) => {
+              if (pr.number === currentNumber) return false;
+              return pr.head.ref === expectedBranch;
+            });
+
+            core.setOutput("duplicate", duplicate ? "true" : "false");
+
+      - name: Apply labels and summarize result
+        if: always()
+        uses: actions/github-script@v8
+        with:
+          script: |
+            const labelsToManage = ["submitted", "late", "invalid", "duplicate-submission"];
+            const isSubmission = `${{ steps.validate.outputs.is_submission }}` === "true";
+            const valid = `${{ steps.validate.outputs.valid }}` === "true";
+            const late = `${{ steps.validate.outputs.late }}` === "true";
+            const duplicate = `${{ steps.duplicate.outputs.duplicate }}` === "true";
+            const prNumber = context.payload.pull_request.number;
+
+            if (!isSubmission) {
+              core.info("Non-submission PR; skipping submission labels and checks.");
+              return;
+            }
+
+            const existing = context.payload.pull_request.labels.map((l) => l.name);
+            const toRemove = existing.filter((l) => labelsToManage.includes(l));
+            for (const label of toRemove) {
+              try {
+                await github.rest.issues.removeLabel({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  issue_number: prNumber,
+                  name: label
+                });
+              } catch (err) {
+                // Ignore if label does not exist in repository yet.
+              }
+            }
+
+            const toAdd = [];
+            if (!valid || duplicate) {
+              toAdd.push("invalid");
+            } else {
+              toAdd.push("submitted");
+              if (late) toAdd.push("late");
+            }
+            if (duplicate) {
+              toAdd.push("duplicate-submission");
+            }
+
+            if (toAdd.length > 0) {
+              try {
+                await github.rest.issues.addLabels({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  issue_number: prNumber,
+                  labels: toAdd
+                });
+              } catch (err) {
+                core.warning(`Could not add one or more labels. Ensure labels exist: ${toAdd.join(", ")}`);
+              }
+            }
+
+            if (!valid) {
+              core.setFailed("Submission validation failed. Check logs for details.");
+              return;
+            }
+            if (duplicate) {
+              core.setFailed("Duplicate open PR detected for the same student and assignment.");
+              return;
+            }

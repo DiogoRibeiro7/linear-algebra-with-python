@@ -9,17 +9,17 @@ Reference: `assignments/ASSIGNMENTS.tex` contains the full assignment specificat
 Inside `assignments/submissions/`, create your folder using the pattern:
 
 ```
-4025XXX
+40XXXXXX
 ```
 
-Replace `XXX` with exactly three digits.
+Replace `XXXXXX` with exactly six digits (e.g., `40250001`).
 
 ## 2. Add your work
 
 Place your assignment files and notebooks inside your folder. Keep the structure clear and include both languages (assignments 01–07):
 
 ```
-assignments/submissions/4025XXX/
+assignments/submissions/40XXXXXX/
   README.md
   .gitkeep
   SUBMISSION_GUIDE.md
@@ -41,7 +41,7 @@ assignments/submissions/4025XXX/
 Create a branch per assignment (example for assignment 01):
 
 ```bash
-git checkout -b 4025XXX-A01
+git checkout -b 40XXXXXX-A01
 ```
 
 ## 4. Commit your changes
@@ -49,21 +49,21 @@ git checkout -b 4025XXX-A01
 From the repository root:
 
 ```bash
-git add assignments/submissions/4025XXX/01
-git commit -m "submit: 4025XXX A01"
+git add assignments/submissions/40XXXXXX/01
+git commit -m "submit: 40XXXXXX A01"
 ```
 
 ## 5. Push your branch
 
 ```bash
-git push origin 4025XXX-A01
+git push origin 40XXXXXX-A01
 ```
 
 ## 6. Open a Pull Request
 
 Open a PR against the default branch:
 
-- Title: `Submission 4025XXX -- A01`
+- Title: `Submission 40XXXXXX --- A01`
 - Description: confirm both Python and JavaScript deliverables are included
 
 ## 7. Update if requested

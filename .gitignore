@@ -8,3 +8,20 @@ __pycache__/
 node_modules/
 packages/js/dist/
 yarn.lock
+LAGA.md
+
+# LaTeX artifacts
+*.aux
+*.log
+*.out
+*.toc
+*.lof
+*.lot
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+*.bbl
+*.blg
+*.nav
+*.snm
+*.vrb
