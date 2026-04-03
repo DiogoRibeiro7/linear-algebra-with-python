@@ -1,7 +1,6 @@
-<<<<<<< HEAD
-# Student Submission -- 4025XXX
+# Student Submission -- 40XXXXXX
 
-Replace `4025XXX` with your own student ID folder name.
+Replace `40XXXXXX` with your own student ID folder name.
 
 ## Contents
 
@@ -18,6 +17,3 @@ Confirm each assignment includes both languages and a shared reflection:
 ## Notes
 
 Add any relevant notes for the reviewer (optional).
-=======
-Nome: Alice Alfredo
->>>>>>> develop
