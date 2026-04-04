@@ -36,10 +36,7 @@ print("----------- T3 -----------\n")
 def check_diagonal(matrix):
     for i in range(matrix.shape[0]):
         for j in range(matrix.shape[1]):
-            if i == j:
-                if matrix[i][j] == 0:
-                    return False
-            else:
+            if i != j:
                 if matrix[i][j] != 0:
                     return False
     return True
