@@ -1,3 +1,3 @@
-Asssignment 1 - Python
+Assignment 1 - Python
 
 Feito por Miguel Silva
