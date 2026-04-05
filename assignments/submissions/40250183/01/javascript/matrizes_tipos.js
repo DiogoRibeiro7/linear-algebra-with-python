@@ -27,13 +27,25 @@ function shape(A) {
   return `${size[0]}x${size[1]}`;
 }
 
-//impressão das matrizes e suas formas
-console.log("Zero", shape(zero3x4), zero3x4.valueOf());
-console.log("Identity", shape(identity4x4), identity4x4.valueOf());
-console.log("Diagonal", shape(diagonal3x3), diagonal3x3.valueOf());
-console.log("Upper Triangular", shape(upperTriangular3x3), upperTriangular3x3.valueOf());
-console.log("Lower Triangular", shape(lowerTriangular3x3), lowerTriangular3x3.valueOf());
-console.log("Symmetric", shape(symmetric), symmetric.valueOf());
+//verifica se a posição (2, 3) existe na matriz e retorna o valor ou "N/A" se não existir
+function valueAt(A, row, column) {
+  const data = A.valueOf();
+  const size = math.size(A).valueOf();
+
+  if (row < size[0] && column < size[1]) {
+    return data[row][column];
+  }
+
+  return "N/A";
+}
+
+//impressão das matrizes suas formas, e do valor do elemento pedido em a2,3 para a matriz que tem essa posição
+console.log("Zero", shape(zero3x4), zero3x4.valueOf(), "Value a2,3:", valueAt(zero3x4, 2, 3));
+console.log("Identity", shape(identity4x4), identity4x4.valueOf(), "Value a2,3:", valueAt(identity4x4, 2, 3));
+console.log("Diagonal", shape(diagonal3x3), diagonal3x3.valueOf(), "Value a2,3:", valueAt(diagonal3x3, 2, 3));
+console.log("Upper Triangular", shape(upperTriangular3x3), upperTriangular3x3.valueOf(), "Value a2,3:", valueAt(upperTriangular3x3, 2, 3));
+console.log("Lower Triangular", shape(lowerTriangular3x3), lowerTriangular3x3.valueOf(), "Value a2,3:", valueAt(lowerTriangular3x3, 2, 3));
+console.log("Symmetric", shape(symmetric), symmetric.valueOf(), "Value a2,3:", valueAt(symmetric, 2, 3));
 
 //tentativa de adicionar matrizes de formas incompatíveis
 try {
