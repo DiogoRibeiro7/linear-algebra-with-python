@@ -31,11 +31,9 @@ function shape(A) {
 function valueAt(A, row, column) {
   const data = A.valueOf();
   const size = math.size(A).valueOf();
-
   if (row < size[0] && column < size[1]) {
     return data[row][column];
   }
-
   return "N/A";
 }
 
