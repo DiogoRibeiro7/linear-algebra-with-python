@@ -1,0 +1,5 @@
+As matrizes diagonais são conhecidas por serem aquelas onde todos os elementos fora da diagonal principal são, obrigatoriamente, iguais a zero. Como a matriz identidade possui apenas o número 1 na sua diagonal e zeros em todo o resto, ela acaba sendo, por definição, um exemplo perfeito deste conjunto.
+
+Já quando olhamos para as matrizes triangulares, elas são divididas em dois tipos: a triangular superior, onde todos os elementos abaixo da diagonal principal são zero, e a inferior, em que os elementos acima da diagonal são zero. No caso da identidade, como ela tem zeros tanto acima quanto abaixo, ela consegue se enquadrar nestas duas classificações ao mesmo tempo.
+
+Por último, o conjunto das matrizes simétricas, que exige a condição de que a matriz A seja igual à sua transposta AT. Como inverter as linhas e colunas da identidade não muda nada na posição dos seus elementos, ela também faz parte deste grupo.
