@@ -11,42 +11,42 @@ symmetricMatrix2x2 = np.matrix([[2, 5], [5, 8]])
 print("Zero Matrix:")
 print("número de linhas:", zeroMatrix3x4.shape[0]) # 3
 print("número de colunas:", zeroMatrix3x4.shape[1]) # 4
-print("Elemento a(2, 3):", zeroMatrix3x4[1, 2]) #resposta: 0
+print("Elemento a(2, 3):", zeroMatrix3x4[1, 2])
 for x in zeroMatrix3x4:
     print(x)
 
 print("\nDiagonal Matrix:")
 print("número de linhas:", diagonalMatrix3x3.shape[0]) # 3
 print("número de colunas:", diagonalMatrix3x3.shape[1]) # 3
-print("Elemento a(2, 3): " + str(diagonalMatrix3x3[1, 2])) #resposta: 0
+print("Elemento a(2, 3): " + str(diagonalMatrix3x3[1, 2]))
 for x in diagonalMatrix3x3:
     print(x)
 
 print("\nIdentity Matrix:")
 print("número de linhas:", identityMatrix4x4.shape[0]) # 4
 print("número de colunas:", identityMatrix4x4.shape[1]) # 4
-print("Elemento a(2, 3): " + str(identityMatrix4x4[1, 2])) #resposta: 0
+print("Elemento a(2, 3): " + str(identityMatrix4x4[1, 2])) 
 for x in identityMatrix4x4:
     print(x)
 
 print("\nUpper Triangular Matrix:")
 print("número de linhas:", upperTriangularMatrix3x3.shape[0]) # 3
 print("número de colunas:", upperTriangularMatrix3x3.shape[1]) # 3
-print("Elemento a(2, 3): " + str(upperTriangularMatrix3x3[1, 2])) #resposta: 5
+print("Elemento a(2, 3): " + str(upperTriangularMatrix3x3[1, 2])) 
 for x in upperTriangularMatrix3x3:
     print(x)
 
 print("\nLower Triangular Matrix:")
 print("número de linhas:", lowerTriangularMatrix3x3.shape[0]) # 3
 print("número de colunas:", lowerTriangularMatrix3x3.shape[1]) # 3
-print("Elemento a(2, 3): " + str(lowerTriangularMatrix3x3[1, 2])) #resposta 0
+print("Elemento a(2, 3): " + str(lowerTriangularMatrix3x3[1, 2])) 
 for x in lowerTriangularMatrix3x3:
     print(x)
 
 print("\nSymmetric Matrix:")
 print("número de linhas:", symmetricMatrix2x2.shape[0]) # 2
 print("número de colunas:", symmetricMatrix2x2.shape[1]) # 2
-print("Elemento a(2, 2): " + str(symmetricMatrix2x2[1, 1])) #resposta: 8
+print("Elemento a(2, 2): " + str(symmetricMatrix2x2[1, 1])) 
 for x in symmetricMatrix2x2:
     print(x)
 
