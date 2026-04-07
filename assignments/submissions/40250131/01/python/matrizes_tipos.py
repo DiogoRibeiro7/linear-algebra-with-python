@@ -2,7 +2,7 @@ import numpy as np
 
 def classificar_matriz(A):
     """
-    Classificação de matrizes de acordo com o nº de linhas, nº de colunas e elementos.
+    Classificação de cada matriz de acordo com o nº de linhas, nº de colunas e elementos
     """
     classificacoes = [] 
     lin, col = A.shape
@@ -54,7 +54,7 @@ def main():
     simetrica = M + M.T
 
     """
-    Print das classificações e atrizes na consola
+    Print das classificações e matrizes na consola
     """
     matrizes = [zero, identidade, diagonal, sup_triangular, inf_triangular, simetrica]
     nomes = ["Matriz Zero", "Matriz Identidade", "Matriz Diagonal", "Matriz Triangular Superior", "Matriz Triangular Inferior", "Matriz Simétrica"]
