@@ -15,7 +15,7 @@ The repository already contains:
 
 Current automation (`ci.yml`, `docs.yml`, `lint.yml`) triggers on both `develop` and `main` for push and pull_request events.
 
-The existing submissions documentation (`assignments/submissions/README.md`, `assignments/submissions/4025XXX/SUBMISSION_GUIDE.md`) currently describes a model that expects both `python/` and `javascript/` inside assignment folders and includes assignments `01` through `07`.
+The existing submissions documentation (`assignments/submissions/README.md`, `assignments/submissions/40XXXXXX/SUBMISSION_GUIDE.md`) currently describes a model that expects both `python/` and `javascript/` inside assignment folders and includes assignments `01` through `07`.
 
 ## What Already Matches the Target Model
 

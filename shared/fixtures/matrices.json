@@ -1,0 +1,66 @@
+{
+  "criar_matriz_nula": [
+    {
+      "args": { "m": 2, "n": 3 },
+      "expected": [[0, 0, 0], [0, 0, 0]]
+    },
+    {
+      "args": { "m": 3, "n": 3 },
+      "expected": [[0, 0, 0], [0, 0, 0], [0, 0, 0]]
+    }
+  ],
+  "criar_identidade": [
+    {
+      "args": { "n": 3 },
+      "expected": [[1, 0, 0], [0, 1, 0], [0, 0, 1]]
+    },
+    {
+      "args": { "n": 4 },
+      "expected": [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
+    }
+  ],
+  "criar_diagonal": [
+    {
+      "args": { "valores": [1, 2, 3] },
+      "expected": [[1, 0, 0], [0, 2, 0], [0, 0, 3]]
+    },
+    {
+      "args": { "valores": [5, -3] },
+      "expected": [[5, 0], [0, -3]]
+    }
+  ],
+  "dimensao": [
+    {
+      "input": [[1, 2, 3], [4, 5, 6]],
+      "expected": [2, 3]
+    },
+    {
+      "input": [[1, 2], [3, 4], [5, 6]],
+      "expected": [3, 2]
+    }
+  ],
+  "eh_quadrada": [
+    {
+      "input": [[1, 2], [3, 4]],
+      "expected": true
+    },
+    {
+      "input": [[1, 2, 3], [4, 5, 6]],
+      "expected": false
+    }
+  ],
+  "classificar_matriz": [
+    {
+      "input": [[1, 0, 0], [0, 1, 0], [0, 0, 1]],
+      "expected_contains": ["square", "identity", "diagonal", "symmetric", "upper_triangular", "lower_triangular"]
+    },
+    {
+      "input": [[1, 2, 3], [4, 5, 6]],
+      "expected_contains": ["rectangular"]
+    },
+    {
+      "input": [[1, 2], [2, 3]],
+      "expected_contains": ["square", "symmetric"]
+    }
+  ]
+}

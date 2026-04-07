@@ -1,0 +1,61 @@
+{
+  "classificar_sistema": [
+    {
+      "description": "SPD — unique solution",
+      "A": [[2, 1], [1, 3]],
+      "b": [5, 7],
+      "expected": "SPD"
+    },
+    {
+      "description": "SPI — infinitely many solutions",
+      "A": [[1, 2], [2, 4]],
+      "b": [3, 6],
+      "expected": "SPI"
+    },
+    {
+      "description": "SI — inconsistent system",
+      "A": [[1, 2], [2, 4]],
+      "b": [3, 7],
+      "expected": "SI"
+    }
+  ],
+  "resolver_gauss": [
+    {
+      "description": "2x2 unique solution",
+      "A": [[2, 1], [1, 3]],
+      "b": [5, 7],
+      "expected_x": [1.6, 1.8],
+      "tol": 1e-9
+    },
+    {
+      "description": "3x3 unique solution",
+      "A": [[2, 1, -1], [-3, -1, 2], [-2, 1, 2]],
+      "b": [8, -11, -3],
+      "expected_x": [2, 3, -1],
+      "tol": 1e-9
+    }
+  ],
+  "cramer_2x2": [
+    {
+      "A": [[1, 2], [3, 4]],
+      "b": [5, 6],
+      "expected_x": [-4, 4.5],
+      "tol": 1e-9
+    }
+  ],
+  "cramer_3x3": [
+    {
+      "A": [[2, 1, -1], [1, 2, 3], [3, -1, 2]],
+      "b": [3, 9, 4],
+      "tol": 1e-9,
+      "verify": "A @ x == b"
+    }
+  ],
+  "cramer_singular": [
+    {
+      "A": [[1, 2], [2, 4]],
+      "b": [1, 2],
+      "description": "Should raise/throw error"
+    }
+  ]
+}
