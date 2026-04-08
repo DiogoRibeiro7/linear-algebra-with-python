@@ -184,20 +184,6 @@ jobs:
               if not reflexao_path.exists():
                   errors.append(f"Missing required file: {reflexao_path.relative_to(workspace)}")
 
-              python_dir = submission_root / "python"
-              javascript_dir = submission_root / "javascript"
-
-              def has_files(path: Path) -> bool:
-                  return path.exists() and any(p.is_file() for p in path.rglob("*"))
-
-              has_python = has_files(python_dir)
-              has_javascript = has_files(javascript_dir)
-
-              if has_python and has_javascript:
-                  errors.append("Submission must include exactly one track: python/ OR javascript/, not both.")
-              elif not has_python and not has_javascript:
-                  errors.append("Submission must include one non-empty track: python/ OR javascript/.")
-
           late = False
           if assignment and assignment in deadlines:
               deadline_raw = str(deadlines[assignment])
