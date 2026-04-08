@@ -171,8 +171,8 @@ function classificar(A) {
         }
     }
 
-    if (upper) tipos.push("upper_triangular");
-    if (lower) tipos.push("lower_triangular");
+    if (m === n && upper) tipos.push("upper_triangular");
+    if (m === n && lower) tipos.push("lower_triangular");
 
     return tipos;
 }
