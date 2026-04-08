@@ -43,4 +43,4 @@ Assignment-aligned solution notebooks:
 - Regenerate figures via the `scripts/demo_*.py` helpers and save outputs to `assets/figures/`.
 - Keep CLI examples and notebook narratives aligned with the README and FAQ.
 - Student submission-control workflow validates PRs targeting `develop` for assignments `A01` through `A06` only.
-- Submission convention example: branch `4025001-A01`, PR title `Submission 4025001 --- A01`, path `assignments/submissions/4025001/01/`.
+- Submission convention example: branch `40250001-A01`, PR title `Submission 40250001 --- A01`, path `assignments/submissions/40250001/01/`.
