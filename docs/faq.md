@@ -21,7 +21,7 @@
 - When you add new helper modules or scripts, also update the tests under `packages/python/tests/` and mention the new behaviour in the FAQ if it introduces a common stumbling block.
 
 ## Submission workflow troubleshooting (PRs to `develop`)
-- **Invalid branch name**: Use exactly `<7-digit-student>-A<nn>` (example: `4025001-A01`).
+- **Invalid branch name**: Use exactly `<8-digit-student>-A<nn>` (example: `40250001-A01`).
 - **Invalid PR title**: Use exactly `Submission <student_number> --- A<nn>`.
 - **Wrong base branch**: The PR must target `develop`.
 - **Files changed outside allowed folder**: Only change files inside `assignments/submissions/<student>/<nn>/`.
