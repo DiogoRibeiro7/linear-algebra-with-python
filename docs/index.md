@@ -11,9 +11,9 @@ Welcome to the static site that mirrors the `README.md` learning path with riche
 
 ## Assignment submission procedure (A01-A06)
 - Target branch: `develop`
-- Source branch example: `4025001-A01`
-- PR title example: `Submission 4025001 --- A01`
-- Submission path example: `assignments/submissions/4025001/01/`
+- Source branch example: `40250001-A01`
+- PR title example: `Submission 40250001 --- A01`
+- Submission path example: `assignments/submissions/40250001/01/`
 - Required files: `README.md` and `reflexao.md`
 - Include only one track: `python/` or `javascript/`
 - Submission-control scope is limited to assignments `A01` through `A06`; `A07` is excluded from this automation.
