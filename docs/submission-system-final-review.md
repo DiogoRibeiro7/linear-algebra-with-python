@@ -5,8 +5,8 @@
 - Added a dedicated submission-control workflow at `.github/workflows/assignment-pr-control.yml`.
 - Enforced PR submission rules:
   - base branch must be `develop`
-  - branch format `NNNNNNN-Axx`
-  - PR title format `Submission NNNNNNN --- Axx`
+  - branch format `NNNNNNNN-Axx`
+  - PR title format `Submission NNNNNNNN --- Axx`
   - student and assignment consistency between branch and title
   - changed files restricted to `assignments/submissions/<student>/<nn>/...`
   - required files `README.md` and `reflexao.md`
