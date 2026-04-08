@@ -42,8 +42,8 @@ Run those commands before creating a patch, especially if you touched src/ or no
 
 ## Student submission PRs
 - Target branch must be `develop`.
-- Source branch format: `<student_number>-A<nn>` (example: `4025001-A01`).
-- PR title format: `Submission <student_number> --- A<nn>` (example: `Submission 4025001 --- A01`).
+- Source branch format: `<student_number>-A<nn>` (example: `40250001-A01`).
+- PR title format: `Submission <student_number> --- A<nn>` (example: `Submission 40250001 --- A01`).
 - Submission files must stay under `assignments/submissions/<student_number>/<nn>/`.
 - Required files in the submission folder: `README.md` and `reflexao.md`.
 - Include exactly one language track: `python/` or `javascript/`.

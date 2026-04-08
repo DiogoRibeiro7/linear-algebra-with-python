@@ -1,0 +1,90 @@
+{
+  "posicao_relativa_retas_2d": [
+    {
+      "description": "Intersecting lines",
+      "p1": [0, 0],
+      "d1": [1, 1],
+      "p2": [0, 1],
+      "d2": [1, -1],
+      "expected": "intersecting"
+    },
+    {
+      "description": "Parallel lines",
+      "p1": [0, 0],
+      "d1": [1, 0],
+      "p2": [0, 1],
+      "d2": [1, 0],
+      "expected": "parallel"
+    },
+    {
+      "description": "Coincident lines",
+      "p1": [0, 0],
+      "d1": [1, 1],
+      "p2": [1, 1],
+      "d2": [2, 2],
+      "expected": "coincident"
+    }
+  ],
+  "posicao_relativa_retas_3d": [
+    {
+      "description": "Skew lines",
+      "p1": [0, 0, 0],
+      "d1": [1, 0, 0],
+      "p2": [0, 1, 1],
+      "d2": [0, 1, 0],
+      "expected": "skew"
+    },
+    {
+      "description": "Intersecting lines in 3D",
+      "p1": [0, 0, 0],
+      "d1": [1, 0, 0],
+      "p2": [1, 0, 0],
+      "d2": [0, 1, 0],
+      "expected": "intersecting"
+    }
+  ],
+  "intersecao_reta_plano": [
+    {
+      "description": "Line intersects plane",
+      "p_reta": [0, 0, 0],
+      "d_reta": [1, 0, 0],
+      "normal": [1, 0, 0],
+      "d": 2,
+      "expected": [2, 0, 0]
+    },
+    {
+      "description": "Line parallel to plane — no intersection",
+      "p_reta": [0, 0, 1],
+      "d_reta": [1, 0, 0],
+      "normal": [0, 0, 1],
+      "d": 0,
+      "expected": null
+    }
+  ],
+  "posicao_relativa_planos": [
+    {
+      "description": "Parallel planes",
+      "n1": [1, 0, 0],
+      "d1": 1,
+      "n2": [1, 0, 0],
+      "d2": 2,
+      "expected": "parallel"
+    },
+    {
+      "description": "Coincident planes",
+      "n1": [1, 0, 0],
+      "d1": 1,
+      "n2": [2, 0, 0],
+      "d2": 2,
+      "expected": "coincident"
+    },
+    {
+      "description": "Intersecting planes",
+      "n1": [1, 0, 0],
+      "d1": 1,
+      "n2": [0, 1, 0],
+      "d2": 1,
+      "expected": "intersecting"
+    }
+  ]
+}
