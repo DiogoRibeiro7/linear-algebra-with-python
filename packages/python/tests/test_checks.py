@@ -6,7 +6,6 @@ import numpy as np
 import pytest
 
 from linalg_utils.checks import (
-    RelativeError,
     assert_close,
     is_orthonormal,
     is_upper_triangular,
