@@ -288,27 +288,7 @@ console.log("Matriz Simétrica 3x3:", classificarMatriz(matrizSimetrica));
 
 // T4 //
 
-// FUNÇÃO PARA SOMAR MATRIZES //
-
-function somarMatrizes(A, B) {
-  if (A.length !== B.length || A[0].length !== B[0].length) {
-    throw new Error("Erro: não é possível somar matrizes com dimensões diferentes.");
-  }
-
-  let resultado = [];
-
-  for (let i = 0; i < A.length; i++) {
-    let linha = [];
-    for (let j = 0; j < A[0].length; j++) {
-      linha.push(A[i][j] + B[i][j]);
-    }
-    resultado.push(linha);
-  }
-
-  return resultado;
-}
-
-// FUNÇÃO PARA MUTIPLICAR MATRIZES //
+// FUNÇÃO PARA MULTIPLICAR MATRIZES //
 
 function multiplicarMatrizes(A, B) {
   if (A[0].length !== B.length) {
@@ -336,8 +316,18 @@ function multiplicarMatrizes(A, B) {
   return resultado;
 }
 
-// TESTE DE ERRO PARA A SOMA //
+// MATRIZES PARA TESTAR ERRO
+const A = [
+  [1, 2],
+  [3, 4]
+];
 
+const B = [
+  [1, 2, 3],
+  [4, 5, 6]
+];
+
+// TESTE DE ERRO PARA A SOMA //
 try {
   let resultado = somarMatrizes(A, B);
   console.log(resultado);
@@ -345,15 +335,10 @@ try {
   console.log(erro.message);
 }
 
-// TESTE DE ERRO PARA A MUTIPLICAÇÃO //
-
-console.log("\nTeste de multiplicação inválida:");
-
+// TESTE DE ERRO PARA A MULTIPLICAÇÃO //
 try {
-  let resultado = multiplicarMatrizes(B, B);
+  let resultado = multiplicarMatrizes(A, B);
   console.log(resultado);
 } catch (erro) {
   console.log(erro.message);
 }
-
-
