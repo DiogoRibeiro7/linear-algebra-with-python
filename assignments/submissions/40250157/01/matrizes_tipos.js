@@ -316,7 +316,7 @@ function multiplicarMatrizes(A, B) {
   return resultado;
 }
 
-// MATRIZES PARA TESTAR ERRO
+// MATRIZES PARA TESTAR ERROO
 const A = [
   [1, 2],
   [3, 4]
@@ -342,3 +342,4 @@ try {
 } catch (erro) {
   console.log(erro.message);
 }
+
