@@ -5,8 +5,6 @@ import * as math from "mathjs";
 //3x4 0
 const matrizNula = math.zeros(3, 4);
 console.log(matrizNula);
-console.log(matrizNula.length)
-
 //4x4 I
 const matrizIdentidade = math.identity(4);
 console.log(matrizIdentidade);
@@ -78,6 +76,7 @@ function classificar_matriz(A) {
 }
 
 function isUpperTriangular(matrix) {
+if (matrix.size()[0] !== matrix.size()[1]) return false; // square matrix check
   for (let i = 1; i < matrix.size()[0]; i++) {
     for (let j = 0; j < i; j++) {
       if (matrix.get([i, j]) !== 0) return false;
@@ -87,6 +86,7 @@ function isUpperTriangular(matrix) {
 }
 
 function isLowerTriangular(matrix) {
+if (matrix.size()[0] !== matrix.size()[1]) return false; // square matrix check
   for (let i = 0; i < matrix.size()[0]; i++) {
     for (let j = i + 1; j < matrix.size()[1]; j++) {
         if (matrix.get([i, j]) !== 0) return false;
