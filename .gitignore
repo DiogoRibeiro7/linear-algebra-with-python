@@ -8,6 +8,8 @@ __pycache__/
 node_modules/
 packages/js/dist/
 yarn.lock
+pr_grading_details.json
+pr_grades.md
 LAGA.md
 
 # LaTeX artifacts
