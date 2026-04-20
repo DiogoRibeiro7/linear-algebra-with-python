@@ -11,13 +11,13 @@
   "dependencies": {
     "chart.js": "^4.5.1",
     "d3": "^7.9.0",
-    "mathjs": "^15.1.1",
+    "mathjs": "^15.2.0",
     "numeric": "^1.2.6",
-    "plotly.js-dist-min": "^3.4.0"
+    "plotly.js-dist-min": "^3.5.0"
   },
   "devDependencies": {
     "typescript": "^6.0.2",
-    "vitest": "^4.1.2"
+    "vitest": "^4.1.4"
   },
   "engines": {
     "node": ">=20"
