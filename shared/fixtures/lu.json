@@ -1,0 +1,51 @@
+{
+  "decomposicao_lu": [
+    {
+      "description": "2x2 matrix — verify P*A = L*U",
+      "input": [[2, 1], [3, 4]],
+      "verify": "P @ A == L @ U"
+    },
+    {
+      "description": "3x3 matrix — verify P*A = L*U",
+      "input": [[1, 2, 3], [4, 5, 6], [7, 8, 10]],
+      "verify": "P @ A == L @ U"
+    }
+  ],
+  "resolver_lu": [
+    {
+      "description": "2x2 system",
+      "A": [[2, 1], [1, 3]],
+      "b": [5, 7],
+      "tol": 1e-9,
+      "verify": "A @ x == b"
+    },
+    {
+      "description": "3x3 system",
+      "A": [[2, 1, -1], [-3, -1, 2], [-2, 1, 2]],
+      "b": [8, -11, -3],
+      "expected_x": [2, 3, -1],
+      "tol": 1e-9
+    }
+  ],
+  "resolver_lu_multiplos_rhs": [
+    {
+      "description": "2x2 system with 2 right-hand sides",
+      "A": [[4, 1], [2, 3]],
+      "B": [[1, 2], [3, 4]],
+      "tol": 1e-9,
+      "verify": "A @ X == B"
+    }
+  ],
+  "det_via_lu": [
+    {
+      "input": [[1, 2], [3, 4]],
+      "expected": -2,
+      "tol": 1e-9
+    },
+    {
+      "input": [[2, 1, 0], [3, 4, 1], [1, 0, 2]],
+      "expected": 13,
+      "tol": 1e-9
+    }
+  ]
+}

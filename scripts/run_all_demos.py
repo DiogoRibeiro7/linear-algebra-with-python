@@ -15,6 +15,8 @@ DEMOS = [
         "nb02_unit_circle.png",
         "nb02_examples_rotation_scaling_shear_reflection.png",
     ]),
+    ("demo_conditioning.py", ["conditioning_sensitivity.png"]),
+    ("demo_pca_2d.py", ["demo_pca_projection.png"]),
 ]
 
 
