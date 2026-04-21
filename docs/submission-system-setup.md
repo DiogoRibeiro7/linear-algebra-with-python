@@ -14,11 +14,11 @@ Students must follow these conventions:
 
 - PR target branch: `develop`
 - source branch format: `<student_number>-A<nn>`
-- source branch example: `4025001-A01`
+- source branch example: `40250001-A01`
 - PR title format: `Submission <student_number> --- A<nn>`
-- PR title example: `Submission 4025001 --- A01`
+- PR title example: `Submission 40250001 --- A01`
 - submission path format: `assignments/submissions/<student_number>/<nn>/`
-- submission path example: `assignments/submissions/4025001/01/`
+- submission path example: `assignments/submissions/40250001/01/`
 
 Each submission folder must contain:
 
@@ -68,7 +68,7 @@ gh label create duplicate-submission --color d93f0b --description "Another open 
 File: `course/config/students.yml`
 
 - Keep one student number per entry under `students:`.
-- Student numbers must match the 7-digit format used in branch and PR title.
+- Student numbers must match the 8-digit format used in branch and PR title.
 - Update this list at the start of each term and whenever enrollment changes.
 
 ## Maintaining deadlines.yml

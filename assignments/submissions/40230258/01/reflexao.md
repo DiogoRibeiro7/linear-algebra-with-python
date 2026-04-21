@@ -1,0 +1,5 @@
+5:
+
+A matriz identidade pertence simultaneamente a vários classificações de matrizes porque ela satisfaz as várias condições ao mesmo tempo. Em notação de conjuntos, I ∈ D, I ∈ S e I ∈ T, onde D é o conjunto de matrizes diagonais, S o conjunto de matrizes simétricas e T o conjunto de matrizes triangulares. Como D ∩ S ∩ T ≠ ∅, a matriz identidade é um elemento comum dessa interseção.
+
+A identidade é diagonal porque todos os elementos fora da diagonal principal são zero e os elementos da diagonal principal são 1. Qualquer matriz diagonal também é simétrica, pois a transposta de uma matriz diagonal é igual à própria matriz; portanto D ⊆ S no sentido de conjuntos. Além disso, uma matriz diagonal é simultaneamente triangular superior e inferior, logo D ⊆ T. Assim, I está contida em D e também em T, o que explica por que ela se qualifica como triangular e simétrica.
