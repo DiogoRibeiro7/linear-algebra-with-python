@@ -216,7 +216,7 @@ jobs:
       - name: Check duplicate open PR for same student/assignment
         id: duplicate
         if: always()
-        uses: actions/github-script@v8
+        uses: actions/github-script@v9
         with:
           script: |
             const isSubmission = `${{ steps.validate.outputs.is_submission }}` === "true";
@@ -246,7 +246,7 @@ jobs:
 
       - name: Apply labels and summarize result
         if: always()
-        uses: actions/github-script@v8
+        uses: actions/github-script@v9
         with:
           script: |
             const labelsToManage = ["submitted", "late", "invalid", "duplicate-submission"];
