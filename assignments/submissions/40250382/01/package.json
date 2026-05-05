@@ -1,0 +1,15 @@
+{
+  "name": "40250382-01",
+  "version": "1.0.0",
+  "description": "",
+  "license": "ISC",
+  "author": "",
+  "type": "commonjs",
+  "main": "matrizes_tipos.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "mathjs": "^15.2.0"
+  }
+}
