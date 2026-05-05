@@ -136,7 +136,7 @@ function eh_invertivel(A){
   let normInvA = math.norm(invA, 'inf');
   let conditional = normA * normInvA;
   let result = false
-  if (det !== 0 && conditional < Math.pow(10, 8)) {
+  if (det !== 0) {
     result = true
   }else{
     return false
