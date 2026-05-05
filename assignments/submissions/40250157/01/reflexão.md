@@ -1,5 +1,0 @@
-
-A matriz identidade pode ser classificada de várias formas ao mesmo tempo porque cumpre diferentes propriedades importantes. Em primeiro lugar, é uma matriz diagonal, pois todos os elementos fora da diagonal principal são zero. Em segundo lugar, é simétrica, porque é igual à sua transposta (( I = I^T )). Além disso, também é considerada uma matriz triangular, já que pode ser vista como triangular superior e inferior ao mesmo tempo, porque todos os valores acima e abaixo da diagonal são zero.
-Estas características mostram que a matriz identidade é um caso especial que pertence a várias classificações ao mesmo tempo. Isso ajuda a perceber melhor como as propriedades das matrizes estão relacionadas entre si.
-Em relação ao código, usei JavaScript e ciclos for para trabalhar com as matrizes. Tive de percorrer cada linha e coluna para verificar os valores e construir a matriz identidade. Apesar de ser um processo mais manual, ajudou-me a entender melhor como funcionam as matrizes e como identificar estas propriedades na prática.
-
