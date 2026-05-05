@@ -1,0 +1,7 @@
+# Reflexão: A Importância da Não-Comutatividade
+
+A não-comutatividade na multiplicação de matrizes ($AB \neq BA$) é uma propriedade que distingue fundamentalmente a álgebra linear da álgebra escalar. Geometricamente, as matrizes funcionam como operadores de transformação. Quando aplicamos duas transformações consecutivas, a ordem em que estas ocorrem altera o estado final do sistema. Por exemplo, num espaço 3D, realizar uma rotação e depois uma translação leva a um resultado diferente de transladar primeiro e rodar depois.
+
+Através das tarefas computacionais realizadas em JavaScript, pudemos observar que o comutador $[P, Q] = PQ - QP$ raramente é nulo, o que prova matematicamente que a ordem dos fatores altera o produto. Esta característica é essencial em áreas como a computação gráfica, onde transformações de câmaras e objetos são encadeadas, e na mecânica quântica, onde a não-comutatividade de operadores está ligada ao Princípio da Incerteza de Heisenberg.
+
+Ao comparar a implementação entre linguagens, nota-se que enquanto o Python (NumPy) oferece uma sintaxe mais limpa através do operador `@`, o JavaScript, via Math.js, exige uma abordagem mais funcional. Contudo, ambas as linguagens permitem verificar propriedades complexas, como as identidades da transposta, desde que se tenha o cuidado de gerir a precisão numérica de ponto flutuante, algo que reforça a importância da verificação computacional rigorosa.

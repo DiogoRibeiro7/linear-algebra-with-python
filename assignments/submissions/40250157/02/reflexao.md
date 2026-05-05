@@ -1,0 +1,6 @@
+
+Ao realizar este trabalho, percebi melhor o significado da não comutatividade na multiplicação de matrizes, ou seja, que em geral AB ≠ BA. Geometricamente, isto acontece porque as matrizes podem representar transformações no espaço, como rotações ou escalas, e a ordem em que aplicamos essas transformações influencia o resultado. Por exemplo, aplicar uma rotação e depois uma escala não é o mesmo que fazer o contrário, o que mostra que a ordem importa.
+
+Do ponto de vista algébrico, a multiplicação de matrizes envolve a combinação das linhas de uma matriz com as colunas da outra. Como estas combinações dependem da posição dos elementos, trocar a ordem altera os cálculos e leva a resultados diferentes. O comutador [A, B] = AB − BA permite verificar isso, pois quando é diferente de zero significa que as matrizes não comutam.
+
+Na parte computacional, utilizei a função np.dot() em Python para calcular os produtos matriciais. Achei esta abordagem simples e clara, pois permite fazer diretamente o produto linha-coluna sem ter de implementar ciclos manualmente. Comparando com uma implementação mais básica, o uso de np.dot() facilita a leitura do código, embora esconda os detalhes do cálculo interno.
