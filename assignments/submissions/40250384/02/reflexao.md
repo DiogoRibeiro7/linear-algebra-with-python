@@ -1,0 +1,2 @@
+﻿# Reflexao\n\nTODO.
+A multiplicação de matrizes é não comutativa porque é multiplicado as linha do primeiro elemento pela coluna do segundo, assim, a matriz final fica maior ou menor dependendo das dimensões das matrizes multiplicadas, por exemplo, uma matriz com as dimensões 2x3(duas linha e três colunas) e a uma matriz B com dimensões 3x2(três linhas e duas colunas), caso multiplicadas a matriz final seria uma matriz 2x2, mas caso multiplicada de forma contraria, ou seja B multiplicado pelo A, ficaria 3x3, por isso a multiplicação de matrizes é não comutativa.
