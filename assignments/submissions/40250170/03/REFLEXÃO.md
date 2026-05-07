@@ -1,0 +1,7 @@
+
+
+O determinante de uma matriz 2×2 tem um significado geométrico direto: ele indica o fator de escala da área quando aplicamos a transformação linear representada pela matriz. Se aplicarmos a matriz ao quadrado unitário, a figura resultante é um paralelogramo cuja área é igual a |det(A)|. Assim, um determinante maior que 1 aumenta a área, enquanto um valor entre 0 e 1 a reduz. O sinal do determinante também é relevante: um valor negativo indica que a transformação inclui uma reflexão, alterando a orientação da figura.
+
+Quando o determinante é zero, a interpretação geométrica torna-se clara. A transformação deixa de “espalhar” o espaço e passa a colapsá‑lo para uma linha ou para um ponto. Isto significa que a área da figura transformada é nula, porque a matriz elimina uma dimensão. Como consequência, diferentes pontos do espaço inicial passam a coincidir na imagem final.
+
+É por isso que det(A) = 0 implica que a matriz não é invertível. Uma transformação que perde dimensão não pode ser revertida, pois não existe forma de recuperar a posição original dos pontos. Em termos algébricos, isto corresponde a dizer que as linhas ou colunas da matriz são linearmente dependentes. Assim, o determinante funciona como um indicador simples e eficaz da invertibilidade.
