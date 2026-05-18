@@ -7,5 +7,6 @@
 Este repositório contém a resolução do terceiro trabalho computacional da unidade curricular de Matemática II. 
 
 ## Conteúdo
-- `python.py`: Implementação em Python utilizando a biblioteca NumPy e MatPlotLib
+- `determinantes.ipynb`: Implementação em Python utilizando a biblioteca NumPy e MatPlotLib
 - `reflexao.md`: Reflexão teórica
+- `determinantes_area.png`: Imagem do gráfico
