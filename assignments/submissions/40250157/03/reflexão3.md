@@ -11,4 +11,4 @@ A situação mais importante ocorre quando det(A)=0. Neste caso, a transformaç�
 
 Por essa razão, matrizes com determinante zero não são invertíveis. Para que exista uma inversa, deve ser possível recuperar exatamente os vetores originais após a transformação. No entanto, quando há perda de dimensão, essa recuperação torna-se impossível.
 
-Assim, o determinante não é apenas um cálculo algébrico, mas também uma ferramenta importante para interpretar geometricamente transformações lineares e compreender o conceito de invertibilidade.
+Assim, o determinante não é apenas um cálculo algébrico, mas também uma ferramenta importante para interpretar geometricamente transformações lineares e compreender o conceito de invertibilidade..

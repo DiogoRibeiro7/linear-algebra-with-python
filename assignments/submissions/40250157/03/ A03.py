@@ -28,7 +28,7 @@ def det_3x3_sarrus(A):
     return (d1 + d2 + d3) - (d4 + d5 + d6)
 
 
-# TESTES 2x2 
+# TESTES 2x2 jj
 
 A1 = np.array([
     [1, 2],
