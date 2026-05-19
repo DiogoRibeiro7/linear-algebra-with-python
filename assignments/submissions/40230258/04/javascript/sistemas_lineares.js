@@ -65,23 +65,13 @@ function substituicao_retroativa(U, b) {
     return x;
 }
 
-function rankMatrix(A) {
-    let { U } = escalonar(A.map(row => row.slice()), false);
-    return U.reduce((count, row) => count + (!(row.every(value => Math.abs(value) < 1e-12)) ? 1 : 0), 0);
-}
-
-function rankAugmented(Ab) {
-    let { U } = escalonar(Ab.map(row => row.slice()), true);
-    return U.reduce((count, row) => count + (!(row.every(value => Math.abs(value) < 1e-12)) ? 1 : 0), 0);
-}
-
-function separaB(U) {
-    return U.map(row => row[row.length - 1]);
-}
-
 function classificar_sistema(A, b) {
-    let rankA = rankMatrix(A);
-    let rankAb = rankAugmented(A.map((row, i) => row.concat([b[i]])));
+    let { U: UA } = escalonar(A.map(row => row.slice()), false);
+    let rankA = UA.reduce((count, row) => count + (!(row.every(value => Math.abs(value) < 1e-12)) ? 1 : 0), 0);
+
+    let augmented = A.map((row, i) => row.concat([b[i]]));
+    let { U: UAb } = escalonar(augmented.map(row => row.slice()), false);
+    let rankAb = UAb.reduce((count, row) => count + (!(row.every(value => Math.abs(value) < 1e-12)) ? 1 : 0), 0);
 
     if (rankA !== rankAb) {
         return 'SI';
@@ -92,13 +82,6 @@ function classificar_sistema(A, b) {
     return 'SPD';
 }
 
-function solveWithGauss(A, b) {
-    let augmented = A.map((row, i) => row.concat([b[i]]));
-    let { U } = escalonar(augmented, true);
-    let transformedB = separaB(U);
-    return substituicao_retroativa(U, transformedB);
-}
-
 console.log('---Ex 1---');
 console.log('Matriz aumentada original:');
 console.log(Ab);
@@ -107,7 +90,7 @@ console.log('Matriz em forma de escada:');
 console.log(U);
 console.log('Log de operações:');
 log.forEach(op => console.log(op));
-let b1 = separaB(U);
+let b1 = U.map(row => row[row.length - 1]);
 let solution1 = substituicao_retroativa(U, b1);
 console.log('Solução:');
 console.log(solution1);
@@ -195,7 +178,10 @@ paramSolutions5.forEach(sol => {
 console.log('---Ex 6---');
 let A6 = [[2, 1, -1], [1, 2, 1], [1, -1, 2]];
 let b6 = [3, 4, 5];
-let gauss6 = solveWithGauss(A6, b6);
+let augmented6 = A6.map((row, i) => row.concat([b6[i]]));
+let { U: U6 } = escalonar(augmented6, true);
+let transformedB6 = U6.map(row => row[row.length - 1]);
+let gauss6 = substituicao_retroativa(U6, transformedB6);
 let built6;
 try {
     built6 = math.lusolve(A6, b6).map(row => row[0]);
