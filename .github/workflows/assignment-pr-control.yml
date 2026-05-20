@@ -71,14 +71,14 @@ jobs:
           errors = []
           warnings = []
 
-          branch_match = re.fullmatch(r"([0-9]{7})-A([0-9]{2})", head_ref)
+          branch_match = re.fullmatch(r"([0-9]{8})-A([0-9]{2})", head_ref)
           if branch_match:
               branch_student, branch_assignment = branch_match.groups()
           else:
               branch_student = ""
               branch_assignment = ""
 
-          title_match = re.fullmatch(r"Submission ([0-9]{7}) --- A([0-9]{2})", pr_title)
+          title_match = re.fullmatch(r"Submission ([0-9]{8}) --- A([0-9]{2})", pr_title)
           if title_match:
               title_student, title_assignment = title_match.groups()
           else:
@@ -112,10 +112,10 @@ jobs:
               errors.append(f"PR base branch must be 'develop', found '{base_ref}'.")
 
           if not branch_match:
-              errors.append("Source branch must match 'NNNNNNN-Axx' (example: 4025001-A01).")
+              errors.append("Source branch must match 'NNNNNNNN-Axx' (example: 40250001-A01).")
 
           if not title_match:
-              errors.append("PR title must match 'Submission NNNNNNN --- Axx'.")
+              errors.append("PR title must match 'Submission NNNNNNNN --- Axx'.")
 
           student_number = branch_student or title_student
           assignment = branch_assignment or title_assignment
@@ -184,20 +184,6 @@ jobs:
               if not reflexao_path.exists():
                   errors.append(f"Missing required file: {reflexao_path.relative_to(workspace)}")
 
-              python_dir = submission_root / "python"
-              javascript_dir = submission_root / "javascript"
-
-              def has_files(path: Path) -> bool:
-                  return path.exists() and any(p.is_file() for p in path.rglob("*"))
-
-              has_python = has_files(python_dir)
-              has_javascript = has_files(javascript_dir)
-
-              if has_python and has_javascript:
-                  errors.append("Submission must include exactly one track: python/ OR javascript/, not both.")
-              elif not has_python and not has_javascript:
-                  errors.append("Submission must include one non-empty track: python/ OR javascript/.")
-
           late = False
           if assignment and assignment in deadlines:
               deadline_raw = str(deadlines[assignment])
@@ -230,7 +216,7 @@ jobs:
       - name: Check duplicate open PR for same student/assignment
         id: duplicate
         if: always()
-        uses: actions/github-script@v8
+        uses: actions/github-script@v9
         with:
           script: |
             const isSubmission = `${{ steps.validate.outputs.is_submission }}` === "true";
@@ -260,7 +246,7 @@ jobs:
 
       - name: Apply labels and summarize result
         if: always()
-        uses: actions/github-script@v8
+        uses: actions/github-script@v9
         with:
           script: |
             const labelsToManage = ["submitted", "late", "invalid", "duplicate-submission"];
