@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Determinant Area</title>
+	<style>
+		body{font-family: Arial, sans-serif; margin:20px;}
+		h2{margin:0 0 10px 0;}
+		svg{border:1px solid #ccc; background:#fafafa;}
+		.axis{stroke:#999; stroke-width:1;}
+		.square{fill:rgba(30,144,255,0.2); stroke:#1e90ff; stroke-width:2;}
+		.para{fill:rgba(255,99,71,0.25); stroke:#ff6347; stroke-width:2;}
+	</style>
+</head>
+<body>
+	<h2 id="title"></h2>
+	<svg id="plot" width="500" height="500" viewBox="-2 -2 6 6"></svg>
+
+	<script>
+		// 2x2 matrix (change values to see new transformation)
+		const A = [[2, 1],[1, 3]];
+
+		function det2x2(M){
+			return M[0][0]*M[1][1]-M[0][1]*M[1][0];
+		}
+
+		function transform(pt){
+			return [
+				A[0][0]*pt[0] + A[0][1]*pt[1],
+				A[1][0]*pt[0] + A[1][1]*pt[1]
+			];
+		}
+
+		const det = det2x2(A);
+		document.getElementById('title').textContent = `|det(A)| = ${Math.abs(det)}`;
+
+		const svg = document.getElementById('plot');
+
+		// axes
+		const axisX = document.createElementNS('http://www.w3.org/2000/svg','line');
+		axisX.setAttribute('x1','-2'); axisX.setAttribute('y1','0');
+		axisX.setAttribute('x2','4'); axisX.setAttribute('y2','0');
+		axisX.setAttribute('class','axis');
+		svg.appendChild(axisX);
+
+		const axisY = document.createElementNS('http://www.w3.org/2000/svg','line');
+		axisY.setAttribute('x1','0'); axisY.setAttribute('y1','-2');
+		axisY.setAttribute('x2','0'); axisY.setAttribute('y2','4');
+		axisY.setAttribute('class','axis');
+		svg.appendChild(axisY);
+
+		// unit square points
+		const square = [[0,0],[1,0],[1,1],[0,1]];
+		const squarePath = square.map(p=>p.join(',')).join(' ');
+		const sq = document.createElementNS('http://www.w3.org/2000/svg','polygon');
+		sq.setAttribute('points', squarePath);
+		sq.setAttribute('class','square');
+		svg.appendChild(sq);
+
+		// transformed parallelogram
+		const paraPts = square.map(transform);
+		const paraPath = paraPts.map(p=>p.join(',')).join(' ');
+		const para = document.createElementNS('http://www.w3.org/2000/svg','polygon');
+		para.setAttribute('points', paraPath);
+		para.setAttribute('class','para');
+		svg.appendChild(para);
+	</script>
+</body>
+</html>
