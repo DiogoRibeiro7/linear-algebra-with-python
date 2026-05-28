@@ -1,7 +1,5 @@
 # Student Submission -- 40250241
 
-Replace `4025XXX` with your own student ID folder name.
-
 ## Contents
 
 Confirm each assignment includes both languages and a shared reflection:
@@ -16,4 +14,4 @@ Confirm each assignment includes both languages and a shared reflection:
 
 ## Notes
 
-Add any relevant notes for the reviewer (optional).
+
