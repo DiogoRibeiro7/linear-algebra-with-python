@@ -1,0 +1,72 @@
+{
+  "det_2x2": [
+    {
+      "input": [[1, 2], [3, 4]],
+      "expected": -2
+    },
+    {
+      "input": [[2, 0], [0, 3]],
+      "expected": 6
+    },
+    {
+      "input": [[1, 0], [0, 1]],
+      "expected": 1
+    }
+  ],
+  "det_3x3_sarrus": [
+    {
+      "input": [[1, 2, 3], [0, 1, 4], [5, 6, 0]],
+      "expected": 1
+    },
+    {
+      "input": [[2, 1, 0], [3, 4, 1], [1, 0, 2]],
+      "expected": 13
+    }
+  ],
+  "det_cofactor": [
+    {
+      "input": [[1, 2, 3], [0, 1, 4], [5, 6, 0]],
+      "expected": 1
+    },
+    {
+      "input": [[3, 2, -1], [1, 0, 2], [4, 1, 1]],
+      "expected": 7
+    }
+  ],
+  "det_gauss": [
+    {
+      "input": [[3, 2, -1], [1, 0, 2], [4, 1, 1]],
+      "expected": 7
+    },
+    {
+      "input": [[1, 2], [3, 4]],
+      "expected": -2
+    }
+  ],
+  "inversa_2x2": [
+    {
+      "input": [[2, 1], [5, 3]],
+      "expected": [[3, -1], [-5, 2]]
+    },
+    {
+      "input": [[1, 0], [0, 1]],
+      "expected": [[1, 0], [0, 1]]
+    }
+  ],
+  "eh_invertivel": [
+    {
+      "input": [[1, 2], [3, 4]],
+      "expected": true
+    },
+    {
+      "input": [[1, 2], [2, 4]],
+      "expected": false
+    }
+  ],
+  "singular_matrix": [
+    {
+      "input": [[1, 2], [2, 4]],
+      "description": "Should raise/throw error for inversa_2x2 and inversa_gauss_jordan"
+    }
+  ]
+}

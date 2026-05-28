@@ -1,0 +1,5 @@
+A realização deste trabalho permitiu analisar a ponte entre os conceitos teóricos de Álgebra Linear e a sua aplicação prática através da biblioteca NumPy.
+
+Uma das conclusões mais interessantes surge na Tarefa T3, onde observamos que uma matriz pode pertencer a múltiplas categorias simultaneamente. A Matriz Identidade é o caso paradigmático: é quadrada, diagonal, simétrica e simultaneamente triangular superior e inferior. Computacionalmente, isto exige que a lógica de classificação não seja excludente, mas sim cumulativa, de forma a capturar todas as propriedades matemáticas do objeto.
+
+A Tarefa T4 reforçou a importância do rigor matemático no desenvolvimento de software. Tentar realizar operações como a soma de matrizes com dimensões incompatíveis ou multiplicações que violam a regra das dimensões internas dispara exceções críticas. O uso de blocos try/except demonstra que, em computação científica, validar as pré-condições matemáticas é tão vital quanto o cálculo em si, garantindo a robustez do algoritmo perante dados inválidos.

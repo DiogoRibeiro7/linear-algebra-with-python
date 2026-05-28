@@ -6,7 +6,7 @@
 
 ## Student Submission Checklist
 - [ ] This PR targets `develop`
-- [ ] Source branch follows `<student_number>-A<nn>` (example: `4025001-A01`)
+- [ ] Source branch follows `<student_number>-A<nn>` (example: `40250001-A01`)
 - [ ] PR title follows `Submission <student_number> --- A<nn>`
 - [ ] Assignment code is between `A01` and `A06`
 - [ ] All changed files are inside `assignments/submissions/<student>/<nn>/`
