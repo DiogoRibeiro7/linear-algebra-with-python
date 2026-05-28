@@ -288,8 +288,6 @@ console.log("Matriz Simétrica 3x3:", classificarMatriz(matrizSimetrica));
 
 // T4 //
 
-// T4 //
-
 // FUNÇÃO PARA MULTIPLICAR MATRIZES //
 
 function multiplicarMatrizes(A, B) {
@@ -344,5 +342,4 @@ try {
 } catch (erro) {
   console.log(erro.message);
 }
-
 
