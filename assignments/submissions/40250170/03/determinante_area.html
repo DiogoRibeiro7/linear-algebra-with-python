@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Transformação Linear — Área = |det(A)|</title>
+</head>
+
+<body>
+<canvas id="plot" width="400" height="400" style="border:1px solid black"></canvas>
+
+<script>
+// ===== MATRIZ A (podes mudar estes valores) =====
+const A = [
+  [2, 1],
+  [1, 3]
+];
+
+// ===== Função que aplica A·v =====
+function transform([x, y]) {
+  return [
+    A[0][0]*x + A[0][1]*y,
+    A[1][0]*x + A[1][1]*y
+  ];
+}
+
+// ===== Quadrado unitário =====
+const square = [
+  [0,0],
+  [1,0],
+  [1,1],
+  [0,1],
+  [0,0]
+];
+
+const canvas = document.getElementById("plot");
+const ctx = canvas.getContext("2d");
+
+// Ajustar coordenadas (origem no canto inferior esquerdo)
+ctx.translate(50, 350);
+ctx.scale(50, -50);
+
+// ===== Desenhar quadrado original =====
+ctx.strokeStyle = "blue";
+ctx.lineWidth = 0.05;
+ctx.beginPath();
+square.forEach(([x,y], i) => {
+  if (i === 0) ctx.moveTo(x, y);
+  else ctx.lineTo(x, y);
+});
+ctx.stroke();
+
+// ===== Desenhar quadrado transformado =====
+ctx.strokeStyle = "red";
+ctx.beginPath();
+square.map(transform).forEach(([x,y], i) => {
+  if (i === 0) ctx.moveTo(x, y);
+  else ctx.lineTo(x, y);
+});
+ctx.stroke();
+
+// ===== Determinante =====
+const det = A[0][0]*A[1][1] - A[0][1]*A[1][0];
+document.title = `Área = |det(A)| = ${Math.abs(det)}`;
+console.log("Área (|det(A)|) =", Math.abs(det));
+</script>
+
+</body>
+</html>

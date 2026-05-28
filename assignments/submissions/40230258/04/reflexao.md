@@ -1,0 +1,7 @@
+ex8
+
+O teorema de Rouché–Capelli dá uma condição simples para decidir se um sistema linear é compatível: o sistema Ax = b tem solução se, e somente se, o posto da matriz de coeficientes A for igual ao posto da matriz aumentada [A|b]. A comparação desses postos distingue três casos clássicos: quando o posto é igual ao número de incógnitas existe uma única solução; quando o posto é menor que o número de incógnitas existem infinitas soluções; e quando os postos diferem o sistema é impossível.
+
+A eliminação de Gauss é a ferramenta algorítmica que revela exatamente a informação de posto que o teorema usa. Ao transformar a matriz aumentada em forma escalonada, a eliminação expõe pivôs e linhas nulas: o número de linhas não nulas na forma de escada corresponde ao posto da matriz. Se, ao escalonar [A|b], surgir uma linha com todos os coeficientes nulos e termo independente não nulo, essa linha representa a contradição 0 = c (c ≠ 0) e demonstra que o sistema não tem solução.
+
+Quando não há contradições, os pivôs indicam as variáveis básicas e as colunas sem pivô correspondem a variáveis livres. Atribuindo parâmetros às variáveis livres obtém‑se a descrição paramétrica do conjunto de soluções — é assim que surgem infinitas soluções em casos indeterminados. Se houver pivô em cada coluna de incógnita, a substituição retroativa fornece a solução única.
