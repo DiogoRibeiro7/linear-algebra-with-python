@@ -86,7 +86,7 @@ function gaussSolve(A, b) {
             }
         }
 
-        if (maxVal === 0) {
+        if (maxVal < 1e-12) {
             throw new Error('Matrix is singular or nearly singular')
         }
 
