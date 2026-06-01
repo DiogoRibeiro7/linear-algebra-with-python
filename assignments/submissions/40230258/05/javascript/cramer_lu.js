@@ -268,7 +268,7 @@ function ex4() {
     const luFactors = factorResult.result
     const factorTime = factorResult.duration
 
-    const solveSameLUTotal = timeFunction(() => B.map(b => solveWithLuFactors(luFactors, b))).duration
+    const solveSameLUTotal = factorTime + timeFunction(() => B.map(b => solveWithLuFactors(luFactors, b))).duration
     const sameLUSolutions = B.map(b => solveWithLuFactors(luFactors, b))
 
     let scratchTotal = 0
