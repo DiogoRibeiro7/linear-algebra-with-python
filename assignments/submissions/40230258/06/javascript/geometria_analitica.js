@@ -115,10 +115,10 @@ function posicao_relativa_retas_3d(P1, P2, Q1, Q2) {
   if (!isZeroVec(uxv, eps)) {
     const coplanarTest = math.dot(w, uxv);
     if (Math.abs(coplanarTest) < eps) {
-      const t = math.dot(math.cross(w, v), uxv) / math.dot(uxv,uxv);
+      const t = math.dot(math.cross(w, v), uxv) / math.dot(uxv, uxv);
       const point = [P1[0] + t * u[0], P1[1] + t * u[1], P1[2] + t * u[2]];
       const sVec = [point[0] - Q1[0], point[1] - Q1[1], point[2] - Q1[2]];
-      if (isZeroVec(sVec, eps)) return "intersecting";
+      if (isZeroVec(math.cross(sVec, v), eps)) return "intersecting";
       return "skew";
     }
     return "skew";
@@ -205,7 +205,7 @@ casos3d.forEach((c, i) => {
   figData.push(pointTrace(c.P1, "P1", "royalblue", scene));
   figData.push(pointTrace(c.Q1, "Q1", "crimson", scene));
 
-  layout[scene] = {
+  layout2[scene] = {
     title: `${c.titulo}: ${rel}`,
     aspectmode: "cube"
   };
@@ -408,21 +408,6 @@ console.log("Planes perpendicular:", isZero(math.dot(n3a, n3b)), math.dot(n3a, n
         t2 = [-c / a, 0, 1];
       }
       return { p, t1, t2, n: [a, b, c] };
-    }
-
-    function intersecao_reta_plano(P0, P1, plano, eps = 1e-9) {
-      const [a, b, c, d] = plano;
-      const n = [a, b, c];
-      const m = [P1[0] - P0[0], P1[1] - P0[1], P1[2] - P0[2]];
-      const nd = math.dot(n, m);
-      const np0 = a * P0[0] + b * P0[1] + c * P0[2];
-
-      if (Math.abs(nd) > eps) {
-        const t = (d - np0) / nd;
-        return { type: "intersecting", point: [P0[0] + t * m[0], P0[1] + t * m[1], P0[2] + t * m[2]] };
-      }
-      if (Math.abs(np0 - d) < eps) return { type: "contained", point: null };
-      return { type: "parallel", point: null };
     }
 
     const plane = [2, -1, 1, 3];
