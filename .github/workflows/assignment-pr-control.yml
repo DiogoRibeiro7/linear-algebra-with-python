@@ -78,7 +78,9 @@ jobs:
               branch_student = ""
               branch_assignment = ""
 
-          title_match = re.fullmatch(r"Submission ([0-9]{8}) --- A([0-9]{2})", pr_title)
+          title_match = re.fullmatch(
+              r"Submission ([0-9]{8}) (?:--|---) A([0-9]{2})", pr_title
+          )
           if title_match:
               title_student, title_assignment = title_match.groups()
           else:
@@ -115,7 +117,9 @@ jobs:
               errors.append("Source branch must match 'NNNNNNNN-Axx' (example: 40250001-A01).")
 
           if not title_match:
-              errors.append("PR title must match 'Submission NNNNNNNN --- Axx'.")
+              errors.append(
+                  "PR title must match 'Submission NNNNNNNN --- Axx' (legacy '--' also accepted)."
+              )
 
           student_number = branch_student or title_student
           assignment = branch_assignment or title_assignment
