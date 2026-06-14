@@ -79,7 +79,7 @@ jobs:
               branch_assignment = ""
 
           title_match = re.fullmatch(
-              r"Submission ([0-9]{8}) (?:--|---) A([0-9]{2})", pr_title
+              r"Submission ([0-9]{8}) (?:---|--) A([0-9]{2})", pr_title
           )
           if title_match:
               title_student, title_assignment = title_match.groups()
