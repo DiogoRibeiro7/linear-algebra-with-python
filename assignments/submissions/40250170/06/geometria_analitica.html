@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <title>Geometria 3D – Resumo</title>
+  <style>
+    body { margin: 0; overflow: hidden; }
+  </style>
+</head>
+<body>
+
+<script src="https://unpkg.com/three@0.160.0/build/three.min.js"></script>
+
+<script>
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(60, window.innerWidth/window.innerHeight, 0.1, 1000);
+  const renderer = new THREE.WebGLRenderer({ antialias: true });
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  document.body.appendChild(renderer.domElement);
+
+  camera.position.set(6, 6, 6);
+  camera.lookAt(0, 0, 0);
+
+  // Plano z = 0
+  const planeGeom = new THREE.PlaneGeometry(10, 10);
+  const planeMat = new THREE.MeshBasicMaterial({ color: 0x88ccff, side: THREE.DoubleSide, opacity: 0.5, transparent: true });
+  const plane = new THREE.Mesh(planeGeom, planeMat);
+  plane.rotateX(Math.PI / 2);
+  scene.add(plane);
+
+  // Reta que intersecta
+  const p0 = new THREE.Vector3(0, 0, -2);
+  const d = new THREE.Vector3(1, 1, 1).normalize();
+  const line1 = new THREE.Line(
+    new THREE.BufferGeometry().setFromPoints([
+      p0.clone().add(d.clone().multiplyScalar(-5)),
+      p0.clone().add(d.clone().multiplyScalar(5))
+    ]),
+    new THREE.LineBasicMaterial({ color: 0xff0000 })
+  );
+  scene.add(line1);
+
+  // Ponto de interseção com z=0
+  const t = (0 - p0.z) / d.z;
+  const P = p0.clone().add(d.clone().multiplyScalar(t));
+
+  const sphere = new THREE.Mesh(
+    new THREE.SphereGeometry(0.12, 16, 16),
+    new THREE.MeshBasicMaterial({ color: 0x000000 })
+  );
+  sphere.position.copy(P);
+  scene.add(sphere);
+
+  // Reta paralela ao plano
+  const p2 = new THREE.Vector3(-3, -3, 1);
+  const d2 = new THREE.Vector3(1, 1, 0).normalize();
+  const line2 = new THREE.Line(
+    new THREE.BufferGeometry().setFromPoints([
+      p2.clone().add(d2.clone().multiplyScalar(-5)),
+      p2.clone().add(d2.clone().multiplyScalar(5))
+    ]),
+    new THREE.LineBasicMaterial({ color: 0x00aa00 })
+  );
+  scene.add(line2);
+
+  // Vetor normal
+  const normal = new THREE.Line(
+    new THREE.BufferGeometry().setFromPoints([
+      new THREE.Vector3(0, 0, 0),
+      new THREE.Vector3(0, 0, 2)
+    ]),
+    new THREE.LineBasicMaterial({ color: 0x0000ff })
+  );
+  scene.add(normal);
+
+  function animate() {
+    requestAnimationFrame(animate);
+    scene.rotation.y += 0.003;
+    renderer.render(scene, camera);
+  }
+  animate();
+</script>
+
+</body>
+</html>
