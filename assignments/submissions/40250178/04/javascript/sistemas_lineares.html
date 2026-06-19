@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <title>A04 - Sistemas Lineares</title>
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+  <style>
+    body { font-family: sans-serif; margin: 20px; background: #f0f0f0; }
+    h2 { color: #222; }
+    .chart { background: white; padding: 15px; margin-bottom: 30px; border-radius: 8px; }
+  </style>
+</head>
+<body>
+  <h2>A04 — Sistemas Lineares: Gauss e Classificação</h2>
+
+  <div id="retas2d" class="chart"></div>
+  <div id="planos3d" class="chart"></div>
+
+  <script>
+    // ─── T7a: 3 sistemas 2D — único, infinito, impossível ────────────────────
+    const t = Array.from({length: 200}, (_, i) => -5 + i * 0.05);
+
+    // Sistema SPD: x + y = 2, x - y = 0 → interseção em (1,1)
+    const r1a = { x: t, y: t.map(ti => 2 - ti), mode:'lines', name:'x+y=2', line:{color:'blue'}, xaxis:'x', yaxis:'y' };
+    const r1b = { x: t, y: t.map(ti => ti),      mode:'lines', name:'x-y=0', line:{color:'cyan'}, xaxis:'x', yaxis:'y' };
+
+    // Sistema SPI: x + y = 2, 2x + 2y = 4 → mesma reta
+    const r2a = { x: t, y: t.map(ti => 2 - ti),  mode:'lines', name:'x+y=2', line:{color:'red'}, xaxis:'x2', yaxis:'y2' };
+    const r2b = { x: t, y: t.map(ti => 2 - ti),  mode:'lines', name:'2x+2y=4', line:{color:'orange', dash:'dot', width:4}, xaxis:'x2', yaxis:'y2' };
+
+    // Sistema SI: x + y = 2, x + y = 4 → paralelas
+    const r3a = { x: t, y: t.map(ti => 2 - ti), mode:'lines', name:'x+y=2', line:{color:'green'}, xaxis:'x3', yaxis:'y3' };
+    const r3b = { x: t, y: t.map(ti => 4 - ti), mode:'lines', name:'x+y=4', line:{color:'lime'}, xaxis:'x3', yaxis:'y3' };
+
+    // ponto de interseção do SPD
+    const inter = { x:[1], y:[1], mode:'markers', name:'Solução única', marker:{size:10, color:'red'}, xaxis:'x', yaxis:'y' };
+
+    Plotly.newPlot('retas2d', [r1a, r1b, inter, r2a, r2b, r3a, r3b], {
+      title: 'Sistemas 2D: único (SPD), infinito (SPI), impossível (SI)',
+      grid: { rows:1, columns:3, pattern:'independent' },
+      xaxis:  { range:[-3,5], title:'SPD — solução única' },   yaxis:  { range:[-1,5] },
+      xaxis2: { range:[-3,5], title:'SPI — infinitas soluções' }, yaxis2: { range:[-1,5] },
+      xaxis3: { range:[-3,5], title:'SI — impossível' },         yaxis3: { range:[-1,5] },
+      height: 420
+    });
+
+    // ─── T7b: 3 planos intersectando num ponto ────────────────────────────────
+    // Plano 1: x = 1,  Plano 2: y = 1,  Plano 3: z = 1
+    const vals = Array.from({length:8}, (_, i) => -2 + i * 0.57);
+
+    function flatPlane(fixedAxis, val) {
+      if (fixedAxis === 'x') {
+        return { type:'surface', x: vals.map(()=>val), y: [vals, vals, vals, vals, vals, vals, vals, vals], z: vals.map(v => vals), opacity:0.4, showscale:false };
+      }
+      if (fixedAxis === 'y') {
+        return { type:'surface', x: [vals, vals, vals, vals, vals, vals, vals, vals], y: vals.map(()=>[val,val,val,val,val,val,val,val]), z: vals.map(v => vals), opacity:0.4, showscale:false };
+      }
+      // z
+      return { type:'surface', x: [vals,vals,vals,vals,vals,vals,vals,vals], y: vals.map(v=>vals), z: vals.map(()=>vals.map(()=>val)), opacity:0.4, showscale:false };
+    }
+
+    // versão simplificada: 3 planos usando meshgrid manual
+    const grid = Array.from({length:8}, (_, i) => -2 + i * 0.57);
+    const Z0 = grid.map(() => grid.map(() => 0));
+    const Z1 = grid.map(() => grid.map(() => 1));
+
+    const plano1 = { // z = 1
+      type:'surface', x:grid, y:grid, z:Z1,
+      opacity:0.35, colorscale:[[0,'#3498db'],[1,'#3498db']], showscale:false, name:'z=1'
+    };
+    const plano2 = { // x = 1 (surface via scatter3d aproximado)
+      type:'mesh3d',
+      x:[1,1,1,1], y:[-2,-2,2,2], z:[-2,2,-2,2],
+      i:[0,0], j:[1,2], k:[2,3],
+      opacity:0.35, color:'#e74c3c', name:'x=1'
+    };
+    const plano3 = {
+      type:'mesh3d',
+      x:[-2,-2,2,2], y:[1,1,1,1], z:[-2,2,-2,2],
+      i:[0,0], j:[1,2], k:[2,3],
+      opacity:0.35, color:'#2ecc71', name:'y=1'
+    };
+    const ponto = {
+      type:'scatter3d', mode:'markers',
+      x:[1], y:[1], z:[1],
+      marker:{ size:10, color:'orange' }, name:'Solução (1,1,1)'
+    };
+
+    Plotly.newPlot('planos3d', [plano1, plano2, plano3, ponto], {
+      title: 'Três planos intersectando num ponto (1,1,1)',
+      scene: { xaxis:{title:'X'}, yaxis:{title:'Y'}, zaxis:{title:'Z'} },
+      height: 500
+    });
+  </script>
+</body>
+</html>
