@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <title>A06 - Geometria Analítica</title>
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+  <style>
+    body { font-family: sans-serif; margin: 20px; background: #f0f0f0; }
+    h2 { color: #222; }
+    .chart { background: white; padding: 10px; margin-bottom: 30px; border-radius: 8px; }
+  </style>
+</head>
+<body>
+  <h2>A06 — Geometria Analítica: Retas e Planos</h2>
+
+  <div id="retas2d" class="chart"></div>
+  <div id="retas3d" class="chart"></div>
+  <div id="resumo3d" class="chart"></div>
+
+  <script>
+    // ─── T1: Retas 2D ─────────────────────────────────────────────────────────
+    const t = Array.from({length: 100}, (_, i) => -5 + i * 0.1);
+
+    function linePoints2d(p, d) {
+      return { x: t.map(ti => p[0] + ti*d[0]), y: t.map(ti => p[1] + ti*d[1]) };
+    }
+
+    const secante1 = linePoints2d([0,0],[1,1]);
+    const secante2 = linePoints2d([1,0],[1,2]);
+    const paralela1 = linePoints2d([0,0],[1,1]);
+    const paralela2 = linePoints2d([0,1],[1,1]);
+    const coinc1 = linePoints2d([0,0],[1,1]);
+    const coinc2 = linePoints2d([1,1],[2,2]);
+
+    Plotly.newPlot('retas2d', [
+      {...secante1, mode:'lines', name:'Secante r1', line:{color:'blue'}, xaxis:'x', yaxis:'y'},
+      {...secante2, mode:'lines', name:'Secante r2', line:{color:'cyan'}, xaxis:'x', yaxis:'y'},
+      {...paralela1, mode:'lines', name:'Paralela r1', line:{color:'red'}, xaxis:'x2', yaxis:'y2'},
+      {...paralela2, mode:'lines', name:'Paralela r2', line:{color:'orange'}, xaxis:'x2', yaxis:'y2'},
+      {...coinc1, mode:'lines', name:'Coincidente r1', line:{color:'green', width:4}, xaxis:'x3', yaxis:'y3'},
+      {...coinc2, mode:'lines', name:'Coincidente r2', line:{color:'lime', dash:'dot'}, xaxis:'x3', yaxis:'y3'},
+    ], {
+      title: 'Retas 2D: secantes, paralelas, coincidentes',
+      grid: { rows:1, columns:3, pattern:'independent' },
+      xaxis:{range:[-3,3],title:'Secantes'}, yaxis:{range:[-3,3]},
+      xaxis2:{range:[-3,3],title:'Paralelas'}, yaxis2:{range:[-3,3]},
+      xaxis3:{range:[-3,3],title:'Coincidentes'}, yaxis3:{range:[-3,3]},
+      height: 400
+    });
+
+    // ─── T2 + T7: Visualização 3D completa ───────────────────────────────────
+
+    // plano z = 1 (normal [0,0,1], d=1)
+    const xs = Array.from({length:10}, (_, i) => -3 + i*0.67);
+    const ys = Array.from({length:10}, (_, i) => -3 + i*0.67);
+    const zPlane = xs.map(() => ys.map(() => 1));
+
+    const normalVec = {
+      type: 'scatter3d', mode: 'lines',
+      x:[0,0], y:[0,0], z:[1,3],
+      line:{color:'purple', width:6},
+      name:'Normal do plano'
+    };
+
+    const retaIntersecta = {
+      type:'scatter3d', mode:'lines',
+      x: t.map(ti=>ti*0.5), y: t.map(ti=>ti*0.5), z: t.map(ti=>ti+1),
+      line:{color:'blue', width:4}, name:'Reta que intersecta'
+    };
+
+    const retaParalela = {
+      type:'scatter3d', mode:'lines',
+      x: t.map(ti=>ti), y: t.map(ti=>0), z: t.map(()=>0.5),
+      line:{color:'red', width:4, dash:'dash'}, name:'Reta paralela'
+    };
+
+    const pontoIntersecao = {
+      type:'scatter3d', mode:'markers',
+      x:[0], y:[0], z:[1],
+      marker:{size:8, color:'orange'}, name:'Ponto de interseção'
+    };
+
+    const planoSurf = {
+      type:'surface',
+      x: xs, y: ys, z: zPlane,
+      opacity:0.4, colorscale:[[0,'lightblue'],[1,'lightblue']],
+      showscale:false, name:'Plano z=1'
+    };
+
+    Plotly.newPlot('resumo3d', [planoSurf, retaIntersecta, retaParalela, normalVec, pontoIntersecao], {
+      title: 'T7 — Plano, retas e ponto de interseção',
+      scene: { xaxis:{title:'X'}, yaxis:{title:'Y'}, zaxis:{title:'Z'} },
+      height: 500
+    });
+
+    // ─── Retas 3D — 4 casos ───────────────────────────────────────────────────
+    Plotly.newPlot('retas3d', [
+      { type:'scatter3d', mode:'lines', x:t, y:t.map(()=>0), z:t.map(()=>0), line:{color:'blue'}, name:'Secante r1' },
+      { type:'scatter3d', mode:'lines', x:t.map(()=>0), y:t, z:t.map(()=>0), line:{color:'cyan'}, name:'Secante r2' },
+      { type:'scatter3d', mode:'lines', x:t, y:t.map(()=>1), z:t.map(()=>0), line:{color:'red'}, name:'Paralela r1' },
+      { type:'scatter3d', mode:'lines', x:t, y:t.map(()=>2), z:t.map(()=>0), line:{color:'orange'}, name:'Paralela r2' },
+      { type:'scatter3d', mode:'lines', x:t, y:t.map(()=>0), z:t.map(()=>1), line:{color:'green'}, name:'Reversa r1' },
+      { type:'scatter3d', mode:'lines', x:t.map(()=>0), y:t.map(()=>1), z:t, line:{color:'lime'}, name:'Reversa r2' },
+    ], {
+      title: 'Retas 3D: secantes, paralelas, reversas',
+      height: 500
+    });
+  </script>
+</body>
+</html>
