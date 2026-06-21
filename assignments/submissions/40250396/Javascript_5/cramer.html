@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <title>A05 - Cramer e LU</title>
+  <script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
+</head>
+<body>
+  <h1>A05 - Cramer e Decomposição LU</h1>
+
+  <h2>T5 - Heatmap de A, L e U</h2>
+  <div id="heatmap"></div>
+
+  <h2>T3 - Benchmark (tempos obtidos ao correr cramer_lu.js)</h2>
+  <div id="benchmark"></div>
+
+  <script>
+    // T5 - heatmaps de A, L e U
+    // valores já calculados em cramer_lu.js para A = [[2,1,0],[1,3,1],[0,1,2]]
+    const A = [[2, 1, 0], [1, 3, 1], [0, 1, 2]];
+    const L = [[1, 0, 0], [0.5, 1, 0], [0, 0.4, 1]];
+    const U = [[2, 1, 0], [0, 2.5, 1], [0, 0, 1.6]];
+
+    // cria um heatmap a partir de uma matriz, deslocado na horizontal
+    function fazHeatmap(M, desvioX) {
+      const z = [];
+      const texto = [];
+      // inverte as linhas para a primeira ficar em cima
+      for (let i = M.length - 1; i >= 0; i--) {
+        z.push(M[i]);
+        texto.push(M[i].map(v => v.toFixed(2)));
+      }
+      const colunasX = [];
+      for (let j = 0; j < M[0].length; j++) colunasX.push(j + desvioX);
+      const linhasY = [];
+      for (let i = 0; i < M.length; i++) linhasY.push(i);
+
+      return {
+        type: "heatmap",
+        z: z, x: colunasX, y: linhasY,
+        text: texto, texttemplate: "%{text}",
+        colorscale: "RdBu", zmid: 0, showscale: false
+      };
+    }
+
+    Plotly.newPlot("heatmap", [
+      fazHeatmap(A, 0),
+      fazHeatmap(L, 4),
+      fazHeatmap(U, 8)
+    ], {
+      title: "A, L e U (PA = LU)",
+      annotations: [
+        { text: "A", xref: "x", yref: "paper", x: 1, y: 1.08, showarrow: false, font: { size: 16 } },
+        { text: "L", xref: "x", yref: "paper", x: 5, y: 1.08, showarrow: false, font: { size: 16 } },
+        { text: "U", xref: "x", yref: "paper", x: 9, y: 1.08, showarrow: false, font: { size: 16 } }
+      ],
+      xaxis: { showticklabels: false },
+      yaxis: { showticklabels: false },
+      height: 350
+    });
+
+    // T3 - grafico de barras do benchmark
+    // tempos médios (ms) obtidos ao correr cramer_lu.js
+    const ns = ["n=2", "n=3", "n=5", "n=10", "n=20"];
+    const tempoCramer = [0.0008, 0.0020, 0.012, 0.45, null];
+    const tempoGauss = [0.0010, 0.0018, 0.004, 0.02, 0.09];
+    const tempoLU = [0.0006, 0.0009, 0.0015, 0.004, 0.012];
+
+    Plotly.newPlot("benchmark", [
+      { name: "Cramer", x: ns, y: tempoCramer, type: "bar", marker: { color: "red" } },
+      { name: "Gauss", x: ns, y: tempoGauss, type: "bar", marker: { color: "blue" } },
+      { name: "LU", x: ns, y: tempoLU, type: "bar", marker: { color: "green" } }
+    ], {
+      title: "Tempo por solução (Cramer cresce muito mais depressa)",
+      barmode: "group",
+      yaxis: { title: "ms", type: "log" },
+      height: 420
+    });
+  </script>
+</body>
+</html>

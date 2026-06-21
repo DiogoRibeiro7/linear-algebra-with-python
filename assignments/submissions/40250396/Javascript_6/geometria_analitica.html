@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <title>A06 - Geometria Analítica</title>
+  <script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
+</head>
+<body>
+  <h1>A06 - Geometria Analítica: Retas e Planos</h1>
+
+  <h2>T7 - Visualização 3D (plano, reta intersectante, reta paralela e normal)</h2>
+  <div id="cena3d"></div>
+
+  <h2>T1 - Retas 2D (3 casos)</h2>
+  <div id="retas2d"></div>
+
+  <script>
+    // T7 - cena 3D
+    // plano x + y + z = 3  ->  z = 3 - x - y
+    const gx = [], gy = [], gz = [];
+    for (let i = -1; i <= 3.5; i += 0.25) {
+      const lx = [], ly = [], lz = [];
+      for (let j = -1; j <= 3.5; j += 0.25) {
+        lx.push(i);
+        ly.push(j);
+        lz.push(3 - i - j);
+      }
+      gx.push(lx); gy.push(ly); gz.push(lz);
+    }
+
+    const plano = {
+      type: "surface", x: gx, y: gy, z: gz,
+      opacity: 0.45, colorscale: "Blues", showscale: false, name: "plano x+y+z=3"
+    };
+
+    // reta que intersecta: passa por (-1,-1,-1) na direção (1,1,1), cruza o plano em (1,1,1)
+    const retaInter = {
+      type: "scatter3d", mode: "lines",
+      x: [-1, 2], y: [-1, 2], z: [-1, 2],
+      line: { color: "red", width: 5 }, name: "reta intersectante"
+    };
+
+    // reta paralela ao plano: direção (1,-1,0) é perpendicular à normal (1,1,1)
+    const retaParalela = {
+      type: "scatter3d", mode: "lines",
+      x: [-2, 2], y: [3, -1], z: [1, 1],
+      line: { color: "orange", width: 5 }, name: "reta paralela"
+    };
+
+    // vetor normal a partir de (1,1,1)
+    const normal = {
+      type: "scatter3d", mode: "lines",
+      x: [1, 1.8], y: [1, 1.8], z: [1, 1.8],
+      line: { color: "purple", width: 6 }, name: "normal (1,1,1)"
+    };
+
+    // ponto de interseção
+    const ponto = {
+      type: "scatter3d", mode: "markers",
+      x: [1], y: [1], z: [1],
+      marker: { size: 8, color: "green" }, name: "interseção (1,1,1)"
+    };
+
+    Plotly.newPlot("cena3d", [plano, retaInter, retaParalela, normal, ponto], {
+      title: "Plano, reta intersectante, reta paralela e normal",
+      scene: {
+        xaxis: { title: "x", range: [-2, 4] },
+        yaxis: { title: "y", range: [-2, 4] },
+        zaxis: { title: "z", range: [-2, 4] }
+      },
+      height: 580
+    });
+
+    // T1 - retas 2D
+    const xs = [];
+    for (let x = -1; x <= 4; x += 0.1) xs.push(x);
+
+    // secantes: y=x+1 e y=-x+3 (cruzam em (1,2))
+    const sec1 = xs.map(x => x + 1);
+    const sec2 = xs.map(x => -x + 3);
+    // coincidentes: y=x-1 (a mesma reta duas vezes)
+    const coi1 = xs.map(x => x - 1);
+    const coi2 = xs.map(x => x - 1);
+    // paralelas: y=x e y=x-2
+    const par1 = xs.map(x => x);
+    const par2 = xs.map(x => x - 2);
+
+    const dados2d = [
+      { x: xs, y: sec1, name: "y=x+1", line: { color: "red" }, xaxis: "x1", yaxis: "y1" },
+      { x: xs, y: sec2, name: "y=-x+3", line: { color: "blue" }, xaxis: "x1", yaxis: "y1" },
+      { x: [1], y: [2], mode: "markers", marker: { size: 10, color: "green" }, name: "(1,2)", xaxis: "x1", yaxis: "y1" },
+
+      { x: xs, y: coi1, name: "y=x-1", line: { color: "red" }, xaxis: "x2", yaxis: "y2", showlegend: false },
+      { x: xs, y: coi2, name: "y=x-1", line: { color: "orange", dash: "dot" }, xaxis: "x2", yaxis: "y2", showlegend: false },
+
+      { x: xs, y: par1, name: "y=x", line: { color: "red" }, xaxis: "x3", yaxis: "y3", showlegend: false },
+      { x: xs, y: par2, name: "y=x-2", line: { color: "blue" }, xaxis: "x3", yaxis: "y3", showlegend: false }
+    ];
+
+    Plotly.newPlot("retas2d", dados2d, {
+      grid: { rows: 1, columns: 3, pattern: "independent" },
+      annotations: [
+        { text: "secantes", xref: "paper", yref: "paper", x: 0.13, y: 1.1, showarrow: false },
+        { text: "coincidentes", xref: "paper", yref: "paper", x: 0.5, y: 1.1, showarrow: false },
+        { text: "paralelas", xref: "paper", yref: "paper", x: 0.87, y: 1.1, showarrow: false }
+      ],
+      xaxis: { range: [-1, 4] }, xaxis2: { range: [-1, 4] }, xaxis3: { range: [-1, 4] },
+      yaxis: { range: [-3, 5] }, yaxis2: { range: [-3, 5] }, yaxis3: { range: [-3, 5] },
+      height: 420
+    });
+  </script>
+</body>
+</html>
