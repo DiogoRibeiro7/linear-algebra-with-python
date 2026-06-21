@@ -1,0 +1,7 @@
+O método de Cramer é matematicamente elegante, mas pouco prático. Para sistemas pequenos (2×2 ou 3×3) funciona bem e é fácil de implementar. No entanto, o custo computacional cresce muito depressa: calcular determinantes de matrizes grandes é caro, e o método exige um determinante por incógnita. Por isso, Cramer torna‑se rapidamente inútil para matrizes de dimensão elevada.
+
+O método de Gauss é muito mais eficiente. A eliminação gaussiana tem complexidade O(n³), o que é aceitável para a maioria dos problemas. Além disso, é estável quando combinado com pivoting. É o método padrão ensinado em cursos de álgebra linear e é a base de muitos algoritmos numéricos modernos.
+
+A decomposição LU leva a ideia de Gauss mais longe. Em vez de resolver o sistema de raiz cada vez que aparece um novo vetor b, a matriz A é fatorizada uma única vez em L e U. Depois, resolver Ax = b reduz‑se a duas substituições simples: Ly = b e Ux = y. Isto torna LU extremamente eficiente quando se têm vários RHS, como em simulações, sistemas dinâmicos ou problemas iterativos.
+
+Em termos de estabilidade, LU com pivoting é geralmente mais robusto do que Gauss simples e muito mais estável do que Cramer. Em termos de uso prático, Cramer é quase exclusivamente pedagógico; Gauss é universal; LU é a escolha ideal para problemas repetitivos ou de grande escala.
