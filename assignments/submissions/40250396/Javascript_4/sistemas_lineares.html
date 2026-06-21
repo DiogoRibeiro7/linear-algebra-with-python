@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <title>A04 - Sistemas Lineares</title>
+  <script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
+</head>
+<body>
+  <h1>A04 - Sistemas Lineares: Gauss e Classificação</h1>
+
+  <h2>T7a - Sistemas 2D (3 casos)</h2>
+  <div id="plot2d"></div>
+
+  <h2>T7b - Três planos a intersectar num ponto</h2>
+  <div id="plot3d"></div>
+
+  <script>
+    // T7a - tres pares de retas
+    // calcula y de uma reta a*x + b*y = c
+    function calculaY(a, b, c, x) {
+      return (c - a * x) / b;
+    }
+
+    // gera os valores de x
+    const xs = [];
+    for (let x = -1; x <= 4; x += 0.1) {
+      xs.push(x);
+    }
+
+    // caso SPD: x - y = -1 e x + y = 3 (cruzam em (1,2))
+    const spd1 = xs.map(x => calculaY(1, -1, -1, x));
+    const spd2 = xs.map(x => calculaY(1, 1, 3, x));
+
+    // caso SPI: x - y = -1 e 2x - 2y = -2 (mesma reta)
+    const spi1 = xs.map(x => calculaY(1, -1, -1, x));
+    const spi2 = xs.map(x => calculaY(2, -2, -2, x));
+
+    // caso SI: x - y = 0 e x - y = 2 (paralelas)
+    const si1 = xs.map(x => calculaY(1, -1, 0, x));
+    const si2 = xs.map(x => calculaY(1, -1, 2, x));
+
+    const dados2d = [
+      { x: xs, y: spd1, name: "x-y=-1", line: { color: "red" }, xaxis: "x1", yaxis: "y1" },
+      { x: xs, y: spd2, name: "x+y=3", line: { color: "blue" }, xaxis: "x1", yaxis: "y1" },
+      { x: [1], y: [2], mode: "markers", marker: { size: 10, color: "green" }, name: "(1,2)", xaxis: "x1", yaxis: "y1" },
+
+      { x: xs, y: spi1, name: "x-y=-1", line: { color: "red" }, xaxis: "x2", yaxis: "y2", showlegend: false },
+      { x: xs, y: spi2, name: "2x-2y=-2", line: { color: "blue", dash: "dot" }, xaxis: "x2", yaxis: "y2", showlegend: false },
+
+      { x: xs, y: si1, name: "x-y=0", line: { color: "red" }, xaxis: "x3", yaxis: "y3", showlegend: false },
+      { x: xs, y: si2, name: "x-y=2", line: { color: "blue" }, xaxis: "x3", yaxis: "y3", showlegend: false }
+    ];
+
+    const layout2d = {
+      grid: { rows: 1, columns: 3, pattern: "independent" },
+      annotations: [
+        { text: "SPD (uma solução)", xref: "paper", yref: "paper", x: 0.12, y: 1.1, showarrow: false },
+        { text: "SPI (infinitas)", xref: "paper", yref: "paper", x: 0.5, y: 1.1, showarrow: false },
+        { text: "SI (nenhuma)", xref: "paper", yref: "paper", x: 0.87, y: 1.1, showarrow: false }
+      ],
+      height: 400,
+      xaxis: { range: [-1, 4] }, xaxis2: { range: [-1, 4] }, xaxis3: { range: [-1, 4] },
+      yaxis: { range: [-2, 5] }, yaxis2: { range: [-2, 5] }, yaxis3: { range: [-2, 5] }
+    };
+
+    Plotly.newPlot("plot2d", dados2d, layout2d);
+
+    // T7b - tres planos
+    // planos x+y+z=3, x-y+z=1, x+y-z=1 cruzam-se em (1,1,1)
+    // monta a grelha de z para um plano a*x + b*y + c*z = d
+    function fazPlano(a, b, c, d, cor, nome) {
+      const gx = [], gy = [], gz = [];
+      for (let i = -1; i <= 3; i += 0.25) {
+        const linhaX = [], linhaY = [], linhaZ = [];
+        for (let j = -1; j <= 3; j += 0.25) {
+          linhaX.push(i);
+          linhaY.push(j);
+          linhaZ.push((d - a * i - b * j) / c);
+        }
+        gx.push(linhaX);
+        gy.push(linhaY);
+        gz.push(linhaZ);
+      }
+      return { type: "surface", x: gx, y: gy, z: gz, opacity: 0.5, colorscale: cor, showscale: false, name: nome };
+    }
+
+    const planos = [
+      fazPlano(1, 1, 1, 3, "Blues", "x+y+z=3"),
+      fazPlano(1, -1, 1, 1, "Reds", "x-y+z=1"),
+      fazPlano(1, 1, -1, 1, "Greens", "x+y-z=1")
+    ];
+
+    const ponto = {
+      type: "scatter3d", mode: "markers",
+      x: [1], y: [1], z: [1],
+      marker: { size: 8, color: "orange" },
+      name: "intersecção (1,1,1)"
+    };
+
+    planos.push(ponto);
+
+    Plotly.newPlot("plot3d", planos, {
+      title: "Três planos a intersectar em (1,1,1)",
+      scene: { xaxis: { title: "x" }, yaxis: { title: "y" }, zaxis: { title: "z" } },
+      height: 550
+    });
+  </script>
+</body>
+</html>
