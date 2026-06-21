@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/14.8.1/math.js"></script>
+    <script src="https://cdn.plot.ly/plotly-3.5.1.min.js" charset="utf-8"></script>
+    <script src="https://cdn.jsdelivr.net/npm/numeric@1.2.6/numeric-1.2.6.min.js"></script>
+</head>
+<body>
+    <h1>Ex3 Benchmark</h1>
+    <div id="benchmark-table"></div>
+    <div id="benchmark-plot" style="width: 100%; max-width: 960px; height: 560px;"></div>
+        
+    <h2>Exercise 5: Heatmaps (A, L, U)</h2>
+    <div id="heatmaps" style="display:flex;gap:20px;align-items:flex-start;flex-wrap:wrap;">
+        <div id="heatmap-A" style="flex:1 1 30%;min-width:220px;height:360px;"></div>
+        <div id="heatmap-L" style="flex:1 1 30%;min-width:220px;height:360px;"></div>
+        <div id="heatmap-U" style="flex:1 1 30%;min-width:220px;height:360px;"></div>
+    </div>
+    <script src="cramer_lu.js"></script>
+</body>
+</html>
