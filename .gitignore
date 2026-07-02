@@ -11,6 +11,7 @@ yarn.lock
 pr_grading_details.json
 pr_grades.md
 LAGA.md
+pr_grades.pdf
 
 # LaTeX artifacts
 *.aux
