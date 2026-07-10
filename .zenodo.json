@@ -1,0 +1,27 @@
+{
+  "title": "Linear Algebra with Python",
+  "description": "Seven practical assignments covering matrices, determinants, linear systems, and analytic geometry, with a Python reference implementation (linalg_utils) and a TypeScript port. Teaching material for Linear Algebra and Analytic Geometry (TSIW, ESMAD -- IPP).",
+  "upload_type": "software",
+  "access_right": "open",
+  "license": "MIT",
+  "creators": [
+    {
+      "name": "Ribeiro, Diogo",
+      "affiliation": "ESMAD – Instituto Politécnico do Porto",
+      "orcid": "0009-0001-2022-7072"
+    }
+  ],
+  "keywords": [
+    "linear algebra",
+    "analytic geometry",
+    "matrices",
+    "determinants",
+    "linear systems",
+    "Gaussian elimination",
+    "LU decomposition",
+    "Python",
+    "TypeScript",
+    "education"
+  ],
+  "language": "eng"
+}

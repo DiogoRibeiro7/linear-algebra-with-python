@@ -1,0 +1,29 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+title: "Linear Algebra with Python"
+abstract: >-
+  Seven practical assignments covering matrices, determinants, linear systems,
+  and analytic geometry, with a Python reference implementation (linalg_utils)
+  and a TypeScript port. Teaching material for Linear Algebra and Analytic
+  Geometry (TSIW, ESMAD -- IPP).
+type: software
+authors:
+  - family-names: Ribeiro
+    given-names: Diogo
+    email: dfr@esmad.ipp.pt
+    affiliation: "ESMAD – Instituto Politécnico do Porto"
+    orcid: "https://orcid.org/0009-0001-2022-7072"
+version: "0.1.0"
+license: MIT
+repository-code: "https://github.com/DiogoRibeiro7/linear-algebra-with-python"
+keywords:
+  - linear algebra
+  - analytic geometry
+  - matrices
+  - determinants
+  - linear systems
+  - Gaussian elimination
+  - LU decomposition
+  - Python
+  - TypeScript
+  - education
