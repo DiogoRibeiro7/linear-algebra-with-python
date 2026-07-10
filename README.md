@@ -3,7 +3,7 @@
 Course: Linear Algebra and Analytic Geometry (TSIW, ESMAD -- IPP)<br>
 Instructor: Diogo Ribeiro (dfr@esmad.ipp.pt, ORCID: 0009-0001-2022-7072)
 
-![Python 3.11+](https://img.shields.io/badge/python-3.11%2B-blue) ![License: MIT](https://img.shields.io/badge/license-MIT-green)
+![Python 3.11+](https://img.shields.io/badge/python-3.11%2B-blue) ![License: MIT](https://img.shields.io/badge/license-MIT-green) [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.21302974.svg)](https://doi.org/10.5281/zenodo.21302974)
 
 ## About
 
@@ -107,6 +107,17 @@ Each submission folder must contain:
 ## License
 
 MIT.
+
+## Citation
+
+If you use this material, please cite it via its DOI. The concept DOI below always resolves to the latest version:
+
+> Ribeiro, D. *Linear Algebra with Python*. Zenodo. <https://doi.org/10.5281/zenodo.21302974>
+
+- Concept DOI (all versions): [10.5281/zenodo.21302974](https://doi.org/10.5281/zenodo.21302974)
+- Version DOI (v0.1.0): [10.5281/zenodo.21302975](https://doi.org/10.5281/zenodo.21302975)
+
+A machine-readable `CITATION.cff` is included; GitHub's "Cite this repository" button uses it.
 
 ## Author
 

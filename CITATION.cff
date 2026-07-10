@@ -14,8 +14,16 @@ authors:
     affiliation: "ESMAD – Instituto Politécnico do Porto"
     orcid: "https://orcid.org/0009-0001-2022-7072"
 version: "0.1.0"
+doi: 10.5281/zenodo.21302974
 license: MIT
 repository-code: "https://github.com/DiogoRibeiro7/linear-algebra-with-python"
+identifiers:
+  - type: doi
+    value: 10.5281/zenodo.21302974
+    description: "Concept DOI (all versions)"
+  - type: doi
+    value: 10.5281/zenodo.21302975
+    description: "Version DOI (v0.1.0)"
 keywords:
   - linear algebra
   - analytic geometry
