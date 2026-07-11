@@ -23,6 +23,11 @@ updates:
     labels:
       - "dependencies"
       - "javascript"
+    ignore:
+      # TypeScript 7 removed lib/_tsc.js, which Yarn 4's builtin compat patch
+      # still expects; installs break. Hold at 6.x until Yarn ships a fix.
+      - dependency-name: "typescript"
+        versions: [">=7"]
 
   # GitHub Actions
   - package-ecosystem: "github-actions"

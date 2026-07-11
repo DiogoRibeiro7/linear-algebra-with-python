@@ -187,5 +187,3 @@ export function inversa_gauss_jordan(A: Matrix, tol = 1e-12): [Matrix, Matrix[]]
   }
   return [inv, steps];
 }
-
-export type { Matrix, Vector };
