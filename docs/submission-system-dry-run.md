@@ -2,7 +2,7 @@
 
 Use these dry-run examples to test `.github/workflows/assignment-pr-control.yml` safely.
 
-All examples below assume PR target branch `develop`.
+All examples below assume PR target branch `main`.
 
 ## Scenario 1: Valid submission PR
 

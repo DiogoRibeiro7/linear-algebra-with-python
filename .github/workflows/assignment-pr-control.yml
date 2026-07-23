@@ -3,7 +3,7 @@ name: Assignment PR Control
 on:
   pull_request:
     branches:
-      - develop
+      - main
     types:
       - opened
       - edited
@@ -110,8 +110,8 @@ jobs:
               sys.exit(0)
 
           # Enforce base branch for submission PRs.
-          if base_ref != "develop":
-              errors.append(f"PR base branch must be 'develop', found '{base_ref}'.")
+          if base_ref != "main":
+              errors.append(f"PR base branch must be 'main', found '{base_ref}'.")
 
           if not branch_match:
               errors.append("Source branch must match 'NNNNNNNN-Axx' (example: 40250001-A01).")

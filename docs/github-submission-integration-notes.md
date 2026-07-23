@@ -18,8 +18,8 @@ This separation avoids coupling course-submission rules to general code-quality 
 
 ## Trigger alignment
 
-- Submission-control workflow listens to pull requests targeting `develop`.
-- Existing CI/docs/lint workflows already include pull requests to `develop` and remain unchanged.
+- Submission-control workflow listens to pull requests targeting `main`.
+- Existing CI/docs/lint workflows already include pull requests to `main` and remain unchanged.
 - `main` remains available for unrelated release workflows already present in the repository.
 
 ## Conflict avoidance

@@ -88,7 +88,7 @@ yarn test
 
 Official PR-based submissions use the following format:
 
-- Target branch: `develop`
+- Target branch: `main`
 - Source branch example: `40250001-A01`
 - PR title example: `Submission 40250001 --- A01`
 - Submission path example: `assignments/submissions/40250001/01/`

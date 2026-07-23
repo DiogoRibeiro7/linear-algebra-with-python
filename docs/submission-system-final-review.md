@@ -4,7 +4,7 @@
 
 - Added a dedicated submission-control workflow at `.github/workflows/assignment-pr-control.yml`.
 - Enforced PR submission rules:
-  - base branch must be `develop`
+  - base branch must be `main`
   - branch format `NNNNNNNN-Axx`
   - PR title format `Submission NNNNNNNN --- Axx`
   - student and assignment consistency between branch and title
@@ -33,7 +33,7 @@
 
 - Existing educational assignment material folders:
   - `assignments/01_*` through `assignments/07_*`
-- Existing CI/docs/lint workflow triggers on `develop` and `main`
+- Existing CI/docs/lint workflow triggers on `main` and `main`
 - Current repository pedagogical content beyond submission workflow guidance
 
 ## A01-A06 scope confirmation

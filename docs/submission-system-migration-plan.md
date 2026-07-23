@@ -13,7 +13,7 @@ The repository already contains:
 - a PR template at `.github/PULL_REQUEST_TEMPLATE.md`
 - contributor/student documentation across `README.md`, `CONTRIBUTING.md`, and `docs/`
 
-Current automation (`ci.yml`, `docs.yml`, `lint.yml`) triggers on both `develop` and `main` for push and pull_request events.
+Current automation (`ci.yml`, `docs.yml`, `lint.yml`) triggers on `main` for push and pull_request events.
 
 The existing submissions documentation (`assignments/submissions/README.md`, `assignments/submissions/40XXXXXX/SUBMISSION_GUIDE.md`) currently describes a model that expects both `python/` and `javascript/` inside assignment folders and includes assignments `01` through `07`.
 
@@ -22,7 +22,7 @@ The existing submissions documentation (`assignments/submissions/README.md`, `as
 - a dedicated `assignments/submissions/` area already exists
 - students can already submit via assignment-specific branches (example branch naming exists)
 - PR-based collaboration is already possible in the same repository
-- `develop` branch already exists and is already used by workflows
+- `main` branch already exists and is already used by workflows
 
 ## Gaps vs Desired Submission Workflow
 
@@ -80,7 +80,7 @@ The submission-control system will validate only assignments `A01` to `A06`.
 ## Required Workflow Changes
 
 1. Add a dedicated submission-control workflow
-- Trigger: pull requests targeting `develop`
+- Trigger: pull requests targeting `main`
 - Enforce naming/title/path/content/deadline/duplicate constraints
 - Apply labels (`submitted`, `late`, `invalid`, `duplicate-submission`)
 
@@ -114,7 +114,7 @@ The submission-control system will validate only assignments `A01` to `A06`.
 - Create `docs/submission-system-dry-run.md` with valid/invalid PR scenarios and expected labels/outcomes.
 
 5. Perform final hardening pass
-- Re-check syntax and logic, ensure `develop` targeting, and ensure A07 exclusion.
+- Re-check syntax and logic, ensure `main` targeting, and ensure A07 exclusion.
 - Publish `docs/submission-system-final-review.md` with implementation status and limitations.
 
 ## Risk Controls and Minimal-Disruption Notes

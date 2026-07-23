@@ -5,7 +5,7 @@
 - Submission folder path (`assignments/submissions/<student>/<nn>/`): 
 
 ## Student Submission Checklist
-- [ ] This PR targets `develop`
+- [ ] This PR targets `main`
 - [ ] Source branch follows `<student_number>-A<nn>` (example: `40250001-A01`)
 - [ ] PR title follows `Submission <student_number> --- A<nn>`
 - [ ] Assignment code is between `A01` and `A06`

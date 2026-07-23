@@ -19,7 +19,7 @@ This document bundles the notebooks, exercises, and assets into a coherent teach
 
 - **Capstone (optional)**: `capstone/starter.ipynb` and `capstone/solution.ipynb` provide Track A (least squares + geometry) and Track B (PCA/SVD) templates. Pair them with the exercises for a final assessment.
 - **CLI + demos**: from `packages/python`, run `poetry run linalgpy --help` (maps, solve, lsq) plus the `scripts/demo_*.py` set keep the figures reproducible. Run `scripts/run_all_demos.py` when you need to regenerate every asset before publishing.
-- **Assignment submission control**: PR-based validation is scoped to `A01` through `A06` on branch `develop`; teaching material for assignment 07 remains in-repo but is excluded from submission-control rules.
+- **Assignment submission control**: PR-based validation is scoped to `A01` through `A06` on branch `main`; teaching material for assignment 07 remains in-repo but is excluded from submission-control rules.
 - **Exercises**: assignment-aligned notebooks live in `exercises/` and mirror the tasks in `assignments/ASSIGNMENTS.tex`.
 - `exercises/01_assignment_exercises.ipynb`
 - `exercises/02_assignment_exercises.ipynb`

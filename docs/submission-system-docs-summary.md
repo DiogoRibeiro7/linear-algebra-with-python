@@ -14,7 +14,7 @@ This update aligned repository documentation with the PR-based submission workfl
 ## What changed
 
 - Added official submission conventions:
-  - target branch `develop`
+  - target branch `main`
   - branch pattern `<student_number>-A<nn>`
   - PR title pattern `Submission <student_number> --- A<nn>`
   - submission path `assignments/submissions/<student_number>/<nn>/`

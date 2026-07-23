@@ -12,7 +12,7 @@ Assignment 07 (`assignments/07_superficies_revolucao`) may stay in the repositor
 
 Students must follow these conventions:
 
-- PR target branch: `develop`
+- PR target branch: `main`
 - source branch format: `<student_number>-A<nn>`
 - source branch example: `40250001-A01`
 - PR title format: `Submission <student_number> --- A<nn>`
@@ -36,7 +36,7 @@ Submission validation is implemented in:
 
 The workflow validates:
 
-- base branch (`develop`)
+- base branch (`main`)
 - branch and title formats
 - branch/title student and assignment consistency
 - changed-file scope inside `assignments/submissions/<student>/<nn>/`

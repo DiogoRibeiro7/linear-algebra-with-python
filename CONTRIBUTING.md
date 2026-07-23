@@ -41,7 +41,7 @@ Run those commands before creating a patch, especially if you touched src/ or no
 - If a notebook or script fails to run, paste the error along with the asset path so reviewers can rerun the same steps.
 
 ## Student submission PRs
-- Target branch must be `develop`.
+- Target branch must be `main`.
 - Source branch format: `<student_number>-A<nn>` (example: `40250001-A01`).
 - PR title format: `Submission <student_number> --- A<nn>` (example: `Submission 40250001 --- A01`).
 - Submission files must stay under `assignments/submissions/<student_number>/<nn>/`.

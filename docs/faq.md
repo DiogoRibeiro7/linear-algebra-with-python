@@ -20,10 +20,10 @@
 - Keep README, CONTRIBUTING, and docs/syllabus aligned whenever you add a lesson, demo, or CLI feature.
 - When you add new helper modules or scripts, also update the tests under `packages/python/tests/` and mention the new behaviour in the FAQ if it introduces a common stumbling block.
 
-## Submission workflow troubleshooting (PRs to `develop`)
+## Submission workflow troubleshooting (PRs to `main`)
 - **Invalid branch name**: Use exactly `<8-digit-student>-A<nn>` (example: `40250001-A01`).
 - **Invalid PR title**: Use exactly `Submission <student_number> --- A<nn>`.
-- **Wrong base branch**: The PR must target `develop`.
+- **Wrong base branch**: The PR must target `main`.
 - **Files changed outside allowed folder**: Only change files inside `assignments/submissions/<student>/<nn>/`.
 - **Both language tracks present**: Include only one track (`python/` or `javascript/`).
 - **No language track present**: Add `python/` or `javascript/` with at least one file.
