@@ -9,6 +9,8 @@ Instructor: Diogo Ribeiro (dfr@esmad.ipp.pt, ORCID: 0009-0001-2022-7072)
 
 Seven practical assignments covering matrices, determinants, linear systems, and analytic geometry, with a Python reference implementation and a TypeScript port.
 
+See [CHANGELOG.md](CHANGELOG.md) for release history and [ROADMAP.md](ROADMAP.md) for planned development.
+
 Repository layout:
 
 - `packages/python`: Python library (`linalg_utils`) and tests.

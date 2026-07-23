@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "linear-algebra-with-python"
-version = "0.1.0"
+version = "0.2.0"
 description = "Practical assignments for Linear Algebra and Analytic Geometry — TSIW, ESMAD/IPP"
 authors = ["Diogo Ribeiro <dfr@esmad.ipp.pt>"]
 license = "MIT"

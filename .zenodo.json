@@ -2,7 +2,7 @@
   "title": "Linear Algebra with Python",
   "description": "Seven practical assignments covering matrices, determinants, linear systems, and analytic geometry, with a Python reference implementation (linalg_utils) and a TypeScript port. Teaching material for Linear Algebra and Analytic Geometry (TSIW, ESMAD -- IPP).",
   "upload_type": "software",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "access_right": "open",
   "license": "MIT",
   "creators": [

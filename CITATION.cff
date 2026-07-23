@@ -13,7 +13,8 @@ authors:
     email: dfr@esmad.ipp.pt
     affiliation: "ESMAD – Instituto Politécnico do Porto"
     orcid: "https://orcid.org/0009-0001-2022-7072"
-version: "0.1.0"
+version: "0.2.0"
+date-released: "2026-07-23"
 doi: 10.5281/zenodo.21302974
 license: MIT
 repository-code: "https://github.com/DiogoRibeiro7/linear-algebra-with-python"
