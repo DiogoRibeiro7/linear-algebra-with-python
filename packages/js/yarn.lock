@@ -966,7 +966,7 @@ __metadata:
     d3: "npm:^7.9.0"
     mathjs: "npm:^15.2.0"
     numeric: "npm:^1.2.6"
-    plotly.js-dist-min: "npm:^3.7.0"
+    plotly.js-dist-min: "npm:^4.0.0"
     typescript: "npm:^6.0.3"
     vitest: "npm:^4.1.10"
   languageName: unknown
@@ -1091,10 +1091,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"plotly.js-dist-min@npm:^3.7.0":
-  version: 3.7.0
-  resolution: "plotly.js-dist-min@npm:3.7.0"
-  checksum: 10c0/dd13c85650a35e9712fa85acd9a9bde568c47d8d850c97106c8e7e3ee3e46d65d930165ff5801b63f13cff7cac32b567e04cf465273f7efebf5d0d56741e17a5
+"plotly.js-dist-min@npm:^4.0.0":
+  version: 4.0.0
+  resolution: "plotly.js-dist-min@npm:4.0.0"
+  checksum: 10c0/2fe55d1e9efa1063cc933b60791a6e0e3c29cf3d80e448a356c210e50aab3a43bdb649d61471d430850438153e35f30af4574b1ffc1af1e57f6099bfd9b4d336
   languageName: node
   linkType: hard
 
