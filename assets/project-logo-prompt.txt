@@ -1,0 +1,7 @@
+Tool: built-in image generation
+
+Use case: logo-brand.
+Asset type: square project logo for linear-algebra-with-python.
+Project purpose: Course repository for Linear Algebra and Analytic Geometry, featuring Python and TypeScript implementations, lesson notebooks, practical assignments, exercises, solutions, demos, and submission workflows.
+Design direction: A charming chalkboard teaching emblem: a white hand-chalk wireframe parallelepiped with one orange basis vector and one sky-blue projected vector. Deep schoolroom-green board, subtle chalk dust, deliberately human strokes with sound perspective. One large legible mathematical construction, no labels, equations, lettering, or extra classroom props.
+Composition: one finished square image, visually distinctive and readable at 160 pixels, with enough margin for README display. Produce the actual artwork, not a mockup sheet or brand presentation. No watermark. Do not use a navy-and-gold metallic badge aesthetic.
